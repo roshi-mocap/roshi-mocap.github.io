@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="RoSHI: Robust Sparse-IMU Human-body pose estimation with Inertial sensors and AprilTag calibration.">
-  <meta name="keywords" content="RoSHI, IMU, Pose Estimation, AprilTag, SMPL, Human Pose">
+        content="RoSHI: A low-cost, portable wearable system that fuses sparse IMUs with egocentric sensing from Project Aria for in-the-wild human motion capture and humanoid policy learning.">
+  <meta name="keywords" content="RoSHI, IMU, Motion Capture, Human Pose, Humanoid, Project Aria, SMPL, Egocentric, IROS 2026">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RoSHI: Robust Sparse-IMU Human Pose Estimation</title>
+  <title>RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -38,16 +38,13 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <!-- TODO: Replace with your homepage link -->
       <a class="navbar-item" href="https://TODO-YOUR-HOMEPAGE.com">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
       </a>
-
-      <!-- Add your other research links here if desired -->
-
     </div>
-
   </div>
 </nav>
 
@@ -57,22 +54,29 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">RoSHI: Robust Sparse-IMU Human Pose Estimation</h1>
+          <h1 class="title is-1 publication-title">RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild</h1>
           <div class="is-size-5 publication-authors">
-            <!-- TODO: Replace with actual author names and links -->
             <span class="author-block">
-              <a href="#">Author One</a><sup>1</sup>,</span>
+              <!-- TODO: Replace # with actual author homepages -->
+              <a href="#">Wenjing Mao</a><sup>*</sup>,</span>
             <span class="author-block">
-              <a href="#">Author Two</a><sup>1</sup>,</span>
+              <a href="#">Jefferson Ng</a><sup>*</sup>,</span>
             <span class="author-block">
-              <a href="#">Author Three</a><sup>2</sup>
+              <a href="#">Luyang Hu</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="#">Daniel Gehrig</a>,</span>
+            <span class="author-block">
+              <a href="#">Antonio Loquercio</a>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
             <!-- TODO: Replace with actual affiliations -->
-            <span class="author-block"><sup>1</sup>Your University,</span>
-            <span class="author-block"><sup>2</sup>Your Lab</span>
+            <span class="author-block">IROS 2026</span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-top: -0.5rem;">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
           </div>
 
           <div class="column has-text-centered">
@@ -125,24 +129,19 @@
   </div>
 </section>
 
-<!-- Teaser video / image. TODO: Replace with your own teaser. -->
+<!-- Teaser. TODO: Replace with your own teaser image or video. -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!-- Option A: teaser video (uncomment and add your video) -->
+      <!-- TODO: Uncomment and add your teaser image/video -->
       <!--
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4" type="video/mp4">
-      </video>
-      -->
-      <!-- Option B: teaser image (uncomment and add your image) -->
-      <!--
-      <img src="./static/images/teaser.png" alt="RoSHI teaser figure." />
+      <img src="./static/images/teaser.png" alt="RoSHI teaser: a low-cost portable suit for in-the-wild human motion capture and humanoid deployment." />
       -->
       <h2 class="subtitle has-text-centered">
-        <!-- TODO: Replace with a one-line description of your project -->
-        <span class="dnerf">RoSHI</span> enables robust full-body pose estimation
-        from only 9 sparse IMU sensors with AprilTag-based calibration.
+        <span class="dnerf">RoSHI</span> is a low-cost, portable system for
+        in-the-wild human motion capture and deployment of learned policies on a humanoid robot.
+        It fuses signals from Project Aria glasses and nine IMUs to capture synchronized
+        3D body pose, egocentric RGB video, and a globally consistent root trajectory.
       </h2>
     </div>
   </div>
@@ -179,24 +178,24 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <!-- TODO: Replace with your actual abstract -->
           <p>
-            We present RoSHI, a system for robust human pose estimation using only 9 sparse
-            inertial measurement units (IMUs) placed on the pelvis, shoulders, elbows, hips, and knees.
-            Each IMU is equipped with a rigidly attached AprilTag for automatic calibration of the
-            sensor-to-body-segment rotation offsets.
+            Scaling up robot learning will likely require human data containing rich and long-horizon
+            interactions in the wild. Existing approaches for collecting such data trade off portability,
+            robustness to occlusion, and global consistency. We introduce <span class="dnerf">RoSHI</span>,
+            a hybrid wearable that fuses low-cost sparse IMUs with the Project Aria glasses to estimate
+            the full 3D pose and body shape of the wearer in a metric global coordinate frame from
+            egocentric perception.
           </p>
           <p>
-            Our calibration pipeline leverages synchronized AprilTag detections and SMPL/SMPLX body
-            model fitting to estimate per-joint bone-to-sensor rotation offsets. We formulate this as
-            a geodesic averaging problem on SO(3) and support robust M-estimators (Huber, Cauchy, L1)
-            to handle outliers from occlusion, blur, or mirrored tag detections.
+            This system is motivated by the complementarity of the two sensors: IMUs provide robustness
+            to occlusions and high-speed motions, while egocentric SLAM anchors long-horizon motion and
+            stabilizes upper body pose. We collect a dataset of agile activities to evaluate
+            <span class="dnerf">RoSHI</span>. On this dataset, we generally outperform other egocentric
+            baselines and perform comparably to a state-of-the-art exocentric baseline (SAM3D).
           </p>
           <p>
-            Once calibrated, <span class="dnerf">RoSHI</span> reconstructs full-body pose in
-            real-time from IMU readings alone, with per-IMU world frame alignment via AprilTag
-            observations. We demonstrate accurate pose estimation across diverse activities including
-            daily motions and dynamic exercises.
+            Finally, we demonstrate that the motion data recorded from our system are suitable for
+            real-world humanoid policy learning.
           </p>
         </div>
       </div>
@@ -220,21 +219,27 @@
 </section>
 
 
-<!-- Method / approach section. TODO: Add your method figures. -->
 <section class="section">
   <div class="container is-max-desktop">
 
+    <!-- Method. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Method</h2>
 
         <div class="content has-text-justified">
           <p>
-            <!-- TODO: Describe your method briefly and add a pipeline figure -->
-            RoSHI operates in two phases: (1) a calibration phase where the subject performs
-            a short motion sequence with AprilTags visible to a camera, and (2) an IMU-only
-            tracking phase where calibrated offsets are applied to live sensor readings for
-            real-time pose reconstruction.
+            A user wears a low-cost, portable suit comprising nine IMU trackers and a Project Aria
+            headset. Each tracker integrates a microcontroller, 9-axis IMU, battery management system,
+            and LiPo battery within a compact enclosure, with an AprilTag mounted at a fixed, known
+            offset for calibration.
+          </p>
+          <p>
+            After an initial calibration procedure using an external iPhone and custom app, each IMU
+            tracker provides bone orientations mapped to the pelvis world frame. Using the Project Aria
+            SLAM poses as conditioning and IMU tracker outputs as guidance, we use a diffusion model to
+            generate articulated human poses in the local Aria camera frame, then map them to a global
+            frame via the SLAM poses.
           </p>
           <!-- TODO: Add your method/pipeline figure -->
           <!--
@@ -244,6 +249,34 @@
 
       </div>
     </div>
+    <!--/ Method. -->
+
+    <!-- Humanoid Control. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Humanoid Control</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            RoSHI motions can be seamlessly retargeted to the Unitree G1 humanoid using existing tools
+            such as PyRoki or GMR. The resulting retargeted trajectories are physically plausible,
+            respect contact and collision constraints, and serve as inputs for downstream policy learning.
+          </p>
+          <p>
+            We convert retargeted human motion sequences into reinforcement learning tracking tasks
+            following the DeepMimic formulation. With this pipeline, our wearable capture system produces
+            data of sufficient quality to train policies that generate coordinated natural motions with
+            accurate position control on the G1 humanoid.
+          </p>
+        </div>
+        <!-- TODO: Add humanoid deployment figures/videos -->
+        <!--
+        <img src="./static/images/humanoid.png" alt="RoSHI humanoid deployment." />
+        -->
+
+      </div>
+    </div>
+    <!--/ Humanoid Control. -->
 
     <!-- Results. -->
     <div class="columns is-centered">
@@ -252,14 +285,16 @@
 
         <div class="content has-text-justified">
           <p>
-            <!-- TODO: Add your quantitative and qualitative results here -->
-            Our method achieves accurate pose estimation across various activities.
-            Below we show qualitative comparisons and quantitative metrics.
+            We evaluate RoSHI on 11 motion sequences across three datasets covering in-place motions,
+            locomotion with global translation, and agile sports-like activities. RoSHI achieves the
+            best mean per-joint position error (MPJPE) across all three datasets and the best joint
+            angle error (JAE) on two of three, showing consistent improvements in both global joint
+            localization and articulated pose reconstruction over egocentric baselines.
           </p>
         </div>
         <!-- TODO: Add result figures, tables, or videos -->
         <!--
-        <img src="./static/images/results.png" alt="RoSHI results." />
+        <img src="./static/images/results.png" alt="RoSHI quantitative results." />
         -->
 
       </div>
@@ -273,12 +308,11 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <!-- TODO: Replace with your actual BibTeX entry -->
-    <pre><code>@article{author2025roshi,
-  author    = {Author, One and Author, Two and Author, Three},
-  title     = {RoSHI: Robust Sparse-IMU Human Pose Estimation},
-  journal   = {TODO},
-  year      = {2025},
+    <pre><code>@inproceedings{mao2026roshi,
+  author    = {Mao, Wenjing and Ng, Jefferson and Hu, Luyang and Gehrig, Daniel and Loquercio, Antonio},
+  title     = {RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2026},
 }</code></pre>
   </div>
 </section>
