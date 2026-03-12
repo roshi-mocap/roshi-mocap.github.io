@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RoSHI: Robust Sparse-IMU Human-body pose estimation with Inertial sensors and AprilTag calibration.">
+  <meta name="keywords" content="RoSHI, IMU, Pose Estimation, AprilTag, SMPL, Human Pose">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoSHI: Robust Sparse-IMU Human Pose Estimation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://TODO-YOUR-HOMEPAGE.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <!-- Add your other research links here if desired -->
+
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">RoSHI: Robust Sparse-IMU Human Pose Estimation</h1>
+          <div class="is-size-5 publication-authors">
+            <!-- TODO: Replace with actual author names and links -->
+            <span class="author-block">
+              <a href="#">Author One</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Author Two</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Author Three</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <!-- TODO: Replace with actual affiliations -->
+            <span class="author-block"><sup>1</sup>Your University,</span>
+            <span class="author-block"><sup>2</sup>Your Lab</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser video / image. TODO: Replace with your own teaser. -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- Option A: teaser video (uncomment and add your video) -->
+      <!--
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video>
+      -->
+      <!-- Option B: teaser image (uncomment and add your image) -->
+      <!--
+      <img src="./static/images/teaser.png" alt="RoSHI teaser figure." />
+      -->
+      <h2 class="subtitle has-text-centered">
+        <!-- TODO: Replace with a one-line description of your project -->
+        <span class="dnerf">RoSHI</span> enables robust full-body pose estimation
+        from only 9 sparse IMU sensors with AprilTag-based calibration.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- Results carousel. TODO: Add your result videos/images here. -->
+<!--
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/result1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/result2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your actual abstract -->
+          <p>
+            We present RoSHI, a system for robust human pose estimation using only 9 sparse
+            inertial measurement units (IMUs) placed on the pelvis, shoulders, elbows, hips, and knees.
+            Each IMU is equipped with a rigidly attached AprilTag for automatic calibration of the
+            sensor-to-body-segment rotation offsets.
+          </p>
+          <p>
+            Our calibration pipeline leverages synchronized AprilTag detections and SMPL/SMPLX body
+            model fitting to estimate per-joint bone-to-sensor rotation offsets. We formulate this as
+            a geodesic averaging problem on SO(3) and support robust M-estimators (Huber, Cauchy, L1)
+            to handle outliers from occlusion, blur, or mirrored tag detections.
+          </p>
+          <p>
+            Once calibrated, <span class="dnerf">RoSHI</span> reconstructs full-body pose in
+            real-time from IMU readings alone, with per-IMU world frame alignment via AprilTag
+            observations. We demonstrate accurate pose estimation across diverse activities including
+            daily motions and dynamic exercises.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. TODO: Replace with your video. -->
+    <!--
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<!-- Method / approach section. TODO: Add your method figures. -->
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            <!-- TODO: Describe your method briefly and add a pipeline figure -->
+            RoSHI operates in two phases: (1) a calibration phase where the subject performs
+            a short motion sequence with AprilTags visible to a camera, and (2) an IMU-only
+            tracking phase where calibrated offsets are applied to live sensor readings for
+            real-time pose reconstruction.
+          </p>
+          <!-- TODO: Add your method/pipeline figure -->
+          <!--
+          <img src="./static/images/method.png" alt="RoSHI method pipeline." />
+          -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Results. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            <!-- TODO: Add your quantitative and qualitative results here -->
+            Our method achieves accurate pose estimation across various activities.
+            Below we show qualitative comparisons and quantitative metrics.
+          </p>
+        </div>
+        <!-- TODO: Add result figures, tables, or videos -->
+        <!--
+        <img src="./static/images/results.png" alt="RoSHI results." />
+        -->
+
+      </div>
+    </div>
+    <!--/ Results. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <!-- TODO: Replace with your actual BibTeX entry -->
+    <pre><code>@article{author2025roshi,
+  author    = {Author, One and Author, Two and Author, Three},
+  title     = {RoSHI: Robust Sparse-IMU Human Pose Estimation},
+  journal   = {TODO},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="#">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website template borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
