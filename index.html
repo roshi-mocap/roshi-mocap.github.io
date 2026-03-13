@@ -1,155 +1,166 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="RoSHI: A low-cost, portable wearable system that fuses sparse IMUs with egocentric sensing from Project Aria for in-the-wild human motion capture and humanoid policy learning.">
-  <meta name="keywords" content="RoSHI, IMU, Motion Capture, Human Pose, Humanoid, Project Aria, SMPL, Egocentric, IROS 2026">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="RoSHI: A low-cost, portable wearable system that fuses sparse IMUs with egocentric sensing from Project Aria for in-the-wild human motion capture and humanoid policy learning."
+    />
+    <meta
+      name="keywords"
+      content="RoSHI, IMU, Motion Capture, Human Pose, Humanoid, Project Aria, SMPL, Egocentric, IROS 2026"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild
+    </title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <link rel="icon" href="./static/images/favicon.svg" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-</head>
-<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                <img
+                  src="./static/img/roshi.png"
+                  alt="RoSHI logo"
+                  style="
+                    width: 50px;
+                    vertical-align: -0.15em;
+                    margin-right: 0.2rem;
+                  "
+                />RoSHI: A Versatile Robot-oriented Suit for Human Data
+                In-the-Wild
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="#">Wenjing Mao</a><sup>*</sup>,</span
+                >
+                <span class="author-block">
+                  <a href="#">Jefferson Ng</a><sup>*</sup>,</span
+                >
+                <span class="author-block">
+                  <a href="#">Luyang Hu</a><sup>*</sup>,</span
+                >
+                <span class="author-block">
+                  <a href="#">Daniel Gehrig</a>,</span
+                >
+                <span class="author-block">
+                  <a href="#">Antonio Loquercio</a>
+                </span>
+              </div>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <!-- TODO: Replace with your homepage link -->
-      <a class="navbar-item" href="https://TODO-YOUR-HOMEPAGE.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-    </div>
-  </div>
-</nav>
+              <div class="is-size-5 publication-authors">
+                <!-- TODO: Replace with actual affiliations -->
+                <span class="author-block">IROS 2026</span>
+              </div>
 
+              <div
+                class="is-size-6 publication-authors"
+                style="margin-top: -0.5rem"
+              >
+                <span class="author-block"
+                  ><sup>*</sup>Equal contribution; names are in random
+                  order</span
+                >
+              </div>
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <!-- TODO: Replace # with actual author homepages -->
-              <a href="#">Wenjing Mao</a><sup>*</sup>,</span>
-            <span class="author-block">
-              <a href="#">Jefferson Ng</a><sup>*</sup>,</span>
-            <span class="author-block">
-              <a href="#">Luyang Hu</a><sup>*</sup>,</span>
-            <span class="author-block">
-              <a href="#">Daniel Gehrig</a>,</span>
-            <span class="author-block">
-              <a href="#">Antonio Loquercio</a>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <!-- TODO: Replace with actual affiliations -->
-            <span class="author-block">IROS 2026</span>
-          </div>
-
-          <div class="is-size-6 publication-authors" style="margin-top: -0.5rem;">
-            <span class="author-block"><sup>*</sup>Equal contribution</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv (coming soon)</span>
+                    </a>
                   </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Hardware Setup (coming soon)</span>
+                    </a>
                   </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Calibration App (coming soon)</span>
+                    </a>
                   </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code (coming soon)</span>
+                    </a>
                   </span>
-                  <span>Code</span>
-                  </a>
-              </span>
+                </div>
+              </div>
             </div>
-
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Teaser. TODO: Replace with your own teaser image or video. -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Uncomment and add your teaser image/video -->
-      <!--
-      <img src="./static/images/teaser.png" alt="RoSHI teaser: a low-cost portable suit for in-the-wild human motion capture and humanoid deployment." />
-      -->
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">RoSHI</span> is a low-cost, portable system for
-        in-the-wild human motion capture and deployment of learned policies on a humanoid robot.
-        It fuses signals from Project Aria glasses and nine IMUs to capture synchronized
-        3D body pose, egocentric RGB video, and a globally consistent root trajectory.
-      </h2>
-    </div>
-  </div>
-</section>
+    <section class="section" style="padding-top: 1rem">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="publication-video">
+              <iframe
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&amp;showinfo=0"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-
-<!-- Results carousel. TODO: Add your result videos/images here. -->
-<!--
+    <!-- Results carousel. TODO: Add your result videos/images here. -->
+    <!--
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
@@ -170,40 +181,39 @@
 </section>
 -->
 
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Scaling up robot learning will likely require human data containing rich and long-horizon
-            interactions in the wild. Existing approaches for collecting such data trade off portability,
-            robustness to occlusion, and global consistency. We introduce <span class="dnerf">RoSHI</span>,
-            a hybrid wearable that fuses low-cost sparse IMUs with the Project Aria glasses to estimate
-            the full 3D pose and body shape of the wearer in a metric global coordinate frame from
-            egocentric perception.
-          </p>
-          <p>
-            This system is motivated by the complementarity of the two sensors: IMUs provide robustness
-            to occlusions and high-speed motions, while egocentric SLAM anchors long-horizon motion and
-            stabilizes upper body pose. We collect a dataset of agile activities to evaluate
-            <span class="dnerf">RoSHI</span>. On this dataset, we generally outperform other egocentric
-            baselines and perform comparably to a state-of-the-art exocentric baseline (SAM3D).
-          </p>
-          <p>
-            Finally, we demonstrate that the motion data recorded from our system are suitable for
-            real-world humanoid policy learning.
-          </p>
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Scaling up robot learning will likely require human data
+                containing rich and long-horizon interactions in the wild.
+                Existing approaches for collecting such data trade off
+                portability, robustness to occlusion, and global consistency. We
+                introduce <span class="dnerf">RoSHI</span>, a hybrid wearable
+                that fuses low-cost sparse IMUs with the Project Aria glasses to
+                estimate the full 3D pose and body shape of the wearer in a
+                metric global coordinate frame from egocentric perception. This
+                system is motivated by the complementarity of the two sensors:
+                IMUs provide robustness to occlusions and high-speed motions,
+                while egocentric SLAM anchors long-horizon motion and stabilizes
+                upper body pose. We collect a dataset of agile activities to
+                evaluate <span class="dnerf">RoSHI</span>. On this dataset, we
+                generally outperform other egocentric baselines and perform
+                comparably to a state-of-the-art exocentric baseline (SAM3D).
+                Finally, we demonstrate that the motion data recorded from our
+                system are suitable for real-world humanoid policy learning.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
+        <!--/ Abstract. -->
 
-    <!-- Paper video. TODO: Replace with your video. -->
-    <!--
+        <!-- Paper video. TODO: Replace with your video. -->
+        <!--
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
@@ -214,137 +224,506 @@
       </div>
     </div>
     -->
-    <!--/ Paper video. -->
-  </div>
-</section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <!-- Method. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Method</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            A user wears a low-cost, portable suit comprising nine IMU trackers and a Project Aria
-            headset. Each tracker integrates a microcontroller, 9-axis IMU, battery management system,
-            and LiPo battery within a compact enclosure, with an AprilTag mounted at a fixed, known
-            offset for calibration.
-          </p>
-          <p>
-            After an initial calibration procedure using an external iPhone and custom app, each IMU
-            tracker provides bone orientations mapped to the pelvis world frame. Using the Project Aria
-            SLAM poses as conditioning and IMU tracker outputs as guidance, we use a diffusion model to
-            generate articulated human poses in the local Aria camera frame, then map them to a global
-            frame via the SLAM poses.
-          </p>
-          <!-- TODO: Add your method/pipeline figure -->
-          <!--
-          <img src="./static/images/method.png" alt="RoSHI method pipeline." />
-          -->
-        </div>
-
+        <!--/ Paper video. -->
       </div>
-    </div>
-    <!--/ Method. -->
+    </section>
 
-    <!-- Humanoid Control. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Humanoid Control</h2>
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Method. -->
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Method</h2>
 
-        <div class="content has-text-justified">
-          <p>
-            RoSHI motions can be seamlessly retargeted to the Unitree G1 humanoid using existing tools
-            such as PyRoki or GMR. The resulting retargeted trajectories are physically plausible,
-            respect contact and collision constraints, and serve as inputs for downstream policy learning.
-          </p>
-          <p>
-            We convert retargeted human motion sequences into reinforcement learning tracking tasks
-            following the DeepMimic formulation. With this pipeline, our wearable capture system produces
-            data of sufficient quality to train policies that generate coordinated natural motions with
-            accurate position control on the G1 humanoid.
-          </p>
+            <div class="content has-text-justified">
+              <p>
+                RoSHI combines nine low-cost IMU trackers (~$30 each,
+                BNO085-based, wireless at 100&nbsp;Hz) with Project Aria glasses
+                to capture synchronized 3D body pose, egocentric RGB video, and
+                a globally consistent root trajectory. The two modalities are
+                complementary: IMUs provide robustness to visual occlusion and
+                high-speed motion, while egocentric SLAM anchors long-horizon
+                global localization and stabilizes upper-body pose.
+              </p>
+              <p>
+                Calibration requires only a short 20&ndash;40&nbsp;second video
+                captured by an iPhone while wearing the suit. Each tracker has a
+                rigidly mounted AprilTag; combined with SAM&nbsp;3D Body
+                estimates from the calibration video, this recovers
+                sensor-to-bone and cross-sensor heading alignments without a box
+                calibration or prescribed poses. It enables quick recalibration
+                at any time without removing the IMUs.
+              </p>
+              <p>
+                For body pose generation, we leverage the EgoAllo diffusion
+                model conditioned on the 6-DoF headset trajectory from Aria
+                SLAM. We guide diffusion using bone orientations derived from
+                the IMU trackers and enforce three complementary constraints:
+                (i)&nbsp;direct comparison of observable joint angles (elbow,
+                hip, knee), (ii)&nbsp;relative orientation consistency between
+                the pelvis and shoulders, and (iii)&nbsp;temporal smoothness of
+                pelvis-joint rotations across consecutive frames.
+              </p>
+              <img
+                src="./static/img/IROS2026 ROSHI Method.png"
+                alt="RoSHI method pipeline."
+                style="width: 100%"
+              />
+            </div>
+          </div>
         </div>
-        <!-- TODO: Add humanoid deployment figures/videos -->
-        <!--
-        <img src="./static/images/humanoid.png" alt="RoSHI humanoid deployment." />
-        -->
+        <!--/ Method. -->
 
-      </div>
-    </div>
-    <!--/ Humanoid Control. -->
+        <!-- Results. -->
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Results</h2>
 
-    <!-- Results. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Results</h2>
+            <!-- Qualitative -->
+            <h3 class="title is-4">Qualitative</h3>
 
-        <div class="content has-text-justified">
-          <p>
-            We evaluate RoSHI on 11 motion sequences across three datasets covering in-place motions,
-            locomotion with global translation, and agile sports-like activities. RoSHI achieves the
-            best mean per-joint position error (MPJPE) across all three datasets and the best joint
-            angle error (JAE) on two of three, showing consistent improvements in both global joint
-            localization and articulated pose reconstruction over egocentric baselines.
-          </p>
+            <div class="content">
+              <div class="columns is-multiline">
+                <div class="column is-half">
+                  <div
+                    class="box has-text-centered"
+                    style="
+                      min-height: 200px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: #f5f5f5;
+                    "
+                  >
+                    <div>
+                      <p class="heading">Localization</p>
+                      <p class="has-text-grey">Video coming soon</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-half">
+                  <div
+                    class="box has-text-centered"
+                    style="
+                      min-height: 200px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: #f5f5f5;
+                    "
+                  >
+                    <div>
+                      <p class="heading">Jumping Jack</p>
+                      <p class="has-text-grey">Video coming soon</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-half">
+                  <div
+                    class="box has-text-centered"
+                    style="
+                      min-height: 200px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: #f5f5f5;
+                    "
+                  >
+                    <div>
+                      <p class="heading">Agility</p>
+                      <p class="has-text-grey">Video coming soon</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-half">
+                  <div
+                    class="box has-text-centered"
+                    style="
+                      min-height: 200px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: #f5f5f5;
+                    "
+                  >
+                    <div>
+                      <p class="heading">Climbing</p>
+                      <p class="has-text-grey">Video coming soon</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-full">
+                  <div
+                    class="box has-text-centered"
+                    style="
+                      min-height: 200px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: #f5f5f5;
+                    "
+                  >
+                    <div>
+                      <p class="heading">Long Horizon &mdash; Coffee Making</p>
+                      <p class="has-text-grey">
+                        Egocentric RGB + Human Pose + 3D Scene Reconstruction
+                      </p>
+                      <p class="has-text-grey">Video coming soon</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quantitative -->
+            <h3 class="title is-4">Quantitative</h3>
+            <div class="content has-text-justified">
+              <p>
+                We evaluate RoSHI on 11 motion sequences across three datasets
+                covering in-place motions, locomotion with global translation,
+                and agile sports-like activities. RoSHI achieves the best mean
+                per-joint position error (MPJPE) across all three datasets and
+                the best joint angle error (JAE) on two of three, showing
+                consistent improvements in both global joint localization and
+                articulated pose reconstruction over egocentric baselines.
+              </p>
+            </div>
+
+            <div class="table-container">
+              <table
+                class="table is-bordered is-striped is-hoverable is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th rowspan="2">Method</th>
+                    <th rowspan="2">Egocentric</th>
+                    <th colspan="2" class="has-text-centered">Dataset 1</th>
+                    <th colspan="2" class="has-text-centered">Dataset 2</th>
+                    <th colspan="2" class="has-text-centered">Dataset 3</th>
+                  </tr>
+                  <tr>
+                    <th class="has-text-centered">MPJPE (cm)</th>
+                    <th class="has-text-centered">JAE (deg)</th>
+                    <th class="has-text-centered">MPJPE (cm)</th>
+                    <th class="has-text-centered">JAE (deg)</th>
+                    <th class="has-text-centered">MPJPE (cm)</th>
+                    <th class="has-text-centered">JAE (deg)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="color: #999">
+                    <td>SAM3D</td>
+                    <td class="has-text-centered" style="color: #e74c3c">
+                      &#10007;
+                    </td>
+                    <td class="has-text-centered">10.3</td>
+                    <td class="has-text-centered">10.5</td>
+                    <td class="has-text-centered">10.5</td>
+                    <td class="has-text-centered">10.7</td>
+                    <td class="has-text-centered">21.6</td>
+                    <td class="has-text-centered">11.2</td>
+                  </tr>
+                  <tr>
+                    <td>IMU-only (naive)</td>
+                    <td class="has-text-centered" style="color: #27ae60">
+                      &#10003;
+                    </td>
+                    <td class="has-text-centered">16.7</td>
+                    <td class="has-text-centered">12.6</td>
+                    <td class="has-text-centered">18.8</td>
+                    <td class="has-text-centered">12.2</td>
+                    <td class="has-text-centered">16.1</td>
+                    <td class="has-text-centered">8.9</td>
+                  </tr>
+                  <tr>
+                    <td>IMU + EgoAllo root</td>
+                    <td class="has-text-centered" style="color: #27ae60">
+                      &#10003;
+                    </td>
+                    <td class="has-text-centered">12.7</td>
+                    <td class="has-text-centered">12.5</td>
+                    <td class="has-text-centered">11.9</td>
+                    <td class="has-text-centered">12.2</td>
+                    <td class="has-text-centered">12.5</td>
+                    <td class="has-text-centered"><b>8.7</b></td>
+                  </tr>
+                  <tr>
+                    <td>EgoAllo</td>
+                    <td class="has-text-centered" style="color: #27ae60">
+                      &#10003;
+                    </td>
+                    <td class="has-text-centered">10.6</td>
+                    <td class="has-text-centered">15.6</td>
+                    <td class="has-text-centered">10.0</td>
+                    <td class="has-text-centered">14.1</td>
+                    <td class="has-text-centered">11.7</td>
+                    <td class="has-text-centered">17.5</td>
+                  </tr>
+                  <tr>
+                    <td><b>RoSHI (ours)</b></td>
+                    <td class="has-text-centered" style="color: #27ae60">
+                      &#10003;
+                    </td>
+                    <td class="has-text-centered"><b>9.6</b></td>
+                    <td class="has-text-centered"><b>12.0</b></td>
+                    <td class="has-text-centered"><b>9.9</b></td>
+                    <td class="has-text-centered"><b>11.0</b></td>
+                    <td class="has-text-centered"><b>10.3</b></td>
+                    <td class="has-text-centered">15.6</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="is-size-7 has-text-grey" style="margin-top: -0.5rem">
+              MPJPE is computed in the OptiTrack world frame; JAE is computed
+              from parent&ndash;child bone directions (independent of
+              global/root pose). SAM3D relies on an external calibrated camera
+              and is therefore not a fair baseline (shown in gray).
+            </p>
+
+            <!-- Evaluation Videos -->
+            <h4 class="title is-5" style="margin-top: 1.5rem">
+              Dataset 1: In-Place Motions
+            </h4>
+            <div class="columns is-multiline">
+              <div class="column is-half has-text-centered">
+                <p class="heading">Walk / March / Jog / Run</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/01_walk_march_jog_run.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-half has-text-centered">
+                <p class="heading">Stretch / Boxing / Bow / Wave</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/02_stretch_boxing_bow_wave.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-half has-text-centered">
+                <p class="heading">Jumping Jack / Squat / One-Leg Squat</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/03_jumping-jack_squat_one-leg-squad.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-half has-text-centered">
+                <p class="heading">Pick Up Box</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/04_pick-up-box.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <h4 class="title is-5">
+              Dataset 2: Locomotion with Global Translation
+            </h4>
+            <div class="columns is-multiline">
+              <div class="column is-half has-text-centered">
+                <p class="heading">Walk / Say Hi / Walk</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/05_walk-sayhi-walk.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-half has-text-centered">
+                <p class="heading">Pickup / Walk Around</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/06_pickup-walkaround.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-half has-text-centered">
+                <p class="heading">Walk / Jog Back and Forth</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/07_walk-jog-back-and-forth.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-half has-text-centered">
+                <p class="heading">Jump Around</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/08_jump-around.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <h4 class="title is-5">Dataset 3: Agile Activities</h4>
+            <div class="columns is-multiline">
+              <div class="column is-one-third has-text-centered">
+                <p class="heading">Sliding</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/09_sliding.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-one-third has-text-centered">
+                <p class="heading">Tennis</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/10_tennis.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div class="column is-one-third has-text-centered">
+                <p class="heading">Ball Throwing / Catching</p>
+                <video
+                  poster=""
+                  autoplay
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  width="100%"
+                >
+                  <source
+                    src="./static/videos/RoSHI%20Evaluation/11_ball-throwing-catching.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- TODO: Add result figures, tables, or videos -->
-        <!--
-        <img src="./static/images/results.png" alt="RoSHI quantitative results." />
-        -->
-
+        <!--/ Results. -->
       </div>
-    </div>
-    <!--/ Results. -->
+    </section>
 
-  </div>
-</section>
+    <!-- BibTeX section removed, to be added when citation info is finalized -->
 
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{mao2026roshi,
-  author    = {Mao, Wenjing and Ng, Jefferson and Hu, Luyang and Gehrig, Daniel and Loquercio, Antonio},
-  title     = {RoSHI: A Versatile Robot-oriented Suit for Human Data In-the-Wild},
-  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
-  year      = {2026},
-}</code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link" href="#">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="#" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            Website template borrowed from <a
-              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
-          </p>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <a class="icon-link" href="#">
+            <i class="fas fa-file-pdf"></i>
+          </a>
+          <a class="icon-link" href="#" class="external-link" disabled>
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >.
+              </p>
+              <p>
+                Website template borrowed from
+                <a href="https://github.com/nerfies/nerfies.github.io"
+                  >Nerfies</a
+                >.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</footer>
-
-</body>
+    </footer>
+  </body>
 </html>
