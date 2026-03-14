@@ -29,6 +29,7 @@
       href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
     />
     <link rel="stylesheet" href="./static/css/index.css" />
+    <style>html { scroll-behavior: smooth; }</style>
     <link rel="icon" href="./static/images/favicon.svg" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -103,35 +104,24 @@
                   </span>
                   <span class="link-block">
                     <a
-                      href="#"
-                      class="external-link button is-normal is-rounded is-dark"
+                      href="#code-and-resources"
+                      class="button is-normal is-rounded is-dark"
                     >
                       <span class="icon">
-                        <i class="fab fa-github"></i>
+                        💻
                       </span>
-                      <span>Hardware Setup (coming soon)</span>
+                      <span>Code</span>
                     </a>
                   </span>
                   <span class="link-block">
                     <a
-                      href="https://github.com/Jirl-upenn/RoSHI-App"
+                      href="https://roshi-mocap.github.io/docs/_build/html/"
                       class="external-link button is-normal is-rounded is-dark"
                     >
                       <span class="icon">
-                        <i class="fab fa-github"></i>
+                        <i class="fas fa-book"></i>
                       </span>
-                      <span>Calibration App</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a
-                      href="#"
-                      class="external-link button is-normal is-rounded is-dark"
-                    >
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                      <span>Code (coming soon)</span>
+                      <span>Documentation</span>
                     </a>
                   </span>
                 </div>
@@ -653,6 +643,36 @@
                 </video>
               </div>
             </div>
+            <!-- Real Robot Experiments -->
+            <h3 class="title is-4" style="margin-top: 2rem;">Real Robot Experiments</h3>
+            <p class="has-text-justified" style="margin-bottom: 1rem;">
+              <span style="color: #e74c3c; font-weight: bold;">TODO: Add real robot experiment videos here.</span>
+            </p>
+            <div class="columns is-multiline">
+              <div class="column is-half has-text-centered">
+                <div
+                  class="box has-text-centered"
+                  style="min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f5f5f5;"
+                >
+                  <div>
+                    <p class="heading">Experiment 1</p>
+                    <p class="has-text-grey">Video coming soon</p>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-half has-text-centered">
+                <div
+                  class="box has-text-centered"
+                  style="min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f5f5f5;"
+                >
+                  <div>
+                    <p class="heading">Experiment 2</p>
+                    <p class="has-text-grey">Video coming soon</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
         <!--/ Results. -->
@@ -661,19 +681,107 @@
 
     <!-- BibTeX section removed, to be added when citation info is finalized -->
 
+    <section class="section" id="code-and-resources">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Code &amp; Resources</h2>
+            <p class="subtitle is-6 has-text-grey" style="margin-top: -0.75rem; margin-bottom: 1.5rem;">
+              The RoSHI system is organized into modular repositories. All repositories will be publicly available.
+            </p>
+
+            <div class="columns is-multiline">
+              <div class="column is-full">
+                <div class="card" style="border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none;">
+                  <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                      <p class="title is-5" style="margin-bottom: 0.5rem;">RoSHI Core Algorithm</p>
+                      <span class="tag is-warning">Core</span>
+                    </div>
+                    <p class="content is-size-7" style="margin-top: 0.5rem;">
+                      Full pose estimation pipeline: IMU-guided EgoAllo diffusion, sensor fusion, calibration processing, and SMPL body model output.
+                    </p>
+                  </div>
+                  <div class="card-footer" style="border-top: none; padding: 0 1.25rem 1.25rem;">
+                    <a href="#" class="button is-link is-fullwidth is-rounded" disabled>
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Coming Soon</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="column is-half">
+                <div class="card" style="height: 100%; border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none;">
+                  <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                      <p class="title is-5" style="margin-bottom: 0.5rem;">RoSHI-App</p>
+                      <span class="tag is-info">Calibration</span>
+                    </div>
+                    <p class="content is-size-7" style="margin-top: 0.5rem;">
+                      iOS app for calibrating the RoSHI wearable system. Captures RGB video with real-time AprilTag detection and synchronizes with 9 body-mounted IMU sensors over LAN.
+                    </p>
+                  </div>
+                  <div class="card-footer" style="border-top: none; padding: 0 1.25rem 1.25rem;">
+                    <a href="https://github.com/Jirl-upenn/RoSHI-App" class="button is-link is-fullwidth is-rounded" target="_blank">
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="column is-half">
+                <div class="card" style="height: 100%; border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none;">
+                  <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                      <p class="title is-5" style="margin-bottom: 0.5rem;">RoSHI-Hardware</p>
+                      <span class="tag is-success">Hardware</span>
+                    </div>
+                    <p class="content is-size-7" style="margin-top: 0.5rem;">
+                      Hardware design files, 3D-printable enclosures, BOM, and ESP32 firmware for the 9 wireless IMU trackers (BNO085-based, 100 Hz).
+                    </p>
+                  </div>
+                  <div class="card-footer" style="border-top: none; padding: 0 1.25rem 1.25rem;">
+                    <a href="#" class="button is-link is-fullwidth is-rounded" disabled>
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Coming Soon</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="has-text-grey is-size-7" style="margin-top: 1rem;">
+              Refer to the <a href="https://roshi-mocap.github.io/docs/_build/html/">documentation</a> for detailed setup instructions.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Acknowledgements</h2>
+            <div class="content has-text-justified">
+              <p>
+                <span style="color: #e74c3c; font-weight: bold;">TODO: Add acknowledgements here.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div class="container">
-        <div class="content has-text-centered">
-          <a class="icon-link" href="#">
-            <i class="fas fa-file-pdf"></i>
-          </a>
-          <a class="icon-link" href="#" class="external-link" disabled>
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
         <div class="columns is-centered">
           <div class="column is-8">
-            <div class="content">
+            <div class="content has-text-centered">
               <p>
                 This website is licensed under a
                 <a
@@ -682,8 +790,6 @@
                   >Creative Commons Attribution-ShareAlike 4.0 International
                   License</a
                 >.
-              </p>
-              <p>
                 Website template borrowed from
                 <a href="https://github.com/nerfies/nerfies.github.io"
                   >Nerfies</a
