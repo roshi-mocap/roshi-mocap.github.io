@@ -1,35 +1,13 @@
 RoSHI Documentation
 ====================
 
-**RoSHI** (Robot-oriented Suit for Human data In-the-wild) is a low-cost,
-portable wearable system that fuses sparse IMUs with egocentric sensing from
-Project Aria glasses for in-the-wild human motion capture and humanoid policy
-learning.
+RoSHI is a wearable motion capture system built around sparse IMUs, Project
+Aria, and a short iPhone calibration step.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Getting Started
 
-   getting_started/overview
-   getting_started/installation
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Hardware
-
-   hardware/components
-   hardware/assembly
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Calibration
-
-   calibration/app_setup
-   calibration/procedure
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Pipeline
-
-   pipeline/data_capture
-   pipeline/pose_estimation
+   getting_started/index
+   hardware/index
+   calibration/index
+   pipeline/index

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Components &#8212; RoSHI  documentation</title>
+    <title>Pipeline &#8212; RoSHI  documentation</title>
   
   
   
@@ -42,11 +42,11 @@
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'hardware/components';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Assembly" href="assembly.html" />
-    <link rel="prev" title="Hardware" href="index.html" />
+    <link rel="next" title="Data Capture" href="data_capture.html" />
+    <link rel="prev" title="Calibration Procedure" href="../calibration/procedure.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -132,8 +132,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hardware/index.html">
     Hardware
   </a>
 </li>
@@ -146,8 +146,8 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
     Pipeline
   </a>
 </li>
@@ -211,10 +211,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -248,8 +244,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hardware/index.html">
     Hardware
   </a>
 </li>
@@ -262,8 +258,8 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
     Pipeline
   </a>
 </li>
@@ -311,9 +307,9 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assembly.html">Assembly</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data_capture.html">Data Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pose_estimation.html">Pose Estimation</a></li>
 </ul>
 </div>
 </nav></div>
@@ -354,10 +350,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Hardware</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Components</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Pipeline</span></li>
   </ul>
 </nav>
 </div>
@@ -374,112 +367,16 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="components">
-<h1>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h1>
-<section id="imu-trackers">
-<h2>IMU Trackers<a class="headerlink" href="#imu-trackers" title="Link to this heading">#</a></h2>
-<p>Each tracker consists of:</p>
-<ul class="simple">
-<li><p><strong>BNO085</strong> 9-axis IMU sensor</p></li>
-<li><p><strong>ESP32</strong> microcontroller for Wi-Fi streaming</p></li>
-<li><p><strong>3D-printed enclosure</strong> with a rigidly mounted AprilTag</p></li>
-<li><p><strong>LiPo battery</strong> (500 mAh, ~4 hours runtime)</p></li>
+  <section id="pipeline">
+<h1>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">#</a></h1>
+<p>This section summarizes how RoSHI captures synchronized data and reconstructs
+full-body pose.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="data_capture.html">Data Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pose_estimation.html">Pose Estimation</a></li>
 </ul>
-<p>You need <strong>9 trackers</strong> in total, placed at the following body locations:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 33.3%" />
-<col style="width: 66.7%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Tag ID</p></th>
-<th class="head"><p>Body Location</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>Pelvis</p></td>
-</tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>Left Shoulder</p></td>
-</tr>
-<tr class="row-even"><td><p>2</p></td>
-<td><p>Right Shoulder</p></td>
-</tr>
-<tr class="row-odd"><td><p>3</p></td>
-<td><p>Left Elbow</p></td>
-</tr>
-<tr class="row-even"><td><p>4</p></td>
-<td><p>Right Elbow</p></td>
-</tr>
-<tr class="row-odd"><td><p>5</p></td>
-<td><p>Left Hip</p></td>
-</tr>
-<tr class="row-even"><td><p>6</p></td>
-<td><p>Right Hip</p></td>
-</tr>
-<tr class="row-odd"><td><p>7</p></td>
-<td><p>Left Knee</p></td>
-</tr>
-<tr class="row-even"><td><p>8</p></td>
-<td><p>Right Knee</p></td>
-</tr>
-</tbody>
-</table>
 </div>
-</section>
-<section id="project-aria-glasses">
-<h2>Project Aria Glasses<a class="headerlink" href="#project-aria-glasses" title="Link to this heading">#</a></h2>
-<p>RoSHI uses <a class="reference external" href="https://www.projectaria.com/">Project Aria</a> glasses for:</p>
-<ul class="simple">
-<li><p>6-DoF head tracking via onboard SLAM</p></li>
-<li><p>Egocentric RGB video capture</p></li>
-<li><p>Machine Perception Services (MPS) for post-processing</p></li>
-</ul>
-</section>
-<section id="bill-of-materials">
-<h2>Bill of Materials<a class="headerlink" href="#bill-of-materials" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 50.0%" />
-<col style="width: 25.0%" />
-<col style="width: 25.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Item</p></th>
-<th class="head"><p>Quantity</p></th>
-<th class="head"><p>Approx. Cost</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>BNO085 IMU breakout</p></td>
-<td><p>9</p></td>
-<td><p>$12 each</p></td>
-</tr>
-<tr class="row-odd"><td><p>ESP32 dev board</p></td>
-<td><p>9</p></td>
-<td><p>$8 each</p></td>
-</tr>
-<tr class="row-even"><td><p>LiPo battery (500 mAh)</p></td>
-<td><p>9</p></td>
-<td><p>$5 each</p></td>
-</tr>
-<tr class="row-odd"><td><p>AprilTag prints (Tag36h11)</p></td>
-<td><p>9</p></td>
-<td><p>~$2 total</p></td>
-</tr>
-<tr class="row-even"><td><p>3D-printed enclosures</p></td>
-<td><p>9</p></td>
-<td><p>~$15 total</p></td>
-</tr>
-<tr class="row-odd"><td><p>Velcro straps</p></td>
-<td><p>9</p></td>
-<td><p>~$10 total</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
 </section>
 
 
@@ -493,20 +390,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="../calibration/procedure.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hardware</p>
+        <p class="prev-next-title">Calibration Procedure</p>
       </div>
     </a>
     <a class="right-next"
-       href="assembly.html"
+       href="data_capture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assembly</p>
+        <p class="prev-next-title">Data Capture</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -516,26 +413,6 @@
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-trackers">IMU Trackers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-aria-glasses">Project Aria Glasses</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bill-of-materials">Bill of Materials</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

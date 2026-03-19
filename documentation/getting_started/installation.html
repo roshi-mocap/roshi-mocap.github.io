@@ -31,6 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=1a807ab6" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -44,7 +45,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/installation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Components" href="../hardware/components.html" />
+    <link rel="next" title="Hardware" href="../hardware/index.html" />
     <link rel="prev" title="Overview" href="overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -124,71 +125,33 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="overview.html">
-    Overview
-  </a>
-</li>
-
-
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
-    Installation
+  <a class="nav-link nav-internal" href="index.html">
+    Getting Started
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../hardware/components.html">
-    Components
+  <a class="nav-link nav-internal" href="../hardware/index.html">
+    Hardware
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../hardware/assembly.html">
-    Assembly
+  <a class="nav-link nav-internal" href="../calibration/index.html">
+    Calibration
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../calibration/app_setup.html">
-    Calibration App Setup
+  <a class="nav-link nav-internal" href="../pipeline/index.html">
+    Pipeline
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../calibration/procedure.html">
-    Calibration Procedure
-  </a>
-</li>
-
-
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../pipeline/data_capture.html">
-    Data Capture
-  </a>
-</li>
-
-
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../pipeline/pose_estimation.html">
-    Pose Estimation
-  </a>
-</li>
-
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -278,58 +241,30 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="overview.html">
-    Overview
-  </a>
-</li>
-
-
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
-    Installation
+  <a class="nav-link nav-internal" href="index.html">
+    Getting Started
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../hardware/components.html">
-    Components
+  <a class="nav-link nav-internal" href="../hardware/index.html">
+    Hardware
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../hardware/assembly.html">
-    Assembly
+  <a class="nav-link nav-internal" href="../calibration/index.html">
+    Calibration
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../calibration/app_setup.html">
-    Calibration App Setup
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../calibration/procedure.html">
-    Calibration Procedure
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/data_capture.html">
-    Data Capture
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/pose_estimation.html">
-    Pose Estimation
+  <a class="nav-link nav-internal" href="../pipeline/index.html">
+    Pipeline
   </a>
 </li>
 
@@ -376,7 +311,11 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"></div>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation</a></li>
+</ul>
+</div>
 </nav></div>
     </div>
   
@@ -415,6 +354,9 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Getting Started</a></li>
+    
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Installation</span></li>
   </ul>
 </nav>
@@ -446,9 +388,12 @@
 <h2>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI.git
 <span class="nb">cd</span><span class="w"> </span>RoSHI
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
+<p>Install the Python environment needed for the parts of the RoSHI pipeline you
+plan to run. The main repository README lists the core dependencies, and the
+bundled projects such as <code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code>, <code class="docutils literal notranslate"><span class="pre">MHR/</span></code>, and <code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> document
+their additional setup requirements.</p>
 </section>
 <section id="imu-firmware">
 <h2>IMU Firmware<a class="headerlink" href="#imu-firmware" title="Link to this heading">#</a></h2>
@@ -462,7 +407,9 @@ at 100 Hz. See the <a class="reference internal" href="../hardware/components.ht
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-App.git
 </pre></div>
 </div>
-<p>Open <code class="docutils literal notranslate"><span class="pre">ROSHI.xcodeproj</span></code> in Xcode 15+ and build to your device.</p>
+<p>See <a class="reference internal" href="../calibration/app_setup.html"><span class="doc">Calibration App Setup</span></a> for build and receiver setup, and
+<a class="reference internal" href="../calibration/app_reference.html"><span class="doc">Calibration App Reference</span></a> for app settings, outputs, and
+troubleshooting.</p>
 </section>
 </section>
 
@@ -486,11 +433,11 @@ at 100 Hz. See the <a class="reference internal" href="../hardware/components.ht
       </div>
     </a>
     <a class="right-next"
-       href="../hardware/components.html"
+       href="../hardware/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Components</p>
+        <p class="prev-next-title">Hardware</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -519,15 +466,6 @@ at 100 Hz. See the <a class="reference internal" href="../hardware/components.ht
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-app">Calibration App</a></li>
 </ul>
   </nav></div>
-
-  <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/getting_started/installation.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
 
 </div></div>
               

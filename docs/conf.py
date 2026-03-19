@@ -13,6 +13,12 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+html_show_sourcelink = False
+
+html_sidebars = {
+    "index": [],
+}
 
 html_theme_options = {
     "logo": {
@@ -28,6 +34,13 @@ html_theme_options = {
     "navbar_align": "left",
     "show_prev_next": True,
     "navigation_with_keys": True,
+    "show_nav_level": 2,
+    "navigation_depth": 2,
+    "header_links_before_dropdown": 4,
+    "secondary_sidebar_items": {
+        "**": ["page-toc"],
+        "index": [],
+    },
 }
 
 html_context = {

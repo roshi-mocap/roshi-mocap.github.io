@@ -15,7 +15,11 @@ Python Environment
 
    git clone https://github.com/Jirl-upenn/RoSHI.git
    cd RoSHI
-   pip install -r requirements.txt
+
+Install the Python environment needed for the parts of the RoSHI pipeline you
+plan to run. The main repository README lists the core dependencies, and the
+bundled projects such as ``sam-3d-body/``, ``MHR/``, and ``egoallo/`` document
+their additional setup requirements.
 
 IMU Firmware
 ------------
@@ -33,4 +37,6 @@ The iOS calibration app is available at
 
    git clone https://github.com/Jirl-upenn/RoSHI-App.git
 
-Open ``ROSHI.xcodeproj`` in Xcode 15+ and build to your device.
+See :doc:`../calibration/app_setup` for build and receiver setup, and
+:doc:`../calibration/app_reference` for app settings, outputs, and
+troubleshooting.
