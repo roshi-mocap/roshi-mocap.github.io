@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d9396ff5" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=39de3225" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,6 +43,7 @@
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'calibration/procedure';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Calibration Math" href="math.html" />
@@ -196,7 +197,7 @@
           
           
           
-          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span class="icon-link-emoji" aria-hidden="true">🤸🏻</span>
+          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-house fa-lg" aria-hidden="true"></i>
             <span class="sr-only">Project Page</span></a>
         </li>
         <li class="nav-item">
@@ -315,7 +316,7 @@
           
           
           
-          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span class="icon-link-emoji" aria-hidden="true">🤸🏻</span>
+          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-house fa-lg" aria-hidden="true"></i>
             <span class="sr-only">Project Page</span></a>
         </li>
         <li class="nav-item">
@@ -417,7 +418,7 @@ For the rotation equations and robust solvers used in the calibration pipeline, 
 <li><p><strong>Wear the suit</strong> with all 9 IMU trackers attached and powered on.</p></li>
 <li><p><strong>Start the receiver</strong> on the computer that will receive the uploaded files, and check the IP address and port shown in the receiver terminal.</p></li>
 <li><p><strong>Launch the calibration app</strong> and ensure the receiver status (top-right) is green.</p></li>
-<li><p><strong>Tap Record</strong> - a 3-second countdown starts, then recording begins if you are using the front camera.</p></li>
+<li><p><strong>Tap Record</strong> you can use either the front or back camera.</p></li>
 <li><p><strong>Slowly rotate</strong> to expose all 9 AprilTags to the camera; the tag detection tracker in the app shows progress per tag.</p></li>
 <li><p><strong>Once all tags are detected</strong>, you can step out of the camera view and start performing the motion you want to record.</p></li>
 <li><p><strong>Tap Stop</strong> when you are done with the collection.</p></li>
@@ -428,6 +429,11 @@ For the rotation equations and robust solvers used in the calibration pipeline, 
 <p>The full recording can be longer, but the calibration segment itself usually
 only needs 20-40 seconds. The time when calibration is completed is also recorded and used to define the clip for calibration automatically.
 Move slowly while exposing the tags, keep them facing the camera, and use good lighting for reliable detection.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a quick visual walkthrough of this calibration flow, see the demo video
+in <a class="reference internal" href="app_reference.html#app-reference-video"><span class="std std-ref">UI Behavior</span></a>.</p>
 </div>
 </section>
 <section id="pipeline-summary">

@@ -18,8 +18,8 @@ Core Functions
   zoom
 - One-tap upload of the recorded session to the receiver
 
-In-App Controls
----------------
+Capture Settings
+----------------
 
 .. list-table::
    :header-rows: 1
@@ -44,18 +44,67 @@ In-App Controls
      - Front / Back
      - Back
 
+UI Screens
+----------
+
+.. list-table::
+   :class: app-ui-grid
+   :widths: 1 1
+
+   * - .. figure:: ../_static/app-ui-preview-clean.png
+          :width: 250px
+          :alt: RoSHI app preview screen
+
+          Preview mode. The top bar shows resolution, FPS, receiver status,
+          target detections(# of tag detections needed for each IMU), and measured processing FPS.
+
+     - .. figure:: ../_static/app-ui-recording-clean.png
+          :width: 250px
+          :alt: RoSHI app recording screen
+
+          Recording mode. The timer appears, and tracker chips switch to live detection counts.
+
+.. figure:: ../_static/app-ui-receiver-fields-clean.png
+   :width: 320px
+   :alt: RoSHI app receiver input fields
+
+   Receiver settings. Tap the receiver status chip to open the sheet, confirm
+   connection state, and edit the receiver IP address and port manually.
+
+Behavior Notes
+--------------
+
+.. container:: behavior-video-grid
+
+   .. container:: behavior-video-copy
+
+      - The tag tracker stays gray in preview, turns red while recording below
+        the target count, and turns green once the target is met.
+      - The live AprilTag overlay shows a bounding box, local 3D axes, and a
+        small readout with tag ID and camera-frame position.
+      - If recording stops before every tag reaches the target count, the
+        session is still saved and uploaded, but the app warns that some tags
+        are incomplete.
+      - Exact tag placement and ID mapping are documented in
+        :doc:`../hardware/components` and also the top bar in the app.
+
+   .. container:: behavior-video-media
+
+      .. raw:: html
+
+         <video class="app-ui-video" controls playsinline preload="metadata">
+           <source src="../_static/roshi_app.mp4" type="video/mp4">
+         </video>
+
 Session Output
 --------------
 
 Each recording session uploads two files to the receiver:
 
-- ``video_YYYYMMDD_HHMMSS.mp4``: H.264-encoded calibration video at the chosen
-  resolution and frame rate
+- ``video_YYYYMMDD_HHMMSS.mp4``: H.264-encoded calibration video
 - ``metadata_YYYYMMDD_HHMMSS.json``: per-frame metadata including timestamps,
   intrinsics, and AprilTag detections
 
-The metadata contains per-frame UTC timestamps, camera intrinsics, and tag
-detections used by the downstream calibration pipeline.
 
 Common Issues
 -------------

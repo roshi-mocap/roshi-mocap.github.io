@@ -14,12 +14,6 @@
   width: 2rem;
 }
 
-.icon-link-emoji {
-  display: inline-block;
-  font-size: 1.15rem;
-  line-height: 1;
-}
-
 .bd-docs-nav .nav-link {
   border-left: 2px solid transparent;
   padding-left: 0.85rem;
@@ -33,4 +27,56 @@
 
 .page-toc {
   font-size: 0.95rem;
+}
+
+.app-ui-grid {
+  width: 100%;
+  border: 0;
+}
+
+.app-ui-grid tbody,
+.app-ui-grid tr,
+.app-ui-grid td {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.app-ui-grid td {
+  padding: 0 0 1rem 0;
+  vertical-align: top;
+}
+
+.app-ui-grid .figure {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.behavior-video-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 360px);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.behavior-video-copy ul {
+  margin-bottom: 0;
+}
+
+.behavior-video-media {
+  display: flex;
+  justify-content: center;
+}
+
+.app-ui-video {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 14px;
+  background: #000;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 900px) {
+  .behavior-video-grid {
+    grid-template-columns: 1fr;
+  }
 }

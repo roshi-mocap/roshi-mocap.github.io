@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoSHI App - UI Reference</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    background: #1a1a2e;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { color: #aaa; margin-bottom: 40px; font-size: 14px; }
+
+  .page-section {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 60px;
+  }
+  .page-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+  }
+
+  .layout {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* iPhone frame */
+  .phone-frame {
+    width: 375px;
+    height: 812px;
+    background: #000;
+    border-radius: 44px;
+    border: 4px solid #333;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Camera background */
+  .camera-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2a3a4a, #1a2a3a, #0a1a2a);
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  /* Annotation bubble */
+  .anno {
+    position: absolute;
+    width: 28px; height: 28px;
+    background: #ff3b30;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 100;
+    box-shadow: 0 0 0 3px rgba(255,59,48,0.3);
+    cursor: default;
+  }
+
+  /* Top bar */
+  .top-bar {
+    position: absolute;
+    top: 52px; left: 8px; right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+  }
+  .btn-pill {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+  }
+  .receiver-btn {
+    background: rgba(0,0,0,0.5);
+    border-radius: 6px;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .status-dot.green { background: #30d158; }
+  .status-dot.red { background: #ff3b30; }
+  .fps-readout {
+    background: rgba(0,0,0,0.5);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #30d158;
+    font-family: 'SF Mono', 'Menlo', monospace;
+  }
+
+  /* Tag tracker */
+  .tag-tracker {
+    position: absolute;
+    top: 96px; left: 6px; right: 6px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    z-index: 10;
+  }
+  .tracker-group {
+    display: flex;
+    gap: 1px;
+    padding: 2px;
+    border-radius: 6px;
+  }
+  .tracker-group.left { background: rgba(0,122,255,0.3); }
+  .tracker-group.center { background: rgba(255,255,255,0.2); }
+  .tracker-group.right { background: rgba(52,199,89,0.3); }
+  .mini-chip {
+    width: 36px; height: 28px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 600;
+  }
+  .mini-chip.idle { background: rgba(128,128,128,0.5); }
+  .mini-chip.recording { background: rgba(255,59,48,0.5); }
+  .mini-chip.done { background: rgba(52,199,89,0.5); }
+  .mini-chip .chip-label { font-size: 8px; }
+  .mini-chip .chip-id { font-size: 8px; opacity: 0.7; font-family: monospace; }
+  .mini-chip .chip-bar {
+    width: 30px; height: 2px;
+    background: rgba(255,255,255,0.2);
+    margin-top: 2px;
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .mini-chip .chip-bar-fill {
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+  }
+
+  /* AprilTag overlay */
+  .apriltag-box {
+    position: absolute;
+    width: 80px; height: 80px;
+    border: 3px solid #30d158;
+    z-index: 5;
+  }
+  .apriltag-axes {
+    position: absolute;
+    top: 50%; left: 50%;
+    z-index: 6;
+  }
+  .axis-x { position: absolute; width: 30px; height: 4px; background: #ff3b30; top: -2px; left: 0; }
+  .axis-y { position: absolute; width: 4px; height: 30px; background: #30d158; top: 0; left: -2px; }
+  .axis-z { position: absolute; width: 25px; height: 4px; background: #007aff; top: -2px; left: 0; transform: rotate(-45deg); transform-origin: left center; }
+  .tag-info {
+    position: absolute;
+    top: -90px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 7;
+  }
+  .tag-info .tag-id { color: #ffd60a; font-weight: 700; }
+  .tag-info .tag-dist { color: #fff; font-weight: 700; }
+  .tag-info .tag-x { color: #ff3b30; }
+  .tag-info .tag-y { color: #30d158; }
+  .tag-info .tag-z { color: #007aff; }
+
+  /* Recording duration */
+  .rec-duration {
+    position: absolute;
+    bottom: 190px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,59,48,0.8);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'SF Mono', monospace;
+    z-index: 10;
+  }
+
+  /* Zoom slider */
+  .zoom-bar {
+    position: absolute;
+    bottom: 140px;
+    left: 40px; right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+  }
+  .zoom-icon { font-size: 16px; opacity: 0.9; }
+  .zoom-slider {
+    flex: 1; height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    position: relative;
+  }
+  .zoom-slider-fill {
+    width: 20%;
+    height: 100%;
+    background: #30d158;
+    border-radius: 2px;
+  }
+  .zoom-thumb {
+    position: absolute;
+    width: 20px; height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    top: -8px; left: 18%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  /* Bottom controls */
+  .bottom-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .record-btn {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .record-btn-inner {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: #ff3b30;
+  }
+  .record-btn.recording {
+    background: #ff3b30;
+  }
+  .record-btn.recording .record-btn-inner {
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    background: #fff;
+  }
+  .flip-btn {
+    position: absolute;
+    right: 40px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  /* Legend table */
+  .legend {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+  }
+  .legend table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .legend th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid #444;
+    color: #aaa;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .legend td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #2a2a3e;
+    vertical-align: top;
+  }
+  .legend td:first-child {
+    width: 40px;
+    text-align: center;
+  }
+  .legend .num {
+    display: inline-flex;
+    width: 24px; height: 24px;
+    background: #ff3b30;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .legend .label { font-weight: 600; color: #fff; }
+  .legend .desc { color: #aaa; font-size: 13px; margin-top: 2px; }
+
+  /* Countdown overlay */
+  .countdown-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+  .countdown-num {
+    font-size: 120px;
+    font-weight: 700;
+  }
+
+  /* Receiver settings sheet mockup */
+  .settings-sheet {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: #1c1c1e;
+    border-radius: 12px 12px 0 0;
+    z-index: 60;
+    padding: 16px;
+  }
+  .sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 16px;
+  }
+  .sheet-header .close { color: #007aff; font-size: 16px; }
+  .sheet-header .title { font-size: 17px; font-weight: 600; }
+  .sheet-header .save { color: #007aff; font-size: 16px; font-weight: 600; }
+  .form-section {
+    margin-bottom: 16px;
+  }
+  .form-section-header {
+    font-size: 12px; color: #8e8e93;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    padding-left: 16px;
+  }
+  .form-row {
+    background: #2c2c2e;
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .form-row:first-of-type { border-radius: 10px 10px 0 0; }
+  .form-row:last-of-type { border-radius: 0 0 10px 10px; }
+  .form-row:only-of-type { border-radius: 10px; }
+  .form-row + .form-row { border-top: 1px solid #3a3a3c; }
+  .form-row .value { color: #8e8e93; font-family: monospace; }
+
+  /* Second mockup: recording state */
+  .state-label {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffd60a;
+    z-index: 99;
+    white-space: nowrap;
+  }
+</style>
+
+<style>
+  body { padding: 24px 20px; min-height: auto; }
+  h1, .subtitle, .page-section h2 { display: none; }
+  .page-section { max-width: 460px; margin: 0 auto; }
+  .layout { justify-content: center; }
+  .legend, .anno { display: none; }
+</style>
+</head>
+<body>
+
+<div class="page-section">
+  <h2>1. Main View — Idle State (Not Recording)</h2>
+  <div class="layout">
+
+    <!-- Phone -->
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="camera-bg"></div>
+        <div class="state-label">Idle / Preview Mode</div>
+
+        <!-- Annotations -->
+        <div class="anno" style="top:44px; left:24px;">1</div>
+        <div class="anno" style="top:44px; left:82px;">2</div>
+        <div class="anno" style="top:44px; right:98px;">3</div>
+        <div class="anno" style="top:44px; right:52px;">4</div>
+        <div class="anno" style="top:44px; right:8px;">5</div>
+        <div class="anno" style="top:89px; left:50%; transform:translateX(-50%);">6</div>
+        <div class="anno" style="top:320px; left:140px;">7</div>
+        <div class="anno" style="bottom:146px; left:12px;">8</div>
+        <div class="anno" style="bottom:52px; left:50%; transform:translateX(-50%);">9</div>
+        <div class="anno" style="bottom:52px; right:26px;">10</div>
+
+        <!-- Top Bar -->
+        <div class="top-bar">
+          <div class="btn-pill" style="min-width:55px;">720p</div>
+          <div class="btn-pill" style="min-width:40px;">30</div>
+          <div style="flex:1;"></div>
+          <div class="receiver-btn">
+            <div class="status-dot green"></div>
+            <span style="font-size:12px; opacity:0.9;">⚡</span>
+          </div>
+          <div class="btn-pill" style="min-width:50px;border:1px solid rgba(255,255,255,0.5);">
+            <div style="font-size:8px; font-weight:700; opacity:0.8;">Target</div>
+            <div style="font-size:13px; font-weight:700; font-family:monospace;">200</div>
+          </div>
+          <div class="fps-readout">30</div>
+        </div>
+
+        <!-- Tag Tracker -->
+        <div class="tag-tracker">
+          <div class="tracker-group left">
+            <div class="mini-chip idle"><span class="chip-label">Shoulder</span><span class="chip-id">#2</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+            <div class="mini-chip idle"><span class="chip-label">Elbow</span><span class="chip-id">#4</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+            <div class="mini-chip idle"><span class="chip-label">Hip</span><span class="chip-id">#6</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+            <div class="mini-chip idle"><span class="chip-label">Knee</span><span class="chip-id">#8</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+          </div>
+          <div class="tracker-group center">
+            <div class="mini-chip idle"><span class="chip-label">Pelvis</span><span class="chip-id">#1</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+          </div>
+          <div class="tracker-group right">
+            <div class="mini-chip idle"><span class="chip-label">Shoulder</span><span class="chip-id">#3</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+            <div class="mini-chip idle"><span class="chip-label">Elbow</span><span class="chip-id">#5</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+            <div class="mini-chip idle"><span class="chip-label">Hip</span><span class="chip-id">#7</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+            <div class="mini-chip idle"><span class="chip-label">Knee</span><span class="chip-id">#9</span><div class="chip-bar"><div class="chip-bar-fill" style="width:0%"></div></div></div>
+          </div>
+        </div>
+
+        <!-- AprilTag Detection Example -->
+        <div class="apriltag-box" style="top:280px; left:140px;">
+          <div class="tag-info">
+            <div class="tag-id">ID: 1</div>
+            <div class="tag-dist">Dist: 0.45m</div>
+            <div class="tag-x">X: 0.02</div>
+            <div class="tag-y">Y: -0.15</div>
+            <div class="tag-z">Z: 0.45</div>
+          </div>
+          <div class="apriltag-axes">
+            <div class="axis-x"></div>
+            <div class="axis-y"></div>
+            <div class="axis-z"></div>
+          </div>
+        </div>
+
+        <!-- Zoom Bar -->
+        <div class="zoom-bar">
+          <span class="zoom-icon">🔍−</span>
+          <div class="zoom-slider">
+            <div class="zoom-slider-fill"></div>
+            <div class="zoom-thumb"></div>
+          </div>
+          <span class="zoom-icon">🔍+</span>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="bottom-controls">
+          <div class="record-btn">
+            <div class="record-btn-inner"></div>
+          </div>
+          <div class="flip-btn">⟲</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Element</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="num">1</span></td>
+            <td>
+              <div class="label">Resolution Toggle</div>
+              <div class="desc">Tap to switch between <strong>720p</strong> and <strong>1080p</strong> video resolution. Affects both preview and recorded video.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">2</span></td>
+            <td>
+              <div class="label">FPS Toggle</div>
+              <div class="desc">Cycle through frame rates: <strong>30 → 20 → 15 → 10 FPS</strong>. Lower FPS gives more processing time per frame for AprilTag detection.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">3</span></td>
+            <td>
+              <div class="label">Receiver Status</div>
+              <div class="desc"><strong>Green dot</strong> = connected to LAN receiver. <strong>Red dot</strong> = disconnected. Tap to open receiver settings (IP/port configuration).</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">4</span></td>
+            <td>
+              <div class="label">Target Detections</div>
+              <div class="desc">Required detections per tag before a recording is considered complete. Cycle: <strong>50 → 100 → 200</strong>. Higher = more data for calibration accuracy.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">5</span></td>
+            <td>
+              <div class="label">Real-time FPS Readout</div>
+              <div class="desc">Shows the actual frames per second being processed. Green color. Helps monitor if the device is keeping up with the target FPS.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">6</span></td>
+            <td>
+              <div class="label">Tag Detection Tracker</div>
+              <div class="desc">Shows detection progress for all 9 IMU joints. <strong>Left (blue)</strong>: left body joints. <strong>Center</strong>: pelvis. <strong>Right (green)</strong>: right body joints. Each chip shows the joint name, tag ID, and a progress bar. Colors: gray=idle, red=recording (not yet met target), green=target met.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">7</span></td>
+            <td>
+              <div class="label">AprilTag AR Overlay</div>
+              <div class="desc">Real-time overlay on detected AprilTags. Shows: <strong>green bounding box</strong>, <strong>3D axes</strong> (red=X, green=Y, blue=Z), and an info panel with <strong>Tag ID</strong>, <strong>distance</strong>, and <strong>XYZ position</strong> in camera coordinates.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">8</span></td>
+            <td>
+              <div class="label">Zoom Slider</div>
+              <div class="desc">Camera zoom control. Range: <strong>1× to 5×</strong>. Use to get a better view of distant AprilTags without physically moving closer.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">9</span></td>
+            <td>
+              <div class="label">Record Button</div>
+              <div class="desc">Start/stop recording. <strong>Red circle</strong> = ready to record. <strong>Gray</strong> = disabled (receiver not connected). When recording, changes to a red square (stop icon). Front camera triggers a <strong>3-second countdown</strong> before recording starts.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="num">10</span></td>
+            <td>
+              <div class="label">Camera Flip Button</div>
+              <div class="desc">Switch between <strong>front</strong> and <strong>rear</strong> camera. Note: front camera uses a countdown before recording.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

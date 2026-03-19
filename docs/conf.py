@@ -16,6 +16,7 @@ html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 html_show_sourcelink = False
+html_favicon = "_static/favicon.svg"
 
 html_sidebars = {
     "index": [],
@@ -31,8 +32,7 @@ html_theme_options = {
         {
             "name": "Project Page",
             "url": "https://roshi-mocap.github.io/",
-            "icon": "🤸🏻",
-            "type": "emoji",
+            "icon": "fa-solid fa-house",
         },
         {
             "name": "GitHub",

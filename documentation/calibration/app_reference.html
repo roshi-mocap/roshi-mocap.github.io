@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d9396ff5" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=39de3225" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,6 +43,7 @@
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'calibration/app_reference';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Calibration Procedure" href="procedure.html" />
@@ -196,7 +197,7 @@
           
           
           
-          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span class="icon-link-emoji" aria-hidden="true">🤸🏻</span>
+          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-house fa-lg" aria-hidden="true"></i>
             <span class="sr-only">Project Page</span></a>
         </li>
         <li class="nav-item">
@@ -315,7 +316,7 @@
           
           
           
-          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span class="icon-link-emoji" aria-hidden="true">🤸🏻</span>
+          <a href="https://roshi-mocap.github.io/" title="Project Page" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-house fa-lg" aria-hidden="true"></i>
             <span class="sr-only">Project Page</span></a>
         </li>
         <li class="nav-item">
@@ -424,8 +425,8 @@ zoom</p></li>
 <li><p>One-tap upload of the recorded session to the receiver</p></li>
 </ul>
 </section>
-<section id="in-app-controls">
-<h2>In-App Controls<a class="headerlink" href="#in-app-controls" title="Link to this heading">#</a></h2>
+<section id="capture-settings">
+<h2>Capture Settings<a class="headerlink" href="#capture-settings" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
 <col style="width: 40.0%" />
@@ -463,17 +464,71 @@ zoom</p></li>
 </table>
 </div>
 </section>
+<section id="ui-screens">
+<h2>UI Screens<a class="headerlink" href="#ui-screens" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="app-ui-grid table">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/app-ui-preview-clean.png"><img alt="RoSHI app preview screen" src="../_images/app-ui-preview-clean.png" style="width: 250px;" /></a>
+<figcaption>
+<p><span class="caption-text">Preview mode. The top bar shows resolution, FPS, receiver status,
+target detections(# of tag detections needed for each IMU), and measured processing FPS.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/app-ui-recording-clean.png"><img alt="RoSHI app recording screen" src="../_images/app-ui-recording-clean.png" style="width: 250px;" /></a>
+<figcaption>
+<p><span class="caption-text">Recording mode. The timer appears, and tracker chips switch to live detection counts.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/app-ui-receiver-fields-clean.png"><img alt="RoSHI app receiver input fields" src="../_images/app-ui-receiver-fields-clean.png" style="width: 320px;" /></a>
+<figcaption>
+<p><span class="caption-text">Receiver settings. Tap the receiver status chip to open the sheet, confirm
+connection state, and edit the receiver IP address and port manually.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="behavior-notes">
+<h2>Behavior Notes<a class="headerlink" href="#behavior-notes" title="Link to this heading">#</a></h2>
+<div class="behavior-video-grid docutils container">
+<div class="behavior-video-copy docutils container">
+<ul class="simple">
+<li><p>The tag tracker stays gray in preview, turns red while recording below
+the target count, and turns green once the target is met.</p></li>
+<li><p>The live AprilTag overlay shows a bounding box, local 3D axes, and a
+small readout with tag ID and camera-frame position.</p></li>
+<li><p>If recording stops before every tag reaches the target count, the
+session is still saved and uploaded, but the app warns that some tags
+are incomplete.</p></li>
+<li><p>Exact tag placement and ID mapping are documented in
+<a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> and also the top bar in the app.</p></li>
+</ul>
+</div>
+<div class="behavior-video-media docutils container">
+<video class="app-ui-video" controls playsinline preload="metadata">
+  <source src="../_static/roshi_app.mp4" type="video/mp4">
+</video></div>
+</div>
+</section>
 <section id="session-output">
 <h2>Session Output<a class="headerlink" href="#session-output" title="Link to this heading">#</a></h2>
 <p>Each recording session uploads two files to the receiver:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">video_YYYYMMDD_HHMMSS.mp4</span></code>: H.264-encoded calibration video at the chosen
-resolution and frame rate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">video_YYYYMMDD_HHMMSS.mp4</span></code>: H.264-encoded calibration video</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">metadata_YYYYMMDD_HHMMSS.json</span></code>: per-frame metadata including timestamps,
 intrinsics, and AprilTag detections</p></li>
 </ul>
-<p>The metadata contains per-frame UTC timestamps, camera intrinsics, and tag
-detections used by the downstream calibration pipeline.</p>
 </section>
 <section id="common-issues">
 <h2>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h2>
@@ -539,7 +594,9 @@ time before stopping the recording.</p></li>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-functions">Core Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-app-controls">In-App Controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-settings">Capture Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ui-screens">UI Screens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-notes">Behavior Notes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-output">Session Output</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
 </ul>

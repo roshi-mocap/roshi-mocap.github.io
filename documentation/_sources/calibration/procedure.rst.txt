@@ -12,7 +12,7 @@ Recording Steps
 1. **Wear the suit** with all 9 IMU trackers attached and powered on.
 2. **Start the receiver** on the computer that will receive the uploaded files, and check the IP address and port shown in the receiver terminal.
 3. **Launch the calibration app** and ensure the receiver status (top-right) is green.
-4. **Tap Record** - a 3-second countdown starts, then recording begins if you are using the front camera.
+4. **Tap Record** you can use either the front or back camera.
 5. **Slowly rotate** to expose all 9 AprilTags to the camera; the tag detection tracker in the app shows progress per tag.
 6. **Once all tags are detected**, you can step out of the camera view and start performing the motion you want to record. 
 7. **Tap Stop** when you are done with the collection.
@@ -22,6 +22,10 @@ Recording Steps
    The full recording can be longer, but the calibration segment itself usually
    only needs 20-40 seconds. The time when calibration is completed is also recorded and used to define the clip for calibration automatically. 
    Move slowly while exposing the tags, keep them facing the camera, and use good lighting for reliable detection.
+
+.. note::
+   For a quick visual walkthrough of this calibration flow, see the demo video
+   in :ref:`app-reference-video`.
 
 Pipeline Summary
 ----------------
