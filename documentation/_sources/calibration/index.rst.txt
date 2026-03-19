@@ -1,8 +1,8 @@
 Calibration
 ===========
 
-This section covers the iOS calibration app and the short capture procedure
-used to estimate sensor-to-bone offsets.
+This section covers calibration app setup, the recording workflow, the app UI,
+and the math used to estimate sensor-to-bone offsets.
 
 .. toctree::
    :maxdepth: 1

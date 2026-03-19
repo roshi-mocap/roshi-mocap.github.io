@@ -1,11 +1,11 @@
 Calibration App Setup
 =====================
 
-Use the RoSHI iOS app to record the short AprilTag video needed for
-sensor-to-bone calibration.
+Use this page to build the RoSHI iOS app and connect it to the receiver.
 
-For app capabilities, recorded outputs, and troubleshooting, see
-:doc:`app_reference`. For the capture workflow itself, see :doc:`procedure`.
+For the recording workflow, see :doc:`procedure`. For UI details, uploaded
+files, and troubleshooting, see :doc:`app_reference`. For calibration math and
+frame conventions, see :doc:`math`.
 
 Source code: `RoSHI-App <https://github.com/Jirl-upenn/RoSHI-App>`_
 

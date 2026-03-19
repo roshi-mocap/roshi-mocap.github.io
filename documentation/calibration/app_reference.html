@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=39de3225" />
   
   <!-- So that users can add custom icons -->
@@ -409,20 +409,16 @@
                   
   <section id="calibration-app-reference">
 <h1>Calibration App Reference<a class="headerlink" href="#calibration-app-reference" title="Link to this heading">#</a></h1>
-<p>The calibration app records the short AprilTag video used by the RoSHI
-pipeline and uploads each session to the local receiver.</p>
-<p>For installation and receiver setup, see <a class="reference internal" href="app_setup.html"><span class="doc">Calibration App Setup</span></a>. For the recording
-workflow, see <a class="reference internal" href="procedure.html"><span class="doc">Calibration Procedure</span></a>.</p>
+<p>This page covers the calibration app UI, capture settings, and uploaded files.</p>
 <section id="core-functions">
 <h2>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Real-time AprilTag detection (Tag36h11) with 3D pose overlay</p></li>
-<li><p>Video recording with per-frame UTC timestamps and camera intrinsics</p></li>
-<li><p>LAN receiver connection with configurable IP and port</p></li>
-<li><p>Per-tag detection tracking with configurable target counts</p></li>
-<li><p>Front and back camera support with adjustable resolution, frame rate, and
-zoom</p></li>
-<li><p>One-tap upload of the recorded session to the receiver</p></li>
+<li><p>Configurable capture settings for resolution, FPS, target detections, zoom,
+and camera selection</p></li>
+<li><p>Manual receiver connection via IP address and port</p></li>
+<li><p>One-tap upload of each recorded session to the receiver</p></li>
+<li><p>Video and metadata export for the downstream calibration pipeline</p></li>
 </ul>
 </section>
 <section id="capture-settings">
@@ -475,15 +471,15 @@ zoom</p></li>
 <tr class="row-odd"><td><figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/app-ui-preview-clean.png"><img alt="RoSHI app preview screen" src="../_images/app-ui-preview-clean.png" style="width: 250px;" /></a>
 <figcaption>
-<p><span class="caption-text">Preview mode. The top bar shows resolution, FPS, receiver status,
-target detections(# of tag detections needed for each IMU), and measured processing FPS.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text">Preview mode with capture settings, receiver status, target
+detections, and live tag feedback.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </td>
 <td><figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/app-ui-recording-clean.png"><img alt="RoSHI app recording screen" src="../_images/app-ui-recording-clean.png" style="width: 250px;" /></a>
 <figcaption>
-<p><span class="caption-text">Recording mode. The timer appears, and tracker chips switch to live detection counts.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">Recording mode with the timer and live detection counts.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </td>
@@ -499,20 +495,22 @@ connection state, and edit the receiver IP address and port manually.</span><a c
 </figcaption>
 </figure>
 </section>
-<section id="behavior-notes">
-<h2>Behavior Notes<a class="headerlink" href="#behavior-notes" title="Link to this heading">#</a></h2>
+<section id="during-capture">
+<span id="app-reference-video"></span><h2>During Capture<a class="headerlink" href="#during-capture" title="Link to this heading">#</a></h2>
 <div class="behavior-video-grid docutils container">
 <div class="behavior-video-copy docutils container">
 <ul class="simple">
-<li><p>The tag tracker stays gray in preview, turns red while recording below
-the target count, and turns green once the target is met.</p></li>
 <li><p>The live AprilTag overlay shows a bounding box, local 3D axes, and a
 small readout with tag ID and camera-frame position.</p></li>
+<li><p>The tag tracker stays gray in preview, turns red while recording below
+the target count, and turns green once the target is met.</p></li>
+<li><p>The front camera starts with a short 3-second countdown before
+recording.</p></li>
 <li><p>If recording stops before every tag reaches the target count, the
 session is still saved and uploaded, but the app warns that some tags
 are incomplete.</p></li>
 <li><p>Exact tag placement and ID mapping are documented in
-<a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> and also the top bar in the app.</p></li>
+<a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a>.</p></li>
 </ul>
 </div>
 <div class="behavior-video-media docutils container">
@@ -596,7 +594,7 @@ time before stopping the recording.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-functions">Core Functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-settings">Capture Settings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ui-screens">UI Screens</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-notes">Behavior Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#during-capture">During Capture</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-output">Session Output</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
 </ul>

@@ -1,22 +1,17 @@
 Calibration App Reference
 =========================
 
-The calibration app records the short AprilTag video used by the RoSHI
-pipeline and uploads each session to the local receiver.
-
-For installation and receiver setup, see :doc:`app_setup`. For the recording
-workflow, see :doc:`procedure`.
+This page covers the calibration app UI, capture settings, and uploaded files.
 
 Core Functions
 --------------
 
 - Real-time AprilTag detection (Tag36h11) with 3D pose overlay
-- Video recording with per-frame UTC timestamps and camera intrinsics
-- LAN receiver connection with configurable IP and port
-- Per-tag detection tracking with configurable target counts
-- Front and back camera support with adjustable resolution, frame rate, and
-  zoom
-- One-tap upload of the recorded session to the receiver
+- Configurable capture settings for resolution, FPS, target detections, zoom,
+  and camera selection
+- Manual receiver connection via IP address and port
+- One-tap upload of each recorded session to the receiver
+- Video and metadata export for the downstream calibration pipeline
 
 Capture Settings
 ----------------
@@ -55,14 +50,14 @@ UI Screens
           :width: 250px
           :alt: RoSHI app preview screen
 
-          Preview mode. The top bar shows resolution, FPS, receiver status,
-          target detections(# of tag detections needed for each IMU), and measured processing FPS.
+          Preview mode with capture settings, receiver status, target
+          detections, and live tag feedback.
 
      - .. figure:: ../_static/app-ui-recording-clean.png
           :width: 250px
           :alt: RoSHI app recording screen
 
-          Recording mode. The timer appears, and tracker chips switch to live detection counts.
+          Recording mode with the timer and live detection counts.
 
 .. figure:: ../_static/app-ui-receiver-fields-clean.png
    :width: 320px
@@ -71,22 +66,26 @@ UI Screens
    Receiver settings. Tap the receiver status chip to open the sheet, confirm
    connection state, and edit the receiver IP address and port manually.
 
-Behavior Notes
+.. _app-reference-video:
+
+During Capture
 --------------
 
 .. container:: behavior-video-grid
 
    .. container:: behavior-video-copy
 
-      - The tag tracker stays gray in preview, turns red while recording below
-        the target count, and turns green once the target is met.
       - The live AprilTag overlay shows a bounding box, local 3D axes, and a
         small readout with tag ID and camera-frame position.
+      - The tag tracker stays gray in preview, turns red while recording below
+        the target count, and turns green once the target is met.
+      - The front camera starts with a short 3-second countdown before
+        recording.
       - If recording stops before every tag reaches the target count, the
         session is still saved and uploaded, but the app warns that some tags
         are incomplete.
       - Exact tag placement and ID mapping are documented in
-        :doc:`../hardware/components` and also the top bar in the app.
+        :doc:`../hardware/components`.
 
    .. container:: behavior-video-media
 
@@ -104,7 +103,6 @@ Each recording session uploads two files to the receiver:
 - ``video_YYYYMMDD_HHMMSS.mp4``: H.264-encoded calibration video
 - ``metadata_YYYYMMDD_HHMMSS.json``: per-frame metadata including timestamps,
   intrinsics, and AprilTag detections
-
 
 Common Issues
 -------------
