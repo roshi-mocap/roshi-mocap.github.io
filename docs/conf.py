@@ -23,9 +23,17 @@ html_sidebars = {
 
 html_theme_options = {
     "logo": {
+        "image_light": "_static/roshi.png",
+        "image_dark": "_static/roshi.png",
         "text": "RoSHI",
     },
     "icon_links": [
+        {
+            "name": "Project Page",
+            "url": "https://roshi-mocap.github.io/",
+            "icon": "🤸🏻",
+            "type": "emoji",
+        },
         {
             "name": "GitHub",
             "url": "https://github.com/Jirl-upenn/RoSHI-MoCap",
@@ -45,5 +53,5 @@ html_theme_options = {
 }
 
 html_context = {
-    "default_mode": "light",
+    "default_mode": "dark",
 }

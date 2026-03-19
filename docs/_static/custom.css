@@ -5,6 +5,21 @@
   text-transform: uppercase;
 }
 
+.navbar-brand {
+  gap: 0.55rem;
+}
+
+.navbar-brand img {
+  height: 2rem;
+  width: 2rem;
+}
+
+.icon-link-emoji {
+  display: inline-block;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
 .bd-docs-nav .nav-link {
   border-left: 2px solid transparent;
   padding-left: 0.85rem;
