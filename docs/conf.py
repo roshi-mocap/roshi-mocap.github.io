@@ -5,6 +5,7 @@ author = "Wenjing Mao, Jefferson Ng, Luyang Hu, Daniel Gehrig, Antonio Loquercio
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
 ]
 
@@ -27,7 +28,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/Jirl-upenn/RoSHI-App",
+            "url": "https://github.com/Jirl-upenn/RoSHI-MoCap",
             "icon": "fa-brands fa-github",
         },
     ],

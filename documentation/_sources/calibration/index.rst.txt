@@ -10,3 +10,4 @@ used to estimate sensor-to-bone offsets.
    app_setup
    app_reference
    procedure
+   math

@@ -38,6 +38,54 @@ You need **9 trackers** in total, placed at the following body locations:
    * - 8
      - Right Knee
 
+IMU / AprilTag / Joint Mapping
+------------------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 30 18 18
+
+   * - IMU ID
+     - Body Part
+     - AprilTag ID
+     - SMPL-X Joint
+   * - 1
+     - Pelvis
+     - 0
+     - 0
+   * - 2
+     - Left Shoulder
+     - 1
+     - 16
+   * - 3
+     - Right Shoulder
+     - 2
+     - 17
+   * - 4
+     - Left Elbow
+     - 3
+     - 18
+   * - 5
+     - Right Elbow
+     - 4
+     - 19
+   * - 6
+     - Left Hip
+     - 5
+     - 1
+   * - 7
+     - Right Hip
+     - 6
+     - 2
+   * - 8
+     - Left Knee
+     - 7
+     - 4
+   * - 9
+     - Right Knee
+     - 8
+     - 5
+
 Project Aria Glasses
 --------------------
 

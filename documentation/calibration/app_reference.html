@@ -190,7 +190,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -297,7 +297,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -315,6 +315,7 @@
 <li class="toctree-l1"><a class="reference internal" href="app_setup.html">Calibration App Setup</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration App Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="procedure.html">Calibration Procedure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Calibration Math</a></li>
 </ul>
 </div>
 </nav></div>
@@ -386,7 +387,7 @@ workflow, see <a class="reference internal" href="procedure.html"><span class="d
 <ul class="simple">
 <li><p>Real-time AprilTag detection (Tag36h11) with 3D pose overlay</p></li>
 <li><p>Video recording with per-frame UTC timestamps and camera intrinsics</p></li>
-<li><p>Automatic LAN receiver discovery via Bonjour/mDNS</p></li>
+<li><p>LAN receiver connection with configurable IP and port</p></li>
 <li><p>Per-tag detection tracking with configurable target counts</p></li>
 <li><p>Front and back camera support with adjustable resolution, frame rate, and
 zoom</p></li>
@@ -448,7 +449,8 @@ detections used by the downstream calibration pipeline.</p>
 <h2>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Receiver not found</strong>: confirm the phone and receiver machine are on the
-same Wi-Fi network and that Bonjour traffic is not blocked.</p></li>
+same Wi-Fi network and that the manually entered IP and port match the
+values shown in the receiver terminal.</p></li>
 <li><p><strong>Connection timeout</strong>: check the receiver process, port, and any manual IP
 or port override inside the app.</p></li>
 <li><p><strong>Tags not detected</strong>: keep the 42 mm tags flat, visible, and well lit, and

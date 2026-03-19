@@ -45,7 +45,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'calibration/procedure';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Pipeline" href="../pipeline/index.html" />
+    <link rel="next" title="Calibration Math" href="math.html" />
     <link rel="prev" title="Calibration App Reference" href="app_reference.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,7 +190,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -297,7 +297,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -315,6 +315,7 @@
 <li class="toctree-l1"><a class="reference internal" href="app_setup.html">Calibration App Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app_reference.html">Calibration App Reference</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration Procedure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Calibration Math</a></li>
 </ul>
 </div>
 </nav></div>
@@ -377,33 +378,34 @@
                   
   <section id="calibration-procedure">
 <h1>Calibration Procedure<a class="headerlink" href="#calibration-procedure" title="Link to this heading">#</a></h1>
-<p>RoSHI calibration uses a short iPhone recording to recover sensor-to-bone and
-cross-sensor heading alignment.</p>
-<p>For app settings, output files, and troubleshooting, see <a class="reference internal" href="app_reference.html"><span class="doc">Calibration App Reference</span></a>.</p>
+<p>RoSHI calibration uses a short iPhone recording to recover <strong>sensor-to-bone calibration offsets</strong> and <strong>per-IMU world alignment</strong>.</p>
+<p>For app settings, output files, and troubleshooting, see <a class="reference internal" href="app_reference.html"><span class="doc">Calibration App Reference</span></a>.
+For the rotation equations and robust solvers used in the calibration pipeline, see <a class="reference internal" href="math.html"><span class="doc">Calibration Math</span></a>.</p>
 <section id="recording-steps">
 <h2>Recording Steps<a class="headerlink" href="#recording-steps" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Wear the suit</strong> with all 9 IMU trackers attached and powered on</p></li>
-<li><p><strong>Launch the calibration app</strong> and ensure the receiver status (top-right) is
-green</p></li>
-<li><p><strong>Tap Record</strong> - a 3-second countdown starts, then recording begins</p></li>
-<li><p><strong>Slowly rotate</strong> to expose all 9 AprilTags to the camera - the tag
-detection tracker in the app shows progress per tag</p></li>
-<li><p><strong>Tap Stop</strong> when all tags reach the target detection count</p></li>
-<li><p>The app automatically uploads the video and metadata to the receiver</p></li>
+<li><p><strong>Wear the suit</strong> with all 9 IMU trackers attached and powered on.</p></li>
+<li><p><strong>Start the receiver</strong> on the computer that will receive the uploaded files, and check the IP address and port shown in the receiver terminal.</p></li>
+<li><p><strong>Launch the calibration app</strong> and ensure the receiver status (top-right) is green.</p></li>
+<li><p><strong>Tap Record</strong> - a 3-second countdown starts, then recording begins if you are using the front camera.</p></li>
+<li><p><strong>Slowly rotate</strong> to expose all 9 AprilTags to the camera; the tag detection tracker in the app shows progress per tag.</p></li>
+<li><p><strong>Once all tags are detected</strong>, you can step out of the camera view and start performing the motion you want to record.</p></li>
+<li><p><strong>Tap Stop</strong> when you are done with the collection.</p></li>
+<li><p>The app automatically uploads the video and metadata to the receiver. You will also have the option to start the offline calibration process.</p></li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The calibration video only needs to be 20-40 seconds. Move slowly and keep
-tags facing the camera. Good lighting helps detection accuracy.</p>
+<p>The full recording can be longer, but the calibration segment itself usually
+only needs 20-40 seconds. The time when calibration is completed is also recorded and used to define the clip for calibration automatically.
+Move slowly while exposing the tags, keep them facing the camera, and use good lighting for reliable detection.</p>
 </div>
 </section>
 <section id="pipeline-summary">
 <h2>Pipeline Summary<a class="headerlink" href="#pipeline-summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Detect AprilTags in the RGB video to recover 3D tag poses</p></li>
-<li><p>Run SAM 3D Body on the calibration clip</p></li>
-<li><p>Align tag frames with estimated bone frames to solve for calibration offsets</p></li>
+<li><p>Run SAM 3D Body on the RGB with camera intrinsics from the app to get body reconstruction in MHR format.</p></li>
+<li><p>Convert MHR to SMPL(X) format.</p></li>
+<li><p>Solve for sensor-to-bone calibration offsets and per-IMU world alignment.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -414,7 +416,7 @@ re-record a short calibration video.</p>
 <section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Link to this heading">#</a></h2>
 <p>The calibration output is a JSON file with per-sensor rotation offsets for the
-pose estimation pipeline.</p>
+pose estimation pipeline. The output file is named <cite>imu_calibration.json</cite>.</p>
 </section>
 </section>
 
@@ -438,11 +440,11 @@ pose estimation pipeline.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../pipeline/index.html"
+       href="math.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Pipeline</p>
+        <p class="prev-next-title">Calibration Math</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

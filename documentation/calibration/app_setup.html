@@ -190,7 +190,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -297,7 +297,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -315,6 +315,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration App Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app_reference.html">Calibration App Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="procedure.html">Calibration Procedure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Calibration Math</a></li>
 </ul>
 </div>
 </nav></div>
@@ -389,8 +390,8 @@ sensor-to-bone calibration.</p>
 <li><p>9 AprilTags from the <strong>Tag36h11</strong> family, printed at <strong>42 mm</strong></p></li>
 <li><p><strong>Xcode 15+</strong> with Swift 5.0</p></li>
 <li><p>A computer on the same LAN to run the receiver</p></li>
-<li><p>The main <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI">RoSHI</a> repository for the
-receiver and downstream calibration pipeline</p></li>
+<li><p>The main <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap">RoSHI-MoCap</a>
+repository for the receiver and downstream calibration pipeline</p></li>
 </ul>
 <p>See <a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> for the tag ID to body-location mapping.</p>
 </section>
@@ -412,14 +413,14 @@ vendored as C source.</p>
 <section id="run-the-receiver">
 <h2>Run the Receiver<a class="headerlink" href="#run-the-receiver" title="Link to this heading">#</a></h2>
 <p>On your computer (same Wi-Fi network as the iOS device):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI.git
-<span class="nb">cd</span><span class="w"> </span>RoSHI
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-MoCap.git
+<span class="nb">cd</span><span class="w"> </span>RoSHI-MoCap
 python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>received_recordings
 </pre></div>
 </div>
-<p>The receiver is part of the main RoSHI repository. It advertises itself via
-Bonjour/mDNS, so the app usually discovers it automatically. You can also
-enter the receiver IP address and port manually from the app if needed.</p>
+<p>The receiver is part of the main RoSHI-MoCap repository. Start it on the same
+Wi-Fi network as the iOS device, then enter the IP address and port shown in
+the receiver terminal into the app.</p>
 <p>Useful options:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>01_receiver.py<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
 python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>~/roshi_data

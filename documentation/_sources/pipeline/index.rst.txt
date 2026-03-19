@@ -8,4 +8,5 @@ full-body pose.
    :maxdepth: 1
 
    data_capture
+   session_layout
    pose_estimation

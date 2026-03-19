@@ -12,7 +12,7 @@ Core Functions
 
 - Real-time AprilTag detection (Tag36h11) with 3D pose overlay
 - Video recording with per-frame UTC timestamps and camera intrinsics
-- Automatic LAN receiver discovery via Bonjour/mDNS
+- LAN receiver connection with configurable IP and port
 - Per-tag detection tracking with configurable target counts
 - Front and back camera support with adjustable resolution, frame rate, and
   zoom
@@ -61,7 +61,8 @@ Common Issues
 -------------
 
 - **Receiver not found**: confirm the phone and receiver machine are on the
-  same Wi-Fi network and that Bonjour traffic is not blocked.
+  same Wi-Fi network and that the manually entered IP and port match the
+  values shown in the receiver terminal.
 - **Connection timeout**: check the receiver process, port, and any manual IP
   or port override inside the app.
 - **Tags not detected**: keep the 42 mm tags flat, visible, and well lit, and

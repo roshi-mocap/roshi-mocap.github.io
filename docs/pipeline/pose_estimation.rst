@@ -30,3 +30,6 @@ The pipeline outputs per-frame SMPL body model parameters:
 - **Body pose**: joint rotations in axis-angle format
 - **Root translation**: in the global (Aria SLAM) coordinate frame
 - **Body shape**: beta parameters estimated during calibration
+
+The calibrated session artifacts consumed by this stage are summarized on
+:doc:`session_layout`.

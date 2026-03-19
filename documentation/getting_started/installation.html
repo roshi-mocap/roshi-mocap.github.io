@@ -190,7 +190,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -297,7 +297,7 @@
           
           
           
-          <a href="https://github.com/Jirl-upenn/RoSHI-App" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/Jirl-upenn/RoSHI-MoCap" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -386,14 +386,45 @@
 </section>
 <section id="python-environment">
 <h2>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI.git
-<span class="nb">cd</span><span class="w"> </span>RoSHI
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-MoCap.git
+<span class="nb">cd</span><span class="w"> </span>RoSHI-MoCap
 </pre></div>
 </div>
 <p>Install the Python environment needed for the parts of the RoSHI pipeline you
 plan to run. The main repository README lists the core dependencies, and the
 bundled projects such as <code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code>, <code class="docutils literal notranslate"><span class="pre">MHR/</span></code>, and <code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> document
 their additional setup requirements.</p>
+</section>
+<section id="core-dependencies">
+<h2>Core Dependencies<a class="headerlink" href="#core-dependencies" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Python 3.10+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, <code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">smplx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">opencv-python</span></code>, <code class="docutils literal notranslate"><span class="pre">viser</span></code>, <code class="docutils literal notranslate"><span class="pre">pillow</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyserial</span></code> for the IMU hardware interface</p></li>
+</ul>
+</section>
+<section id="additional-components">
+<h2>Additional Components<a class="headerlink" href="#additional-components" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> additionally requires Python 3.12+, JAX with CUDA, and
+<code class="docutils literal notranslate"><span class="pre">jaxls</span></code>. See <code class="docutils literal notranslate"><span class="pre">egoallo/README_RoSHI_egoallo.md</span></code> for the full setup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code> and <code class="docutils literal notranslate"><span class="pre">MHR/</span></code> have their own dependency instructions in
+their respective <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files.</p></li>
+</ul>
+</section>
+<section id="model-files">
+<h2>Model Files<a class="headerlink" href="#model-files" title="Link to this heading">#</a></h2>
+<p>SMPL body models are licensed separately and must be placed under <code class="docutils literal notranslate"><span class="pre">model/</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>model/
+├── smplh/
+│   └── neutral/model.npz
+└── smplx/
+    └── SMPLX_NEUTRAL.npz
+</pre></div>
+</div>
+<p>See the official SMPL-H and SMPL-X distribution sites for the required model
+downloads.</p>
 </section>
 <section id="imu-firmware">
 <h2>IMU Firmware<a class="headerlink" href="#imu-firmware" title="Link to this heading">#</a></h2>
@@ -462,6 +493,9 @@ troubleshooting.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-environment">Python Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-dependencies">Core Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-components">Additional Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-files">Model Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-firmware">IMU Firmware</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-app">Calibration App</a></li>
 </ul>

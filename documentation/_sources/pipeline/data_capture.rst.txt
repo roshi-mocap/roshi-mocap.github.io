@@ -31,3 +31,5 @@ Data Synchronization
 
 IMU and Aria streams are aligned via UTC timestamps. The synchronization
 pipeline handles clock drift correction between the two modalities.
+
+For the processed session folder structure, see :doc:`session_layout`.

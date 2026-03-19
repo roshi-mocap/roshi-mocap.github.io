@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Components &#8212; RoSHI  documentation</title>
+    <title>Calibration Math &#8212; RoSHI  documentation</title>
   
   
   
@@ -42,11 +42,12 @@
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'hardware/components';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'calibration/math';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Assembly" href="assembly.html" />
-    <link rel="prev" title="Hardware" href="index.html" />
+    <link rel="next" title="Pipeline" href="../pipeline/index.html" />
+    <link rel="prev" title="Calibration Procedure" href="procedure.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -132,15 +133,15 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hardware/index.html">
     Hardware
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../calibration/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     Calibration
   </a>
 </li>
@@ -248,15 +249,15 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hardware/index.html">
     Hardware
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../calibration/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     Calibration
   </a>
 </li>
@@ -312,8 +313,10 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assembly.html">Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app_setup.html">Calibration App Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app_reference.html">Calibration App Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="procedure.html">Calibration Procedure</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration Math</a></li>
 </ul>
 </div>
 </nav></div>
@@ -355,9 +358,9 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Hardware</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Calibration</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Components</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Calibration Math</span></li>
   </ul>
 </nav>
 </div>
@@ -374,176 +377,148 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="components">
-<h1>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h1>
-<section id="imu-trackers">
-<h2>IMU Trackers<a class="headerlink" href="#imu-trackers" title="Link to this heading">#</a></h2>
-<p>Each tracker consists of:</p>
-<ul class="simple">
-<li><p><strong>BNO085</strong> 9-axis IMU sensor</p></li>
-<li><p><strong>ESP32</strong> microcontroller for Wi-Fi streaming</p></li>
-<li><p><strong>3D-printed enclosure</strong> with a rigidly mounted AprilTag</p></li>
-<li><p><strong>LiPo battery</strong> (500 mAh, ~4 hours runtime)</p></li>
-</ul>
-<p>You need <strong>9 trackers</strong> in total, placed at the following body locations:</p>
+  <section id="calibration-math">
+<h1>Calibration Math<a class="headerlink" href="#calibration-math" title="Link to this heading">#</a></h1>
+<p>This page summarizes the rotation conventions used by the RoSHI calibration pipeline and the equations used to solve both <strong>sensor-to-bone calibration offsets</strong> and <strong>per-IMU world alignment</strong>.</p>
+<section id="coordinate-frames">
+<h2>Coordinate Frames<a class="headerlink" href="#coordinate-frames" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 33.3%" />
-<col style="width: 66.7%" />
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Tag ID</p></th>
-<th class="head"><p>Body Location</p></th>
+<tr class="row-odd"><th class="head"><p>Frame</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>Pelvis</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(C\)</span></p></td>
+<td><p>Camera frame using the OpenCV convention, with <span class="math notranslate nohighlight">\(x\)</span> right,
+<span class="math notranslate nohighlight">\(y\)</span> down, and <span class="math notranslate nohighlight">\(z\)</span> forward</p></td>
 </tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>Left Shoulder</p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(B\)</span></p></td>
+<td><p>Bone frame from the SMPL-X joint</p></td>
 </tr>
-<tr class="row-even"><td><p>2</p></td>
-<td><p>Right Shoulder</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(T\)</span></p></td>
+<td><p>AprilTag frame rigidly attached to the IMU</p></td>
 </tr>
-<tr class="row-odd"><td><p>3</p></td>
-<td><p>Left Elbow</p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(S\)</span></p></td>
+<td><p>IMU sensor frame from the fused quaternion output</p></td>
 </tr>
-<tr class="row-even"><td><p>4</p></td>
-<td><p>Right Elbow</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(W_i\)</span></p></td>
+<td><p>Per-IMU world frame, gravity aligned with arbitrary heading</p></td>
 </tr>
-<tr class="row-odd"><td><p>5</p></td>
-<td><p>Left Hip</p></td>
-</tr>
-<tr class="row-even"><td><p>6</p></td>
-<td><p>Right Hip</p></td>
-</tr>
-<tr class="row-odd"><td><p>7</p></td>
-<td><p>Left Knee</p></td>
-</tr>
-<tr class="row-even"><td><p>8</p></td>
-<td><p>Right Knee</p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(W_p\)</span></p></td>
+<td><p>Shared world frame using the pelvis IMU as reference</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="imu-apriltag-joint-mapping">
-<h2>IMU / AprilTag / Joint Mapping<a class="headerlink" href="#imu-apriltag-joint-mapping" title="Link to this heading">#</a></h2>
+<section id="offset-calibration">
+<h2>Offset Calibration<a class="headerlink" href="#offset-calibration" title="Link to this heading">#</a></h2>
+<p>The AprilTag is rigidly attached to the body segment. At time <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[{}^{C}R_{T}(t) = {}^{C}R_{B}(t) \cdot {}^{B}R_{T}\]</div>
+<p>Rearranging gives a frame-wise estimate of the constant offset:</p>
+<div class="math notranslate nohighlight">
+\[{}^{B}R_{T}(t) = \left({}^{C}R_{B}(t)\right)^{\top} \cdot {}^{C}R_{T}(t)\]</div>
+<p>RoSHI then computes the final calibration by minimizing the geodesic distance
+over all valid frames:</p>
+<div class="math notranslate nohighlight">
+\[\widehat{{}^{B}R_{T}} =
+\arg\min_{R \in SO(3)}
+\sum_{t=1}^{N} \rho\left(d_g\left(R, {}^{B}R_{T}(t)\right)\right)\]</div>
+<p>where the geodesic distance is:</p>
+<div class="math notranslate nohighlight">
+\[d_g(R_1, R_2) = \left\lVert \log\left(R_1^{\top}R_2\right) \right\rVert\]</div>
+</section>
+<section id="supported-optimization-methods">
+<h2>Supported Optimization Methods<a class="headerlink" href="#supported-optimization-methods" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 18.5%" />
-<col style="width: 37.0%" />
-<col style="width: 22.2%" />
-<col style="width: 22.2%" />
+<col style="width: 23.7%" />
+<col style="width: 31.6%" />
+<col style="width: 44.7%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>IMU ID</p></th>
-<th class="head"><p>Body Part</p></th>
-<th class="head"><p>AprilTag ID</p></th>
-<th class="head"><p>SMPL-X Joint</p></th>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Loss</p></th>
+<th class="head"><p>Typical use</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>Pelvis</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">karcher</span></code> (default)</p></td>
+<td><p>Geodesic L2</p></td>
+<td><p>Clean data with approximately Gaussian noise</p></td>
 </tr>
-<tr class="row-odd"><td><p>2</p></td>
-<td><p>Left Shoulder</p></td>
-<td><p>1</p></td>
-<td><p>16</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">huber</span></code></p></td>
+<td><p>L2 near zero, L1 for outliers</p></td>
+<td><p>Moderate outliers</p></td>
 </tr>
-<tr class="row-even"><td><p>3</p></td>
-<td><p>Right Shoulder</p></td>
-<td><p>2</p></td>
-<td><p>17</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cauchy</span></code></p></td>
+<td><p>Cauchy / Lorentzian</p></td>
+<td><p>Heavy outliers</p></td>
 </tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td><p>Left Elbow</p></td>
-<td><p>3</p></td>
-<td><p>18</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">l1</span></code></p></td>
+<td><p>Geodesic L1</p></td>
+<td><p>Median-like robustness</p></td>
 </tr>
-<tr class="row-even"><td><p>5</p></td>
-<td><p>Right Elbow</p></td>
-<td><p>4</p></td>
-<td><p>19</p></td>
-</tr>
-<tr class="row-odd"><td><p>6</p></td>
-<td><p>Left Hip</p></td>
-<td><p>5</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>7</p></td>
-<td><p>Right Hip</p></td>
-<td><p>6</p></td>
-<td><p>2</p></td>
-</tr>
-<tr class="row-odd"><td><p>8</p></td>
-<td><p>Left Knee</p></td>
-<td><p>7</p></td>
-<td><p>4</p></td>
-</tr>
-<tr class="row-even"><td><p>9</p></td>
-<td><p>Right Knee</p></td>
-<td><p>8</p></td>
-<td><p>5</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ransac</span></code></p></td>
+<td><p>RANSAC plus Karcher refinement</p></td>
+<td><p>Severely corrupted samples</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In our tests, there is no significant difference between the performance of these solvers. <code class="docutils literal notranslate"><span class="pre">karcher</span></code> tended to work slightly better overall.
+<code class="docutils literal notranslate"><span class="pre">ransac</span></code> can potentially be stronger but typically benefited from more tuning.</p>
+</div>
 </section>
-<section id="project-aria-glasses">
-<h2>Project Aria Glasses<a class="headerlink" href="#project-aria-glasses" title="Link to this heading">#</a></h2>
-<p>RoSHI uses <a class="reference external" href="https://www.projectaria.com/">Project Aria</a> glasses for:</p>
+<section id="imu-only-pose-reconstruction">
+<h2>IMU-Only Pose Reconstruction<a class="headerlink" href="#imu-only-pose-reconstruction" title="Link to this heading">#</a></h2>
+<p>Given the calibrated offset <span class="math notranslate nohighlight">\({}^{B}R_{S}\)</span> and a live IMU reading
+<span class="math notranslate nohighlight">\({}^{W_i}R_{S}(t)\)</span>, the corresponding bone orientation is:</p>
+<div class="math notranslate nohighlight">
+\[{}^{W_i}R_{B}(t) =
+{}^{W_i}R_{S}(t) \cdot \left({}^{B}R_{S}\right)^{\top}\]</div>
+<p>World-frame alignment uses AprilTag observations to estimate
+<span class="math notranslate nohighlight">\({}^{W_p}R_{W_i}\)</span> so the individual IMU headings can be expressed in a
+shared pelvis-centric frame.</p>
+<p>For each joint IMU, RoSHI first estimates the camera-to-IMU-world rotation:</p>
+<div class="math notranslate nohighlight">
+\[{}^{C}R_{W_i}(t) =
+{}^{C}R_{T_i}(t) \cdot \left({}^{W_i}R_{T_i}(t)\right)^{\top}\]</div>
+<p>These per-frame estimates are averaged over time, and the pelvis world is used
+as the shared reference:</p>
+<div class="math notranslate nohighlight">
+\[{}^{W_p}R_{W_i} =
+\left(\overline{{}^{C}R_{W_p}}\right)^{\top} \cdot \overline{{}^{C}R_{W_i}}\]</div>
+<p>The aligned bone orientation in the pelvis world then becomes:</p>
+<div class="math notranslate nohighlight">
+\[{}^{W_p}R_{B}(t) =
+{}^{W_p}R_{W_i} \cdot {}^{W_i}R_{B}(t)\]</div>
+</section>
+<section id="tag-to-imu-axis-mapping">
+<h2>Tag-to-IMU Axis Mapping<a class="headerlink" href="#tag-to-imu-axis-mapping" title="Link to this heading">#</a></h2>
+<p>The rigid transform from the AprilTag frame to the IMU frame is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{}^{T}R_{S} =
+\begin{bmatrix}
+0 &amp; -1 &amp; 0 \\
+-1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; -1
+\end{bmatrix}\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We get this mapping from the <strong>BNO085 IMU frame</strong> and <strong>AprilTag frame</strong> conventions.</p>
 <ul class="simple">
-<li><p>6-DoF head tracking via onboard SLAM</p></li>
-<li><p>Egocentric RGB video capture</p></li>
-<li><p>Machine Perception Services (MPS) for post-processing</p></li>
+<li><p>The <strong>BNO085 IMU frame</strong> is given in the <a class="reference external" href="https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf">BNO08X datasheet</a> on page 41.</p></li>
+<li><p>The <strong>AprilTag frame</strong> is centered on the tag with <span class="math notranslate nohighlight">\(x\)</span> right, <span class="math notranslate nohighlight">\(y\)</span> down, and <span class="math notranslate nohighlight">\(z\)</span> into the tag. See the <a class="reference external" href="https://github.com/AprilRobotics/apriltag">AprilTag 3 documentation</a>.</p></li>
 </ul>
-</section>
-<section id="bill-of-materials">
-<h2>Bill of Materials<a class="headerlink" href="#bill-of-materials" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 50.0%" />
-<col style="width: 25.0%" />
-<col style="width: 25.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Item</p></th>
-<th class="head"><p>Quantity</p></th>
-<th class="head"><p>Approx. Cost</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>BNO085 IMU breakout</p></td>
-<td><p>9</p></td>
-<td><p>$12 each</p></td>
-</tr>
-<tr class="row-odd"><td><p>ESP32 dev board</p></td>
-<td><p>9</p></td>
-<td><p>$8 each</p></td>
-</tr>
-<tr class="row-even"><td><p>LiPo battery (500 mAh)</p></td>
-<td><p>9</p></td>
-<td><p>$5 each</p></td>
-</tr>
-<tr class="row-odd"><td><p>AprilTag prints (Tag36h11)</p></td>
-<td><p>9</p></td>
-<td><p>~$2 total</p></td>
-</tr>
-<tr class="row-even"><td><p>3D-printed enclosures</p></td>
-<td><p>9</p></td>
-<td><p>~$15 total</p></td>
-</tr>
-<tr class="row-odd"><td><p>Velcro straps</p></td>
-<td><p>9</p></td>
-<td><p>~$10 total</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </section>
 </section>
@@ -559,20 +534,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="procedure.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hardware</p>
+        <p class="prev-next-title">Calibration Procedure</p>
       </div>
     </a>
     <a class="right-next"
-       href="assembly.html"
+       href="../pipeline/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assembly</p>
+        <p class="prev-next-title">Pipeline</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -595,10 +570,11 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-trackers">IMU Trackers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-apriltag-joint-mapping">IMU / AprilTag / Joint Mapping</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-aria-glasses">Project Aria Glasses</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bill-of-materials">Bill of Materials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-frames">Coordinate Frames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offset-calibration">Offset Calibration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-optimization-methods">Supported Optimization Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-only-pose-reconstruction">IMU-Only Pose Reconstruction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tag-to-imu-axis-mapping">Tag-to-IMU Axis Mapping</a></li>
 </ul>
   </nav></div>
 

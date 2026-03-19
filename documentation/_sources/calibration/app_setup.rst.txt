@@ -16,8 +16,8 @@ Requirements
 - 9 AprilTags from the **Tag36h11** family, printed at **42 mm**
 - **Xcode 15+** with Swift 5.0
 - A computer on the same LAN to run the receiver
-- The main `RoSHI <https://github.com/Jirl-upenn/RoSHI>`_ repository for the
-  receiver and downstream calibration pipeline
+- The main `RoSHI-MoCap <https://github.com/Jirl-upenn/RoSHI-MoCap>`_
+  repository for the receiver and downstream calibration pipeline
 
 See :doc:`../hardware/components` for the tag ID to body-location mapping.
 
@@ -44,13 +44,13 @@ On your computer (same Wi-Fi network as the iOS device):
 
 .. code-block:: bash
 
-   git clone https://github.com/Jirl-upenn/RoSHI.git
-   cd RoSHI
+   git clone https://github.com/Jirl-upenn/RoSHI-MoCap.git
+   cd RoSHI-MoCap
    python 01_receiver.py --output-dir received_recordings
 
-The receiver is part of the main RoSHI repository. It advertises itself via
-Bonjour/mDNS, so the app usually discovers it automatically. You can also
-enter the receiver IP address and port manually from the app if needed.
+The receiver is part of the main RoSHI-MoCap repository. Start it on the same
+Wi-Fi network as the iOS device, then enter the IP address and port shown in
+the receiver terminal into the app.
 
 Useful options:
 
