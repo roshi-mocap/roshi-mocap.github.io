@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Calibration App Setup &#8212; RoSHI  documentation</title>
+    <title>Installation &#8212; RoSHI  documentation</title>
   
   
   
@@ -42,12 +42,12 @@
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'calibration/app_setup';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/installation';</script>
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Calibration App Reference" href="app_reference.html" />
-    <link rel="prev" title="Calibration" href="index.html" />
+    <link rel="next" title="Data Capture" href="data_capture.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -132,8 +132,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     Pipeline
   </a>
 </li>
@@ -146,8 +146,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../calibration/index.html">
     Calibration
   </a>
 </li>
@@ -253,8 +253,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     Pipeline
   </a>
 </li>
@@ -267,8 +267,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../calibration/index.html">
     Calibration
   </a>
 </li>
@@ -329,10 +329,11 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration App Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="app_reference.html">Calibration App Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="procedure.html">Calibration Procedure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math.html">Calibration Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_capture.html">Data Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session_layout.html">Session Data Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pose_estimation.html">Pose Estimation</a></li>
 </ul>
 </div>
 </nav></div>
@@ -374,9 +375,9 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Calibration</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pipeline</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Calibration App Setup</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Installation</span></li>
   </ul>
 </nav>
 </div>
@@ -393,56 +394,73 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="calibration-app-setup">
-<h1>Calibration App Setup<a class="headerlink" href="#calibration-app-setup" title="Link to this heading">#</a></h1>
-<p>Use this page to build the RoSHI iOS app and connect it to the receiver.</p>
-<p>For the recording workflow, see <a class="reference internal" href="procedure.html"><span class="doc">Calibration Procedure</span></a>. For UI details, uploaded
-files, and troubleshooting, see <a class="reference internal" href="app_reference.html"><span class="doc">Calibration App Reference</span></a>. For calibration math and
-frame conventions, see <a class="reference internal" href="math.html"><span class="doc">Calibration Math</span></a>.</p>
-<p>Source code: <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-App">RoSHI-App</a></p>
-<section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>iPhone or iPad running <strong>iOS 17.6+</strong></p></li>
-<li><p>9 AprilTags from the <strong>Tag36h11</strong> family, printed at <strong>42 mm</strong></p></li>
-<li><p><strong>Xcode 15+</strong> with Swift 5.0</p></li>
-<li><p>A computer on the same LAN to run the receiver</p></li>
-<li><p>The main <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap">RoSHI-MoCap</a>
-repository for the receiver and downstream calibration pipeline</p></li>
+<li><p>Python 3.8+</p></li>
+<li><p>Project Aria glasses with MPS (Machine Perception Services) access</p></li>
+<li><p>iPhone or iPad running iOS 17.6+ (for calibration)</p></li>
 </ul>
-<p>See <a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> for the tag ID to body-location mapping.</p>
 </section>
-<section id="build-the-app">
-<h2>Build the App<a class="headerlink" href="#build-the-app" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-App.git
-<span class="nb">cd</span><span class="w"> </span>RoSHI-App
-</pre></div>
-</div>
-<ol class="arabic simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">ROSHI.xcodeproj</span></code> in Xcode</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">Signing</span> <span class="pre">&amp;</span> <span class="pre">Capabilities</span></code>, select your Apple Development Team</p></li>
-<li><p>Select your target device</p></li>
-<li><p>Build and run (Cmd+R)</p></li>
-</ol>
-<p>No external Swift packages or CocoaPods are needed; the AprilTag library is
-vendored as C source.</p>
-</section>
-<section id="run-the-receiver">
-<h2>Run the Receiver<a class="headerlink" href="#run-the-receiver" title="Link to this heading">#</a></h2>
-<p>On your computer (same Wi-Fi network as the iOS device):</p>
+<section id="python-environment">
+<h2>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-MoCap.git
 <span class="nb">cd</span><span class="w"> </span>RoSHI-MoCap
-python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>received_recordings
 </pre></div>
 </div>
-<p>The receiver is part of the main RoSHI-MoCap repository. Start it on the same
-Wi-Fi network as the iOS device, then enter the IP address and port shown in
-the receiver terminal into the app.</p>
-<p>Useful options:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>01_receiver.py<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
-python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>~/roshi_data
+<p>Install the Python environment needed for the parts of the RoSHI pipeline you
+plan to run. The main repository README lists the core dependencies, and the
+bundled projects such as <code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code>, <code class="docutils literal notranslate"><span class="pre">MHR/</span></code>, and <code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> document
+their additional setup requirements.</p>
+</section>
+<section id="core-dependencies">
+<h2>Core Dependencies<a class="headerlink" href="#core-dependencies" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Python 3.10+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, <code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">smplx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">opencv-python</span></code>, <code class="docutils literal notranslate"><span class="pre">viser</span></code>, <code class="docutils literal notranslate"><span class="pre">pillow</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyserial</span></code> for the IMU hardware interface</p></li>
+</ul>
+</section>
+<section id="additional-components">
+<h2>Additional Components<a class="headerlink" href="#additional-components" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> additionally requires Python 3.12+, JAX with CUDA, and
+<code class="docutils literal notranslate"><span class="pre">jaxls</span></code>. See <code class="docutils literal notranslate"><span class="pre">egoallo/README_RoSHI_egoallo.md</span></code> for the full setup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code> and <code class="docutils literal notranslate"><span class="pre">MHR/</span></code> have their own dependency instructions in
+their respective <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files.</p></li>
+</ul>
+</section>
+<section id="model-files">
+<h2>Model Files<a class="headerlink" href="#model-files" title="Link to this heading">#</a></h2>
+<p>SMPL body models are licensed separately and must be placed under <code class="docutils literal notranslate"><span class="pre">model/</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>model/
+├── smplh/
+│   └── neutral/model.npz
+└── smplx/
+    └── SMPLX_NEUTRAL.npz
 </pre></div>
 </div>
+<p>See the official SMPL-H and SMPL-X distribution sites for the required model
+downloads.</p>
+</section>
+<section id="imu-firmware">
+<h2>IMU Firmware<a class="headerlink" href="#imu-firmware" title="Link to this heading">#</a></h2>
+<p>Each IMU tracker runs firmware that streams BNO085 orientation data over Wi-Fi
+at 100 Hz. See the <a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> page for flashing instructions.</p>
+</section>
+<section id="calibration-app">
+<h2>Calibration App<a class="headerlink" href="#calibration-app" title="Link to this heading">#</a></h2>
+<p>The iOS calibration app is available at
+<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-App">RoSHI-App</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-App.git
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../calibration/app_setup.html"><span class="doc">Calibration App Setup</span></a> for build and receiver setup, and
+<a class="reference internal" href="../calibration/app_reference.html"><span class="doc">Calibration App Reference</span></a> for app settings, outputs, and
+troubleshooting.</p>
 </section>
 </section>
 
@@ -457,20 +475,20 @@ python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="overview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Calibration</p>
+        <p class="prev-next-title">Overview</p>
       </div>
     </a>
     <a class="right-next"
-       href="app_reference.html"
+       href="data_capture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calibration App Reference</p>
+        <p class="prev-next-title">Data Capture</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -493,9 +511,13 @@ python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-app">Build the App</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-receiver">Run the Receiver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-environment">Python Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-dependencies">Core Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-components">Additional Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-files">Model Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-firmware">IMU Firmware</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-app">Calibration App</a></li>
 </ul>
   </nav></div>
 

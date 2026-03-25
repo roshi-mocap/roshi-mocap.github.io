@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Calibration App Setup &#8212; RoSHI  documentation</title>
+    <title>Overview &#8212; RoSHI  documentation</title>
   
   
   
@@ -42,12 +42,12 @@
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'calibration/app_setup';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/overview';</script>
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Calibration App Reference" href="app_reference.html" />
-    <link rel="prev" title="Calibration" href="index.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Pipeline" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -132,8 +132,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     Pipeline
   </a>
 </li>
@@ -146,8 +146,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../calibration/index.html">
     Calibration
   </a>
 </li>
@@ -253,8 +253,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../pipeline/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     Pipeline
   </a>
 </li>
@@ -267,8 +267,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../calibration/index.html">
     Calibration
   </a>
 </li>
@@ -329,10 +329,11 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration App Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="app_reference.html">Calibration App Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="procedure.html">Calibration Procedure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math.html">Calibration Math</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_capture.html">Data Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session_layout.html">Session Data Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pose_estimation.html">Pose Estimation</a></li>
 </ul>
 </div>
 </nav></div>
@@ -374,9 +375,9 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Calibration</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pipeline</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Calibration App Setup</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Overview</span></li>
   </ul>
 </nav>
 </div>
@@ -393,56 +394,23 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="calibration-app-setup">
-<h1>Calibration App Setup<a class="headerlink" href="#calibration-app-setup" title="Link to this heading">#</a></h1>
-<p>Use this page to build the RoSHI iOS app and connect it to the receiver.</p>
-<p>For the recording workflow, see <a class="reference internal" href="procedure.html"><span class="doc">Calibration Procedure</span></a>. For UI details, uploaded
-files, and troubleshooting, see <a class="reference internal" href="app_reference.html"><span class="doc">Calibration App Reference</span></a>. For calibration math and
-frame conventions, see <a class="reference internal" href="math.html"><span class="doc">Calibration Math</span></a>.</p>
-<p>Source code: <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-App">RoSHI-App</a></p>
-<section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<figure class="align-center">
+<img alt="RoSHI system overview" src="../_images/figure1.png" />
+</figure>
+<p>RoSHI is a low-cost, portable system for in-the-wild human motion capture. It
+fuses information from <strong>9 body-worn IMUs</strong> and <strong>Project Aria glasses</strong> to
+output synchronized <strong>3D body pose (SMPL format)</strong>, <strong>egocentric RGB video</strong>,
+and <strong>a globally consistent root trajectory</strong>. The figure above shows an example
+of data being collected, processed, and deployed to a real robot.</p>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>iPhone or iPad running <strong>iOS 17.6+</strong></p></li>
-<li><p>9 AprilTags from the <strong>Tag36h11</strong> family, printed at <strong>42 mm</strong></p></li>
-<li><p><strong>Xcode 15+</strong> with Swift 5.0</p></li>
-<li><p>A computer on the same LAN to run the receiver</p></li>
-<li><p>The main <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap">RoSHI-MoCap</a>
-repository for the receiver and downstream calibration pipeline</p></li>
+<li><p><strong>Low-cost</strong>: under $500 in tracker hardware — see the <a class="reference internal" href="../hardware/index.html"><span class="doc">Hardware</span></a> section for a detailed item list</p></li>
+<li><p><strong>Quick calibration</strong>: a 20–40 second iPhone video is enough — refer to the <a class="reference internal" href="../calibration/index.html"><span class="doc">Calibration</span></a> section for details</p></li>
+<li><p><strong>Portable</strong> &amp; <strong>In-the-wild</strong>: the entire system is easily wearable, and once calibrated you can move freely in any environment</p></li>
 </ul>
-<p>See <a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> for the tag ID to body-location mapping.</p>
-</section>
-<section id="build-the-app">
-<h2>Build the App<a class="headerlink" href="#build-the-app" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-App.git
-<span class="nb">cd</span><span class="w"> </span>RoSHI-App
-</pre></div>
-</div>
-<ol class="arabic simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">ROSHI.xcodeproj</span></code> in Xcode</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">Signing</span> <span class="pre">&amp;</span> <span class="pre">Capabilities</span></code>, select your Apple Development Team</p></li>
-<li><p>Select your target device</p></li>
-<li><p>Build and run (Cmd+R)</p></li>
-</ol>
-<p>No external Swift packages or CocoaPods are needed; the AprilTag library is
-vendored as C source.</p>
-</section>
-<section id="run-the-receiver">
-<h2>Run the Receiver<a class="headerlink" href="#run-the-receiver" title="Link to this heading">#</a></h2>
-<p>On your computer (same Wi-Fi network as the iOS device):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-MoCap.git
-<span class="nb">cd</span><span class="w"> </span>RoSHI-MoCap
-python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>received_recordings
-</pre></div>
-</div>
-<p>The receiver is part of the main RoSHI-MoCap repository. Start it on the same
-Wi-Fi network as the iOS device, then enter the IP address and port shown in
-the receiver terminal into the app.</p>
-<p>Useful options:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>01_receiver.py<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
-python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>~/roshi_data
-</pre></div>
-</div>
 </section>
 </section>
 
@@ -462,15 +430,15 @@ python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Calibration</p>
+        <p class="prev-next-title">Pipeline</p>
       </div>
     </a>
     <a class="right-next"
-       href="app_reference.html"
+       href="installation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calibration App Reference</p>
+        <p class="prev-next-title">Installation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -493,9 +461,7 @@ python<span class="w"> </span>01_receiver.py<span class="w"> </span>--output-dir
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-app">Build the App</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-receiver">Run the Receiver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
 </ul>
   </nav></div>
 

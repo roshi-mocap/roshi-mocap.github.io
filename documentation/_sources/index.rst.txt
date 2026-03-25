@@ -7,7 +7,6 @@ Aria, and a short iPhone calibration step.
 .. toctree::
    :maxdepth: 2
 
-   getting_started/index
+   pipeline/index
    hardware/index
    calibration/index
-   pipeline/index
