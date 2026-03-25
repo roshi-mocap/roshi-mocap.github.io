@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=39de3225" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=32c850b6" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -399,39 +399,37 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Python 3.8+</p></li>
 <li><p>Project Aria glasses with MPS (Machine Perception Services) access</p></li>
 <li><p>iPhone or iPad running iOS 17.6+ (for calibration)</p></li>
+<li><p>NVIDIA GPU with CUDA support</p></li>
 </ul>
-</section>
-<section id="python-environment">
-<h2>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-MoCap.git
 <span class="nb">cd</span><span class="w"> </span>RoSHI-MoCap
 </pre></div>
 </div>
-<p>Install the Python environment needed for the parts of the RoSHI pipeline you
-plan to run. The main repository README lists the core dependencies, and the
-bundled projects such as <code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code>, <code class="docutils literal notranslate"><span class="pre">MHR/</span></code>, and <code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> document
-their additional setup requirements.</p>
 </section>
-<section id="core-dependencies">
-<h2>Core Dependencies<a class="headerlink" href="#core-dependencies" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Python 3.10+</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, <code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">smplx</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">opencv-python</span></code>, <code class="docutils literal notranslate"><span class="pre">viser</span></code>, <code class="docutils literal notranslate"><span class="pre">pillow</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyserial</span></code> for the IMU hardware interface</p></li>
-</ul>
-</section>
-<section id="additional-components">
-<h2>Additional Components<a class="headerlink" href="#additional-components" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">egoallo/</span></code> additionally requires Python 3.12+, JAX with CUDA, and
-<code class="docutils literal notranslate"><span class="pre">jaxls</span></code>. See <code class="docutils literal notranslate"><span class="pre">egoallo/README_RoSHI_egoallo.md</span></code> for the full setup.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sam-3d-body/</span></code> and <code class="docutils literal notranslate"><span class="pre">MHR/</span></code> have their own dependency instructions in
-their respective <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files.</p></li>
-</ul>
+<section id="conda-environments">
+<h2>Conda Environments<a class="headerlink" href="#conda-environments" title="Link to this heading">#</a></h2>
+<p>RoSHI uses three separate conda environments for different pipeline components.</p>
+<p><strong>roshi</strong> — main pipeline (Python 3.12)</p>
+<p class="todo-red">TODO @Margaret: Update this section if we merge EgoAllo into our code.</p><p>Handles IMU data reception, calibration, pose reconstruction, synchronization,
+and <a class="reference external" href="https://github.com/facebookresearch/egoallo">EgoAllo</a>-based
+diffusion pose estimation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>roshi<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
+conda<span class="w"> </span>activate<span class="w"> </span>roshi
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_roshi.txt
+</pre></div>
+</div>
+<p><strong>sam_3d_body</strong> — 3D body estimation from video (Python 3.11)</p>
+<p>Used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/sam-3d-body">sam-3d-body</a>
+module for extracting SMPL-X body parameters from third-person video frames.
+See the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/sam-3d-body/INSTALL.md">installation guide</a>
+for detailed setup instructions and checkpoint downloads.</p>
+<p><strong>mhr</strong> — motion and hand reconstruction (Python 3.12)</p>
+<p>Used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/MHR">MHR</a> module to convert
+MHR format to SMPL. Refer to its
+<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/MHR/README.md">README</a>
+for detailed installation instructions and checkpoint downloads.</p>
 </section>
 <section id="model-files">
 <h2>Model Files<a class="headerlink" href="#model-files" title="Link to this heading">#</a></h2>
@@ -443,24 +441,9 @@ their respective <code class="docutils literal notranslate"><span class="pre">RE
     └── SMPLX_NEUTRAL.npz
 </pre></div>
 </div>
-<p>See the official SMPL-H and SMPL-X distribution sites for the required model
-downloads.</p>
-</section>
-<section id="imu-firmware">
-<h2>IMU Firmware<a class="headerlink" href="#imu-firmware" title="Link to this heading">#</a></h2>
-<p>Each IMU tracker runs firmware that streams BNO085 orientation data over Wi-Fi
-at 100 Hz. See the <a class="reference internal" href="../hardware/components.html"><span class="doc">Components</span></a> page for flashing instructions.</p>
-</section>
-<section id="calibration-app">
-<h2>Calibration App<a class="headerlink" href="#calibration-app" title="Link to this heading">#</a></h2>
-<p>The iOS calibration app is available at
-<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-App">RoSHI-App</a>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-App.git
-</pre></div>
-</div>
-<p>See <a class="reference internal" href="../calibration/app_setup.html"><span class="doc">Calibration App Setup</span></a> for build and receiver setup, and
-<a class="reference internal" href="../calibration/app_reference.html"><span class="doc">Calibration App Reference</span></a> for app settings, outputs, and
-troubleshooting.</p>
+<p>See the official <a class="reference external" href="https://mano.is.tue.mpg.de/">SMPL-H</a> and
+<a class="reference external" href="https://smpl-x.is.tue.mpg.de/">SMPL-X</a> distribution sites for the
+required model downloads.</p>
 </section>
 </section>
 
@@ -512,12 +495,8 @@ troubleshooting.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-environment">Python Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-dependencies">Core Dependencies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-components">Additional Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environments">Conda Environments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-files">Model Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-firmware">IMU Firmware</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-app">Calibration App</a></li>
 </ul>
   </nav></div>
 

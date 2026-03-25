@@ -29,12 +29,3 @@ the following structure:
        ├── vrs_frames.csv                # Aria first-person frames, if available
        └── vrs_color/                    # Extracted VRS RGB frames, if available
 
-Key Files
----------
-
-- ``metadata.json`` stores the per-frame camera intrinsics and AprilTag
-  detections uploaded from the iOS app.
-- ``imu_calibration.json`` stores the per-sensor rotation offsets used by the
-  downstream pose estimation scripts.
-- ``sync/`` contains the UTC-aligned outputs that combine third-person video,
-  calibrated IMU data, and Aria frames when available.

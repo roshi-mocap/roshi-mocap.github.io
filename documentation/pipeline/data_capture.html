@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=39de3225" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=32c850b6" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -396,14 +396,13 @@
                   
   <section id="data-capture">
 <h1>Data Capture<a class="headerlink" href="#data-capture" title="Link to this heading">#</a></h1>
-<p>This page describes how to capture motion data using RoSHI.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p>Before capturing data, ensure:</p>
 <ol class="arabic simple">
 <li><p>All 9 IMU trackers are powered on and streaming</p></li>
 <li><p>Project Aria glasses are paired and recording</p></li>
-<li><p>Calibration has been completed for the current session</p></li>
+<li><p>Calibration has been completed (see <a class="reference internal" href="../calibration/index.html"><span class="doc">Calibration</span></a>)</p></li>
 </ol>
 </section>
 <section id="recording">
@@ -414,12 +413,6 @@
 <li><p>Perform the desired activities</p></li>
 <li><p>Stop Aria recording and IMU streaming</p></li>
 </ol>
-<p>The system captures:</p>
-<ul class="simple">
-<li><p><strong>IMU data</strong>: 9 sensors × 100 Hz orientation quaternions</p></li>
-<li><p><strong>Aria data</strong>: 6-DoF head trajectory (from onboard SLAM) + RGB video</p></li>
-<li><p><strong>Timestamps</strong>: UTC-synchronized across all sensors</p></li>
-</ul>
 </section>
 <section id="data-synchronization">
 <h2>Data Synchronization<a class="headerlink" href="#data-synchronization" title="Link to this heading">#</a></h2>
