@@ -46,7 +46,7 @@
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Math &amp; Parameters" href="math.html" />
+    <link rel="next" title="Guidance Parameters" href="math.html" />
     <link rel="prev" title="How to Record Data" href="recording.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -333,7 +333,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recording.html">How to Record Data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">How to Postprocess the Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math.html">Math &amp; Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Guidance Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 </ul>
 </div>
@@ -399,6 +399,17 @@
 <h1>How to Postprocess the Data<a class="headerlink" href="#how-to-postprocess-the-data" title="Link to this heading">#</a></h1>
 <p>This section covers the offline processing pipeline that turns raw recordings
 into full-body SMPL pose estimates.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A sample recording is available for testing the full pipeline. Download
+<a class="reference external" href="https://drive.google.com/file/d/1FT1rDZvcw7Yv5sHv-mdlsmndZcEfuSWU/view?usp=sharing">sample_data.zip</a>
+and extract into <code class="docutils literal notranslate"><span class="pre">received_recordings/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>sample_data.zip<span class="w"> </span>-d<span class="w"> </span>received_recordings/
+</pre></div>
+</div>
+<p>This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS
+outputs) that you can use to follow along with every step below.</p>
+</div>
 <section id="step-1-add-aria-data">
 <h2>Step 1: Add Aria Data<a class="headerlink" href="#step-1-add-aria-data" title="Link to this heading">#</a></h2>
 <p>The Aria VRS recording and MPS outputs must be added to the session directory
@@ -535,7 +546,7 @@ python<span class="w"> </span>src/pipeline/04_inference.py<span class="w"> </spa
 </table>
 </div>
 <p>For details on the IMU guidance constraints and optimizer parameters, see
-<a class="reference internal" href="math.html"><span class="doc">Math &amp; Parameters</span></a>.</p>
+<a class="reference internal" href="math.html"><span class="doc">Guidance Parameters</span></a>.</p>
 <p>Results are saved to <code class="docutils literal notranslate"><span class="pre">&lt;session_dir&gt;/egoallo_outputs/</span></code> as NPZ files containing:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
@@ -616,7 +627,7 @@ python<span class="w"> </span>src/pipeline/04_inference.py<span class="w"> </spa
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Math &amp; Parameters</p>
+        <p class="prev-next-title">Guidance Parameters</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

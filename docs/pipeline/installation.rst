@@ -120,6 +120,22 @@ separately and must be downloaded manually.
   or download manually from
   `Google Drive <https://drive.google.com/file/d/14bDkWixFgo3U6dgyrCRmLoXSsXkrDA2w/view?usp=drive_link>`_.
 
+Sample Data
+^^^^^^^^^^^
+
+A sample recording is available for testing the full postprocessing pipeline.
+Download from
+`Google Drive <https://drive.google.com/file/d/1FT1rDZvcw7Yv5sHv-mdlsmndZcEfuSWU/view?usp=sharing>`_
+and extract into ``received_recordings/``:
+
+.. code-block:: bash
+
+   # Download sample_data.zip from the link above, then:
+   unzip sample_data.zip -d received_recordings/
+
+This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
+the :doc:`postprocessing pipeline </pipeline/postprocessing>`.
+
 Project Structure
 ^^^^^^^^^^^^^^^^^
 
@@ -141,7 +157,9 @@ After setup, the repository is organized as follows:
    ├── hardware/              # IMU hardware driver (ESP32 serial reader)
    ├── evaluation/            # Evaluation scripts and ground truth
    ├── scripts/               # Download scripts
-   ├── model/                 # All model files
+   ├── model/                 # All model files (checkpoints, SMPL-X, etc.)
+   ├── received_recordings/   # Raw + processed session data
+   │   └── <session_name>/    # One directory per recording session
    ├── pyproject.toml         # Package configuration
    └── requirements_roshi.txt # Pip requirements
 

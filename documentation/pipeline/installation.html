@@ -502,6 +502,19 @@ or download manually from
 <a class="reference external" href="https://drive.google.com/file/d/14bDkWixFgo3U6dgyrCRmLoXSsXkrDA2w/view?usp=drive_link">Google Drive</a>.</p></li>
 </ul>
 </section>
+<section id="sample-data">
+<h3>Sample Data<a class="headerlink" href="#sample-data" title="Link to this heading">#</a></h3>
+<p>A sample recording is available for testing the full postprocessing pipeline.
+Download from
+<a class="reference external" href="https://drive.google.com/file/d/1FT1rDZvcw7Yv5sHv-mdlsmndZcEfuSWU/view?usp=sharing">Google Drive</a>
+and extract into <code class="docutils literal notranslate"><span class="pre">received_recordings/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download sample_data.zip from the link above, then:</span>
+unzip<span class="w"> </span>sample_data.zip<span class="w"> </span>-d<span class="w"> </span>received_recordings/
+</pre></div>
+</div>
+<p>This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
+the <a class="reference internal" href="postprocessing.html"><span class="doc">postprocessing pipeline</span></a>.</p>
+</section>
 <section id="project-structure">
 <h3>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h3>
 <p>After setup, the repository is organized as follows:</p>
@@ -519,7 +532,9 @@ or download manually from
 ├── hardware/              # IMU hardware driver (ESP32 serial reader)
 ├── evaluation/            # Evaluation scripts and ground truth
 ├── scripts/               # Download scripts
-├── model/                 # All model files
+├── model/                 # All model files (checkpoints, SMPL-X, etc.)
+├── received_recordings/   # Raw + processed session data
+│   └── &lt;session_name&gt;/    # One directory per recording session
 ├── pyproject.toml         # Package configuration
 └── requirements_roshi.txt # Pip requirements
 </pre></div>
@@ -592,6 +607,7 @@ receiver configuration.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environments">Conda Environments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-files">Model Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-data">Sample Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure</a></li>
 </ul>
 </li>

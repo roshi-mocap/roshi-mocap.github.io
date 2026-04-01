@@ -4,6 +4,19 @@ How to Postprocess the Data
 This section covers the offline processing pipeline that turns raw recordings
 into full-body SMPL pose estimates.
 
+.. tip::
+
+   A sample recording is available for testing the full pipeline. Download
+   `sample_data.zip <https://drive.google.com/file/d/1FT1rDZvcw7Yv5sHv-mdlsmndZcEfuSWU/view?usp=sharing>`_
+   and extract into ``received_recordings/``:
+
+   .. code-block:: bash
+
+      unzip sample_data.zip -d received_recordings/
+
+   This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS
+   outputs) that you can use to follow along with every step below.
+
 Step 1: Add Aria Data
 ---------------------
 
