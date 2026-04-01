@@ -399,127 +399,91 @@
   <section id="guidance-parameters">
 <h1>Guidance Parameters<a class="headerlink" href="#guidance-parameters" title="Link to this heading">#</a></h1>
 <p>For calibration math, see <a class="reference internal" href="../calibration/math.html"><span class="doc">Calibration Math</span></a>.</p>
-<p>This page explains, in plain language, what the guidance optimizer is doing
-during <code class="docutils literal notranslate"><span class="pre">04_inference.py</span></code>.</p>
-<p>The diffusion model first predicts a pose sequence. Then the optimizer adjusts
-that prediction so the final result is:</p>
-<ul class="simple">
-<li><p>close to the diffusion output</p></li>
-<li><p>smooth over time</p></li>
-<li><p>consistent with the available sensors</p></li>
-</ul>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>After the diffusion model predicts a pose sequence, a Levenberg-Marquardt
+optimizer refines it to be physically plausible and consistent with sensor
+readings. The optimizer runs twice: once between denoising steps (<code class="docutils literal notranslate"><span class="pre">inner</span></code>,
+5 iterations) and once after sampling is complete (<code class="docutils literal notranslate"><span class="pre">post</span></code>, 20 iterations).</p>
+</section>
 <section id="shared-constraints-all-modes">
 <h2>Shared Constraints (All Modes)<a class="headerlink" href="#shared-constraints-all-modes" title="Link to this heading">#</a></h2>
-<p>All guidance modes use these constraints:</p>
-<ul class="simple">
-<li><p><strong>Pose prior</strong>: keeps joint rotations close to the diffusion output.</p></li>
-<li><p><strong>Torso prior</strong>: keeps torso positions close to the diffusion output.</p></li>
-<li><p><strong>Delta smoothness</strong>: avoids large correction changes between nearby frames.</p></li>
-<li><p><strong>Velocity smoothness</strong>: reduces jitter.</p></li>
-<li><p><strong>Foot skating</strong>: keeps planted feet from sliding.</p></li>
-</ul>
-</section>
-<section id="extra-imu-constraints-roshi-modes">
-<h2>Extra IMU Constraints (RoSHI Modes)<a class="headerlink" href="#extra-imu-constraints-roshi-modes" title="Link to this heading">#</a></h2>
-<p>These are only used in <code class="docutils literal notranslate"><span class="pre">roshi</span></code> and <code class="docutils literal notranslate"><span class="pre">roshi_ariahand</span></code>:</p>
-<ul class="simple">
-<li><p><strong>Local joint matching</strong>: each IMU-equipped joint should match its IMU.</p></li>
-<li><p><strong>Pelvis rotation matching</strong>: pelvis rotation changes should match the pelvis
-IMU.</p></li>
-<li><p><strong>Body smoothness</strong>: adds extra temporal smoothing for the body.</p></li>
-</ul>
-</section>
-<section id="common-parameters">
-<h2>Common Parameters<a class="headerlink" href="#common-parameters" title="Link to this heading">#</a></h2>
+<p>These constraints are applied in every guidance mode, including pure
+<code class="docutils literal notranslate"><span class="pre">egoallo</span></code>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 38.0%" />
+<col style="width: 30.0%" />
 <col style="width: 12.0%" />
-<col style="width: 50.0%" />
+<col style="width: 58.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Meaning</p></th>
+<tr class="row-odd"><th class="head"><p>Constraint</p></th>
+<th class="head"><p>Weight</p></th>
+<th class="head"><p>What it does</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prior_quat_weight</span></code></p></td>
+<tr class="row-even"><td><p>Pose prior</p></td>
 <td><p>1.0</p></td>
-<td><p>Strength of the body rotation prior.</p></td>
+<td><p>Keeps joint rotations close to the diffusion output</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">prior_pos_weight</span></code></p></td>
+<tr class="row-odd"><td><p>Torso prior</p></td>
 <td><p>5.0</p></td>
-<td><p>Strength of the torso position prior.</p></td>
+<td><p>Keeps torso joint positions close to the diffusion output</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">body_quat_delta_smoothness_weight</span></code></p></td>
+<tr class="row-even"><td><p>Delta smoothness</p></td>
 <td><p>10.0</p></td>
-<td><p>Smooths changes in the optimizer correction.</p></td>
+<td><p>Prevents large frame-to-frame changes in the optimizer correction</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">body_quat_smoothness_weight</span></code></p></td>
-<td><p>1.0</p></td>
-<td><p>Smooths frame-to-frame body rotations.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">body_quat_vel_smoothness_weight</span></code></p></td>
+<tr class="row-odd"><td><p>Velocity smoothness</p></td>
 <td><p>5.0</p></td>
-<td><p>Reduces acceleration-like jitter.</p></td>
+<td><p>Penalizes acceleration in joint rotations (reduces jitter)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">skate_weight</span></code></p></td>
+<tr class="row-even"><td><p>Foot skating</p></td>
 <td><p>30.0</p></td>
-<td><p>Strength of the foot skating penalty.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lambda_initial</span></code></p></td>
-<td><p>0.1</p></td>
-<td><p>Initial damping for the solver.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_iters</span></code> (inner / post)</p></td>
-<td><p>5 / 20</p></td>
-<td><p>Solver iterations during sampling and post-optimization.</p></td>
+<td><p>Prevents foot joints from sliding when contact is predicted</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="imu-parameters">
-<h2>IMU Parameters<a class="headerlink" href="#imu-parameters" title="Link to this heading">#</a></h2>
+<section id="imu-constraints-roshi-modes">
+<h2>IMU Constraints (RoSHI Modes)<a class="headerlink" href="#imu-constraints-roshi-modes" title="Link to this heading">#</a></h2>
+<p>These are added in <code class="docutils literal notranslate"><span class="pre">roshi</span></code> and <code class="docutils literal notranslate"><span class="pre">roshi_ariahand</span></code> modes:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 38.0%" />
+<col style="width: 30.0%" />
 <col style="width: 12.0%" />
-<col style="width: 50.0%" />
+<col style="width: 58.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Meaning</p></th>
+<tr class="row-odd"><th class="head"><p>Constraint</p></th>
+<th class="head"><p>Weight</p></th>
+<th class="head"><p>What it does</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">imu_local_quat_weight</span></code></p></td>
+<tr class="row-even"><td><p>Local joint matching</p></td>
 <td><p>5.0</p></td>
-<td><p>Strength of local joint-to-IMU matching.</p></td>
+<td><p>Each IMU-equipped joint rotation should match its IMU reading</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">imu_pelvis_relative_rotation_weight</span></code></p></td>
+<tr class="row-odd"><td><p>Pelvis rotation matching</p></td>
 <td><p>5.0</p></td>
-<td><p>Strength of pelvis rotation matching.</p></td>
+<td><p>Frame-to-frame pelvis rotation change should match the pelvis IMU</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">imu_body_prior_weight</span></code></p></td>
+<tr class="row-even"><td><p>Body prior</p></td>
 <td><p>0.1</p></td>
-<td><p>Extra prior to keep IMU-guided poses near the diffusion output.</p></td>
+<td><p>Extra prior to keep IMU-guided poses near the diffusion output</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">imu_body_smoothness_weight</span></code></p></td>
+<tr class="row-odd"><td><p>Body smoothness</p></td>
 <td><p>10.0</p></td>
-<td><p>Extra temporal smoothing in IMU-guided modes.</p></td>
+<td><p>Extra temporal smoothing for body joints</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
-<section id="reference-equations">
-<h2>Reference Equations<a class="headerlink" href="#reference-equations" title="Link to this heading">#</a></h2>
-<p>The main IMU guidance terms are:</p>
-<ol class="arabic">
-<li><p><strong>Local joint matching</strong></p>
+<p><strong>Local joint matching</strong> minimizes the geodesic distance between predicted and
+IMU-derived parent-relative rotations:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{\text{local}} =
 \sum_{j \in \mathcal{J}_{\text{IMU}}}
@@ -528,8 +492,7 @@ IMU.</p></li>
 \hat{R}_{j}^{\top} \cdot R_{j}^{\text{IMU}}
 \right)
 \right\rVert^{2}\]</div>
-</li>
-<li><p><strong>Pelvis rotation matching</strong></p>
+<p><strong>Pelvis rotation matching</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{\text{pelvis}} =
 \sum_{t}
@@ -539,8 +502,7 @@ IMU.</p></li>
 \Delta R_{\text{pelvis}}^{\text{IMU}}(t)
 \right)
 \right\rVert^{2}\]</div>
-</li>
-<li><p><strong>Body smoothness</strong></p>
+<p><strong>Body smoothness</strong> penalizes large frame-to-frame rotation changes:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{\text{smooth}} =
 \sum_{t} \sum_{j}
@@ -549,8 +511,6 @@ IMU.</p></li>
 \hat{R}_{j}(t)^{\top} \cdot \hat{R}_{j}(t{+}1)
 \right)
 \right\rVert^{2}\]</div>
-</li>
-</ol>
 </section>
 </section>
 
@@ -601,11 +561,9 @@ IMU.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shared-constraints-all-modes">Shared Constraints (All Modes)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-imu-constraints-roshi-modes">Extra IMU Constraints (RoSHI Modes)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-parameters">Common Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-parameters">IMU Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-equations">Reference Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imu-constraints-roshi-modes">IMU Constraints (RoSHI Modes)</a></li>
 </ul>
   </nav></div>
 

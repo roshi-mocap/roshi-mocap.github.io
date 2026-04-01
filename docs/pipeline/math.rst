@@ -3,133 +3,102 @@ Guidance Parameters
 
 For calibration math, see :doc:`/calibration/math`.
 
-This page explains, in plain language, what the guidance optimizer is doing
-during ``04_inference.py``.
+Overview
+--------
 
-The diffusion model first predicts a pose sequence. Then the optimizer adjusts
-that prediction so the final result is:
-
-- close to the diffusion output
-- smooth over time
-- consistent with the available sensors
+After the diffusion model predicts a pose sequence, a Levenberg-Marquardt
+optimizer refines it to be physically plausible and consistent with sensor
+readings. The optimizer runs twice: once between denoising steps (``inner``,
+5 iterations) and once after sampling is complete (``post``, 20 iterations).
 
 Shared Constraints (All Modes)
 ------------------------------
 
-All guidance modes use these constraints:
-
-- **Pose prior**: keeps joint rotations close to the diffusion output.
-- **Torso prior**: keeps torso positions close to the diffusion output.
-- **Delta smoothness**: avoids large correction changes between nearby frames.
-- **Velocity smoothness**: reduces jitter.
-- **Foot skating**: keeps planted feet from sliding.
-
-Extra IMU Constraints (RoSHI Modes)
------------------------------------
-
-These are only used in ``roshi`` and ``roshi_ariahand``:
-
-- **Local joint matching**: each IMU-equipped joint should match its IMU.
-- **Pelvis rotation matching**: pelvis rotation changes should match the pelvis
-  IMU.
-- **Body smoothness**: adds extra temporal smoothing for the body.
-
-Common Parameters
------------------
+These constraints are applied in every guidance mode, including pure
+``egoallo``:
 
 .. list-table::
    :header-rows: 1
-   :widths: 38 12 50
+   :widths: 30 12 58
 
-   * - Parameter
-     - Default
-     - Meaning
-   * - ``prior_quat_weight``
+   * - Constraint
+     - Weight
+     - What it does
+   * - Pose prior
      - 1.0
-     - Strength of the body rotation prior.
-   * - ``prior_pos_weight``
+     - Keeps joint rotations close to the diffusion output
+   * - Torso prior
      - 5.0
-     - Strength of the torso position prior.
-   * - ``body_quat_delta_smoothness_weight``
+     - Keeps torso joint positions close to the diffusion output
+   * - Delta smoothness
      - 10.0
-     - Smooths changes in the optimizer correction.
-   * - ``body_quat_smoothness_weight``
-     - 1.0
-     - Smooths frame-to-frame body rotations.
-   * - ``body_quat_vel_smoothness_weight``
+     - Prevents large frame-to-frame changes in the optimizer correction
+   * - Velocity smoothness
      - 5.0
-     - Reduces acceleration-like jitter.
-   * - ``skate_weight``
+     - Penalizes acceleration in joint rotations (reduces jitter)
+   * - Foot skating
      - 30.0
-     - Strength of the foot skating penalty.
-   * - ``lambda_initial``
-     - 0.1
-     - Initial damping for the solver.
-   * - ``max_iters`` (inner / post)
-     - 5 / 20
-     - Solver iterations during sampling and post-optimization.
+     - Prevents foot joints from sliding when contact is predicted
 
-IMU Parameters
---------------
+IMU Constraints (RoSHI Modes)
+------------------------------
+
+These are added in ``roshi`` and ``roshi_ariahand`` modes:
 
 .. list-table::
    :header-rows: 1
-   :widths: 38 12 50
+   :widths: 30 12 58
 
-   * - Parameter
-     - Default
-     - Meaning
-   * - ``imu_local_quat_weight``
+   * - Constraint
+     - Weight
+     - What it does
+   * - Local joint matching
      - 5.0
-     - Strength of local joint-to-IMU matching.
-   * - ``imu_pelvis_relative_rotation_weight``
+     - Each IMU-equipped joint rotation should match its IMU reading
+   * - Pelvis rotation matching
      - 5.0
-     - Strength of pelvis rotation matching.
-   * - ``imu_body_prior_weight``
+     - Frame-to-frame pelvis rotation change should match the pelvis IMU
+   * - Body prior
      - 0.1
-     - Extra prior to keep IMU-guided poses near the diffusion output.
-   * - ``imu_body_smoothness_weight``
+     - Extra prior to keep IMU-guided poses near the diffusion output
+   * - Body smoothness
      - 10.0
-     - Extra temporal smoothing in IMU-guided modes.
+     - Extra temporal smoothing for body joints
 
-Reference Equations
--------------------
+**Local joint matching** minimizes the geodesic distance between predicted and
+IMU-derived parent-relative rotations:
 
-The main IMU guidance terms are:
+.. math::
 
-1. **Local joint matching**
+   \mathcal{L}_{\text{local}} =
+   \sum_{j \in \mathcal{J}_{\text{IMU}}}
+   \left\lVert
+   \log\!\left(
+   \hat{R}_{j}^{\top} \cdot R_{j}^{\text{IMU}}
+   \right)
+   \right\rVert^{2}
 
-   .. math::
+**Pelvis rotation matching**:
 
-      \mathcal{L}_{\text{local}} =
-      \sum_{j \in \mathcal{J}_{\text{IMU}}}
-      \left\lVert
-      \log\!\left(
-      \hat{R}_{j}^{\top} \cdot R_{j}^{\text{IMU}}
-      \right)
-      \right\rVert^{2}
+.. math::
 
-2. **Pelvis rotation matching**
+   \mathcal{L}_{\text{pelvis}} =
+   \sum_{t}
+   \left\lVert
+   \log\!\left(
+   \Delta \hat{R}_{\text{pelvis}}^{\top}(t) \cdot
+   \Delta R_{\text{pelvis}}^{\text{IMU}}(t)
+   \right)
+   \right\rVert^{2}
 
-   .. math::
+**Body smoothness** penalizes large frame-to-frame rotation changes:
 
-      \mathcal{L}_{\text{pelvis}} =
-      \sum_{t}
-      \left\lVert
-      \log\!\left(
-      \Delta \hat{R}_{\text{pelvis}}^{\top}(t) \cdot
-      \Delta R_{\text{pelvis}}^{\text{IMU}}(t)
-      \right)
-      \right\rVert^{2}
+.. math::
 
-3. **Body smoothness**
-
-   .. math::
-
-      \mathcal{L}_{\text{smooth}} =
-      \sum_{t} \sum_{j}
-      \left\lVert
-      \log\!\left(
-      \hat{R}_{j}(t)^{\top} \cdot \hat{R}_{j}(t{+}1)
-      \right)
-      \right\rVert^{2}
+   \mathcal{L}_{\text{smooth}} =
+   \sum_{t} \sum_{j}
+   \left\lVert
+   \log\!\left(
+   \hat{R}_{j}(t)^{\top} \cdot \hat{R}_{j}(t{+}1)
+   \right)
+   \right\rVert^{2}
