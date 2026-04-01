@@ -56,33 +56,59 @@ under ``src/egoallo/``.
 This environment is used by the `sam-3d-body <https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/sam-3d-body>`_
 module for extracting SMPL-X body parameters from third-person video frames as part of our calibration pipeline.
 See the `installation guide <https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/sam-3d-body/INSTALL.md>`_
-for detailed setup instructions and checkpoint downloads.
+for detailed setup instructions. Model checkpoints should be placed under ``model/sam3d/``
+(see `Model Files`_ below).
 
 **mhr** — motion and hand reconstruction (Python 3.12)
 
 This environment is used by the `MHR <https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/MHR>`_ module to convert
 MHR format to SMPL-X as part of our calibration pipeline. Refer to its
 `README <https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/MHR/README.md>`_
-for detailed installation instructions and checkpoint downloads.
+for detailed installation instructions. Model checkpoints should be placed under ``model/mhr/``
+(see `Model Files`_ below).
 
 Model Files
 ^^^^^^^^^^^
 
-All models are placed under ``model/``. SMPL body models are licensed separately
-and must be downloaded manually; the EgoAllo checkpoint can be fetched with the
-provided script.
+All model checkpoints are placed under ``model/``. Some models are licensed
+separately and must be downloaded manually.
 
 .. code-block:: text
 
    model/
-   ├── egoallo/                        # EgoAllo diffusion checkpoint
+   ├── egoallo/                           # EgoAllo diffusion checkpoint
    │   └── checkpoints_3000000/
    │       ├── model.safetensors
    │       └── ...
-   ├── smplh/                           # SMPL-H body model
+   ├── mhr/                               # MHR torchscript model
+   │   └── mhr_model.pt
+   ├── sam3d/                             # SAM 3D Body checkpoint
+   │   └── sam-3d-body-dinov3/
+   │       ├── model.ckpt
+   │       ├── model_config.yaml
+   │       └── assets/
+   │           └── mhr_model.pt
+   ├── smplh/                             # SMPL-H body model
    │   └── neutral/model.npz
-   └── smplx/                           # SMPL-X body model
+   └── smplx/                             # SMPL-X body model
        └── SMPLX_NEUTRAL.npz
+
+- **SAM 3D Body**: download the ``sam-3d-body-dinov3`` checkpoint from
+  `Hugging Face <https://huggingface.co/facebook/sam-3d-body-dinov3>`_
+  (access request required). Place it under ``model/sam3d/``:
+
+  .. code-block:: bash
+
+     huggingface-cli download facebook/sam-3d-body-dinov3 \
+         --local-dir model/sam3d/sam-3d-body-dinov3
+
+- **MHR**: download the torchscript model from the
+  `MHR GitHub release <https://github.com/facebookresearch/MHR/releases/tag/v1.0.0>`_:
+
+  .. code-block:: bash
+
+     curl -OL https://github.com/facebookresearch/MHR/releases/download/v1.0.0/assets.zip
+     unzip -p assets.zip assets/mhr_model.pt > model/mhr/mhr_model.pt
 
 - **SMPL-H** (16 shape parameters, "Extended SMPL+H model"): download from the
   `MANO project page <https://mano.is.tue.mpg.de/>`_.

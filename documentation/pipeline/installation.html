@@ -333,7 +333,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recording.html">How to Record Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postprocessing.html">How to Postprocess the Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math.html">Math &amp; Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Guidance Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 </ul>
 </div>
@@ -443,30 +443,54 @@ pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com
 <p>This environment is used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/sam-3d-body">sam-3d-body</a>
 module for extracting SMPL-X body parameters from third-person video frames as part of our calibration pipeline.
 See the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/sam-3d-body/INSTALL.md">installation guide</a>
-for detailed setup instructions and checkpoint downloads.</p>
+for detailed setup instructions. Model checkpoints should be placed under <code class="docutils literal notranslate"><span class="pre">model/sam3d/</span></code>
+(see <a class="reference internal" href="#model-files">Model Files</a> below).</p>
 <p><strong>mhr</strong> — motion and hand reconstruction (Python 3.12)</p>
 <p>This environment is used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/MHR">MHR</a> module to convert
 MHR format to SMPL-X as part of our calibration pipeline. Refer to its
 <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/MHR/README.md">README</a>
-for detailed installation instructions and checkpoint downloads.</p>
+for detailed installation instructions. Model checkpoints should be placed under <code class="docutils literal notranslate"><span class="pre">model/mhr/</span></code>
+(see <a class="reference internal" href="#model-files">Model Files</a> below).</p>
 </section>
 <section id="model-files">
 <h3>Model Files<a class="headerlink" href="#model-files" title="Link to this heading">#</a></h3>
-<p>All models are placed under <code class="docutils literal notranslate"><span class="pre">model/</span></code>. SMPL body models are licensed separately
-and must be downloaded manually; the EgoAllo checkpoint can be fetched with the
-provided script.</p>
+<p>All model checkpoints are placed under <code class="docutils literal notranslate"><span class="pre">model/</span></code>. Some models are licensed
+separately and must be downloaded manually.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>model/
-├── egoallo/                        # EgoAllo diffusion checkpoint
+├── egoallo/                           # EgoAllo diffusion checkpoint
 │   └── checkpoints_3000000/
 │       ├── model.safetensors
 │       └── ...
-├── smplh/                           # SMPL-H body model
+├── mhr/                               # MHR torchscript model
+│   └── mhr_model.pt
+├── sam3d/                             # SAM 3D Body checkpoint
+│   └── sam-3d-body-dinov3/
+│       ├── model.ckpt
+│       ├── model_config.yaml
+│       └── assets/
+│           └── mhr_model.pt
+├── smplh/                             # SMPL-H body model
 │   └── neutral/model.npz
-└── smplx/                           # SMPL-X body model
+└── smplx/                             # SMPL-X body model
     └── SMPLX_NEUTRAL.npz
 </pre></div>
 </div>
-<ul class="simple">
+<ul>
+<li><p><strong>SAM 3D Body</strong>: download the <code class="docutils literal notranslate"><span class="pre">sam-3d-body-dinov3</span></code> checkpoint from
+<a class="reference external" href="https://huggingface.co/facebook/sam-3d-body-dinov3">Hugging Face</a>
+(access request required). Place it under <code class="docutils literal notranslate"><span class="pre">model/sam3d/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>huggingface-cli<span class="w"> </span>download<span class="w"> </span>facebook/sam-3d-body-dinov3<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local-dir<span class="w"> </span>model/sam3d/sam-3d-body-dinov3
+</pre></div>
+</div>
+</li>
+<li><p><strong>MHR</strong>: download the torchscript model from the
+<a class="reference external" href="https://github.com/facebookresearch/MHR/releases/tag/v1.0.0">MHR GitHub release</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-OL<span class="w"> </span>https://github.com/facebookresearch/MHR/releases/download/v1.0.0/assets.zip
+unzip<span class="w"> </span>-p<span class="w"> </span>assets.zip<span class="w"> </span>assets/mhr_model.pt<span class="w"> </span>&gt;<span class="w"> </span>model/mhr/mhr_model.pt
+</pre></div>
+</div>
+</li>
 <li><p><strong>SMPL-H</strong> (16 shape parameters, “Extended SMPL+H model”): download from the
 <a class="reference external" href="https://mano.is.tue.mpg.de/">MANO project page</a>.
 Used by EgoAllo for diffusion-based pose estimation.</p></li>
