@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; RoSHI  documentation</title>
+    <title>How to Record Data &#8212; RoSHI  documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=32c850b6" />
   
   <!-- So that users can add custom icons -->
@@ -42,12 +42,12 @@
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/recording';</script>
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
-    <link rel="prev" title="Pipeline" href="index.html" />
+    <link rel="next" title="How to Postprocess the Data" href="postprocessing.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -329,9 +329,9 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recording.html">How to Record Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to Record Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postprocessing.html">How to Postprocess the Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="math.html">Math &amp; Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
@@ -378,7 +378,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pipeline</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Overview</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to Record Data</span></li>
   </ul>
 </nav>
 </div>
@@ -395,22 +395,77 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<figure class="align-center">
-<img alt="RoSHI system overview" src="../_images/figure1.png" />
-</figure>
-<p>RoSHI is a low-cost, portable system for in-the-wild human motion capture. It
-fuses information from <strong>9 body-worn IMUs</strong> and <strong>Project Aria glasses</strong> to
-output synchronized <strong>3D body pose (SMPL format)</strong>, <strong>egocentric RGB video</strong>,
-and <strong>a globally consistent root trajectory</strong>. The figure above shows an example
-of data being collected, processed, and deployed to a real robot.</p>
-<section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+  <section id="how-to-record-data">
+<h1>How to Record Data<a class="headerlink" href="#how-to-record-data" title="Link to this heading">#</a></h1>
+<p>This section covers the full recording workflow: calibration capture, IMU
+streaming, and Aria recording.</p>
+<section id="calibration-recording">
+<h2>Calibration Recording<a class="headerlink" href="#calibration-recording" title="Link to this heading">#</a></h2>
+<p>Before collecting motion data you need a short calibration video to recover
+<strong>sensor-to-bone offsets</strong> and <strong>per-IMU world alignment</strong>.</p>
+<ol class="arabic">
+<li><p><strong>Wear the suit</strong> with all 9 IMU trackers attached and powered on.</p></li>
+<li><p><strong>Wear the Aria glasses</strong> and start the Aria recording via the companion app.</p></li>
+<li><p><strong>Start the receiver</strong> on the computer and note the IP address and port:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/pipeline/01_receiver.py<span class="w"> </span>--output-dir<span class="w"> </span>received_recordings
+</pre></div>
+</div>
+<p>The terminal will print the IP address and port (default <code class="docutils literal notranslate"><span class="pre">8085</span></code>) that the
+iOS app needs to connect to. Make sure the phone and computer are on the
+same Wi-Fi network.</p>
+</li>
+<li><p><strong>Launch the calibration app</strong> and ensure the receiver status (top-right)
+is green.</p></li>
+<li><p><strong>Tap Record</strong>. You can use either the front or back camera.</p></li>
+<li><p><strong>Slowly rotate</strong> until all 9 AprilTags have been seen; the tag tracker in
+the app shows progress for each tag.</p></li>
+<li><p><strong>Once all tags are detected</strong>, you can step out of the camera view and
+start performing the motion you want to record.</p></li>
+<li><p><strong>Tap Stop</strong> when you are done with the collection. The app will upload
+the video and metadata to the receiver automatically. You will have the
+option to start the post-processing pipeline. You can also safely stop
+the Aria recording via the companion app.</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The full take can be longer, but the calibration segment itself usually only
+needs 20–40 seconds. Move slowly while exposing the tags, keep them facing
+the camera, and use good lighting for reliable detection.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calibration can be repeated at any time without removing the IMUs. Simply
+re-record a short calibration video.</p>
+</div>
+<p style="color: red; font-weight: bold;">TODO: Add a visual guide for the entire workflow.</p><p>For a quick visual walkthrough, see the
+<a class="reference internal" href="../calibration/app_reference.html#app-reference-video"><span class="std std-ref">demo video in App Reference</span></a>.</p>
+</section>
+<section id="session-output">
+<h2>Session Output<a class="headerlink" href="#session-output" title="Link to this heading">#</a></h2>
+<p>After recording, the iOS app uploads two files to the receiver. Together with
+the IMU stream, the session directory initially contains:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>received_recordings/&lt;session_name&gt;/
+├── video.mp4                       # H.264 calibration video (uploaded from iOS app)
+├── metadata.json                   # Per-frame timestamps, intrinsics, AprilTag detections (uploaded from iOS app)
+└── imu/
+    └── imu_data.csv                # Raw IMU quaternions (utc_timestamp_ns, imu_id, qw, qx, qy, qz)
+</pre></div>
+</div>
+<p>For how to add Aria data, run the calibration pipeline, and prepare
+synchronized outputs for inference, see <a class="reference internal" href="postprocessing.html"><span class="doc">How to Postprocess the Data</span></a>.</p>
+</section>
+<section id="common-issues">
+<h2>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Low-cost</strong>: under $500 in tracker hardware — see the <a class="reference internal" href="../hardware/index.html"><span class="doc">Hardware</span></a> section for a detailed item list</p></li>
-<li><p><strong>Quick calibration</strong>: a 20–40 second iPhone video is enough — refer to the <a class="reference internal" href="../calibration/index.html"><span class="doc">Calibration</span></a> section for details</p></li>
-<li><p><strong>Portable</strong> &amp; <strong>In-the-wild</strong>: the entire system is easily wearable, and once calibrated you can move freely in any environment</p></li>
+<li><p><strong>Receiver not found</strong>: confirm the phone and receiver machine are on the
+same Wi-Fi network and that the manually entered IP and port match the
+values shown in the receiver terminal.</p></li>
+<li><p><strong>Connection timeout</strong>: check the receiver process, port, and any manual IP
+or port override inside the app.</p></li>
+<li><p><strong>Tags not detected</strong>: keep the 42 mm tags flat, visible, and well lit, and
+avoid strong motion blur.</p></li>
+<li><p><strong>Low detection counts</strong>: move more slowly and give the camera a little more
+time before stopping the recording.</p></li>
 </ul>
 </section>
 </section>
@@ -426,20 +481,20 @@ of data being collected, processed, and deployed to a real robot.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="installation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pipeline</p>
+        <p class="prev-next-title">Installation</p>
       </div>
     </a>
     <a class="right-next"
-       href="installation.html"
+       href="postprocessing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installation</p>
+        <p class="prev-next-title">How to Postprocess the Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -462,7 +517,9 @@ of data being collected, processed, and deployed to a real robot.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-recording">Calibration Recording</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-output">Session Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
 </ul>
   </nav></div>
 

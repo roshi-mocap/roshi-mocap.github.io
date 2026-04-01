@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; RoSHI  documentation</title>
+    <title>How to Postprocess the Data &#8212; RoSHI  documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=32c850b6" />
   
   <!-- So that users can add custom icons -->
@@ -42,12 +42,12 @@
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipeline/postprocessing';</script>
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
-    <link rel="prev" title="Pipeline" href="index.html" />
+    <link rel="next" title="Math &amp; Parameters" href="math.html" />
+    <link rel="prev" title="How to Record Data" href="recording.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -329,10 +329,10 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recording.html">How to Record Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="postprocessing.html">How to Postprocess the Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to Postprocess the Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="math.html">Math &amp; Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 </ul>
@@ -378,7 +378,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pipeline</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Overview</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to Postprocess the Data</span></li>
   </ul>
 </nav>
 </div>
@@ -395,23 +395,200 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<figure class="align-center">
-<img alt="RoSHI system overview" src="../_images/figure1.png" />
-</figure>
-<p>RoSHI is a low-cost, portable system for in-the-wild human motion capture. It
-fuses information from <strong>9 body-worn IMUs</strong> and <strong>Project Aria glasses</strong> to
-output synchronized <strong>3D body pose (SMPL format)</strong>, <strong>egocentric RGB video</strong>,
-and <strong>a globally consistent root trajectory</strong>. The figure above shows an example
-of data being collected, processed, and deployed to a real robot.</p>
-<section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+  <section id="how-to-postprocess-the-data">
+<h1>How to Postprocess the Data<a class="headerlink" href="#how-to-postprocess-the-data" title="Link to this heading">#</a></h1>
+<p>This section covers the offline processing pipeline that turns raw recordings
+into full-body SMPL pose estimates.</p>
+<section id="step-1-add-aria-data">
+<h2>Step 1: Add Aria Data<a class="headerlink" href="#step-1-add-aria-data" title="Link to this heading">#</a></h2>
+<p>The Aria VRS recording and MPS outputs must be added to the session directory
+manually after the recording is complete:</p>
+<ol class="arabic simple">
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">.vrs</span></code> file and its JSON sidecar from the Aria companion app.</p></li>
+<li><p>Submit the VRS to <a class="reference external" href="https://facebookresearch.github.io/projectaria_tools/docs/data_utilities/core_code_snippets/mps">Aria MPS</a>
+for SLAM and hand tracking processing.</p></li>
+<li><p>Place the outputs into the session directory:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>received_recordings/&lt;session_name&gt;/
+├── ...                              # (existing files from recording)
+├── &lt;recording&gt;.vrs                  # Aria VRS recording
+├── &lt;recording&gt;.vrs.json             # VRS metadata sidecar
+└── mps_&lt;recording&gt;_vrs/             # Aria MPS outputs
+    ├── slam/
+    │   ├── closed_loop_trajectory.csv
+    │   └── semidense_points.csv.gz
+    └── hand_tracking/
+        └── hand_tracking_results.csv
+</pre></div>
+</div>
+</section>
+<section id="step-2-calibration-pipeline">
+<h2>Step 2: Calibration Pipeline<a class="headerlink" href="#step-2-calibration-pipeline" title="Link to this heading">#</a></h2>
+<p>The calibration pipeline can run automatically when the receiver finishes
+uploading, or be triggered manually on an existing session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the full calibration pipeline (steps 1–4 below) on an existing session</span>
+python<span class="w"> </span>src/pipeline/01_receiver.py<span class="w"> </span>--session<span class="w"> </span>&lt;session_dir&gt;
+</pre></div>
+</div>
+<p>This runs four sub-steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Prepare session</strong> — extract video frames, camera intrinsics, AprilTag summary.</p></li>
+<li><p><strong>SAM-3D-Body</strong> — estimate 3D body parameters from third-person RGB frames.</p></li>
+<li><p><strong>MHR → SMPL-X</strong> — convert MHR outputs to SMPL-X format.</p></li>
+<li><p><strong>Calibration solve</strong> — compute bone-to-sensor rotation offsets (<code class="docutils literal notranslate"><span class="pre">imu_calibration.json</span></code>).
+Can also be re-run independently via <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">src/pipeline/02_calibrate.py</span> <span class="pre">&lt;session_dir&gt;</span></code>.</p></li>
+</ol>
+<p>After this step, the session directory contains:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>received_recordings/&lt;session_name&gt;/
+├── ...                              # (existing files)
+├── meta/
+│   ├── camera.json                  # Camera intrinsics extracted from metadata
+│   └── calibration_segment.json     # Auto-detected calibration time window
+├── color/                           # Extracted video frames (PNG)
+├── frames.csv                       # Frame index, UTC timestamp, image path
+├── color_apriltag/
+│   └── detection_summary.json       # Per-frame AprilTag detection counts
+├── body_data/                       # SAM-3D-Body MHR outputs (*.npz per frame)
+├── smpl_output/                     # SMPL-X conversion results
+│   ├── smpl_parameters.npz          # Joints, rotations, betas across all frames
+│   ├── smpl_vertices.npy            # Mesh vertices (memory-mapped)
+│   └── per_frame/                   # Individual SMPL-X fits
+└── imu_calibration.json             # Bone-to-sensor rotation offsets (B_R_S per joint)
+</pre></div>
+</div>
+</section>
+<section id="step-3-synchronization">
+<h2>Step 3: Synchronization<a class="headerlink" href="#step-3-synchronization" title="Link to this heading">#</a></h2>
+<p>The sync pipeline aligns IMU, third-person RGB, and (optionally) Aria
+egocentric data to a shared UTC timeline:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/pipeline/03_sync.py<span class="w"> </span>&lt;session_dir&gt;
+</pre></div>
+</div>
+<p>This produces a <code class="docutils literal notranslate"><span class="pre">sync/</span></code> folder with calibrated, UTC-aligned data ready for
+inference:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>received_recordings/&lt;session_name&gt;/
+├── ...                              # (existing files)
+└── sync/
+    ├── frames.csv                   # UTC-mapped third-person RGB
+    ├── color/                       # Symlinked RGB images
+    ├── imu_info.csv                 # Calibrated IMU rotations (9 rows per timestamp)
+    ├── imu_info.pkl                 # Same data as pickle: {utc_ns: {imu_id: 3x3 rotation matrix}}
+    ├── vrs_frames.csv               # (optional) UTC-mapped Aria RGB
+    └── vrs_color/                   # (optional) Extracted Aria RGB frames
+</pre></div>
+</div>
+</section>
+<section id="step-4-pose-estimation">
+<h2>Step 4: Pose Estimation<a class="headerlink" href="#step-4-pose-estimation" title="Link to this heading">#</a></h2>
+<p>Run EgoAllo diffusion-based pose estimation conditioned on head trajectory.
+The <code class="docutils literal notranslate"><span class="pre">--guidance-mode</span></code> flag selects which signals guide the diffusion process:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default: RoSHI (diffusion + IMU guidance)</span>
+python<span class="w"> </span>src/pipeline/04_inference.py<span class="w"> </span>--traj-root<span class="w"> </span>&lt;session_dir&gt;
+
+<span class="c1"># Or specify a different mode</span>
+python<span class="w"> </span>src/pipeline/04_inference.py<span class="w"> </span>--traj-root<span class="w"> </span>&lt;session_dir&gt;<span class="w"> </span>--guidance-mode<span class="w"> </span>egoallo
+</pre></div>
+</div>
+<p>Available guidance modes:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Diffusion</p></th>
+<th class="head"><p>IMU</p></th>
+<th class="head"><p>Aria Hand</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">egoallo</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>no</p></td>
+<td><p>Pure EgoAllo baseline (foot skating constraint only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">egoallo_ariawrist</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>wrist only</p></td>
+<td><p>EgoAllo + Aria wrist pose guidance (no full hand, no IMU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">roshi</span></code> <strong>(default)</strong></p></td>
+<td><p>yes</p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>RoSHI: diffusion guided by IMU bone orientations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">roshi_ariahand</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>yes</p></td>
+<td><p>yes</p></td>
+<td><p>RoSHI + Aria hand tracking</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For details on the IMU guidance constraints and optimizer parameters, see
+<a class="reference internal" href="math.html"><span class="doc">Math &amp; Parameters</span></a>.</p>
+<p>Results are saved to <code class="docutils literal notranslate"><span class="pre">&lt;session_dir&gt;/egoallo_outputs/</span></code> as NPZ files containing:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Ts_world_cpf</span></code></p></td>
+<td><p>CPF (central pupil frame) poses in world frame (T, 7)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Ts_world_root</span></code></p></td>
+<td><p>Root joint (pelvis) pose in world frame (T, 7)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">body_quats</span></code></p></td>
+<td><p>Local body joint quaternions, wxyz (samples, T, 21, 4)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">left_hand_quats</span></code></p></td>
+<td><p>Left hand joint quaternions, wxyz (samples, T, 15, 4)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">right_hand_quats</span></code></p></td>
+<td><p>Right hand joint quaternions, wxyz (samples, T, 15, 4)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">contacts</span></code></p></td>
+<td><p>Foot contact predictions per body joint (samples, T, 21)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">betas</span></code></p></td>
+<td><p>SMPL-H body shape parameters (samples, T, 16)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timestamps_ns</span></code></p></td>
+<td><p>Tracking timestamps in nanoseconds (T,)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="step-5-visualization">
+<h2>Step 5: Visualization<a class="headerlink" href="#step-5-visualization" title="Link to this heading">#</a></h2>
+<p>Compare methods side-by-side with third-person RGB:</p>
 <ul class="simple">
-<li><p><strong>Low-cost</strong>: under $500 in tracker hardware — see the <a class="reference internal" href="../hardware/index.html"><span class="doc">Hardware</span></a> section for a detailed item list</p></li>
-<li><p><strong>Quick calibration</strong>: a 20–40 second iPhone video is enough — refer to the <a class="reference internal" href="../calibration/index.html"><span class="doc">Calibration</span></a> section for details</p></li>
-<li><p><strong>Portable</strong> &amp; <strong>In-the-wild</strong>: the entire system is easily wearable, and once calibrated you can move freely in any environment</p></li>
+<li><p><strong>SAM-3D</strong> — third-person video body estimation from the calibration pipeline</p></li>
+<li><p><strong>IMU FK</strong> — pure forward kinematics from calibrated IMUs, no diffusion model, assume missing joints are at the identity</p></li>
+<li><p><strong>RoSHI</strong> — diffusion + IMU guidance (from <code class="docutils literal notranslate"><span class="pre">04_inference.py</span></code>)</p></li>
+<li><p><strong>EgoAllo</strong> — diffusion baseline outputs (from <code class="docutils literal notranslate"><span class="pre">04_inference.py</span> <span class="pre">--guidance-mode</span> <span class="pre">egoallo</span></code>)</p></li>
 </ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/pipeline/05_visualize.py<span class="w"> </span>&lt;session_dir&gt;
+</pre></div>
+</div>
+<p>For evaluation against OptiTrack ground truth, see <a class="reference internal" href="evaluation.html"><span class="doc">Evaluation</span></a>.</p>
 </section>
 </section>
 
@@ -426,20 +603,20 @@ of data being collected, processed, and deployed to a real robot.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="recording.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pipeline</p>
+        <p class="prev-next-title">How to Record Data</p>
       </div>
     </a>
     <a class="right-next"
-       href="installation.html"
+       href="math.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installation</p>
+        <p class="prev-next-title">Math &amp; Parameters</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -462,7 +639,11 @@ of data being collected, processed, and deployed to a real robot.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-add-aria-data">Step 1: Add Aria Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calibration-pipeline">Step 2: Calibration Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-synchronization">Step 3: Synchronization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-pose-estimation">Step 4: Pose Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-visualization">Step 5: Visualization</a></li>
 </ul>
   </nav></div>
 

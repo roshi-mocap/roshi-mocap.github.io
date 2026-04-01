@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sphinx-build -b html docs/ documentation/)",
+      "Bash(sphinx-build -W -b html docs/ documentation/)",
+      "Bash(python scripts/docs_live_preview.py)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}

@@ -46,7 +46,7 @@
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Capture" href="data_capture.html" />
+    <link rel="next" title="How to Record Data" href="recording.html" />
     <link rel="prev" title="Overview" href="overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -331,9 +331,10 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_capture.html">Data Capture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="session_layout.html">Session Data Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pose_estimation.html">Pose Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording.html">How to Record Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postprocessing.html">How to Postprocess the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Math &amp; Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 </ul>
 </div>
 </nav></div>
@@ -396,55 +397,124 @@
                   
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
+<p>This section covers the four components you need to install and set up before
+using RoSHI:</p>
+<ol class="arabic simple">
+<li><p><strong>Environment &amp; Codebase</strong> — software environments, dependencies, model files</p></li>
+<li><p><strong>Calibration App</strong> — iOS companion app for sensor-to-bone calibration</p></li>
+<li><p><strong>Hardware – IMUs</strong> — 9 body-worn IMU trackers with AprilTags</p></li>
+<li><p><strong>Aria Glasses</strong> — Project Aria for egocentric SLAM and hand tracking</p></li>
+</ol>
+<section id="environment-codebase">
+<h2>1. Environment &amp; Codebase<a class="headerlink" href="#environment-codebase" title="Link to this heading">#</a></h2>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Project Aria glasses with MPS (Machine Perception Services) access</p></li>
-<li><p>iPhone or iPad running iOS 17.6+ (for calibration)</p></li>
 <li><p>NVIDIA GPU with CUDA support</p></li>
+<li><p>Python 3.12+</p></li>
 </ul>
+<p>We recommend using conda to manage the environment and dependencies.</p>
+<p>Clone the main repository:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Jirl-upenn/RoSHI-MoCap.git
 <span class="nb">cd</span><span class="w"> </span>RoSHI-MoCap
 </pre></div>
 </div>
 </section>
 <section id="conda-environments">
-<h2>Conda Environments<a class="headerlink" href="#conda-environments" title="Link to this heading">#</a></h2>
-<p>RoSHI uses three separate conda environments for different pipeline components.</p>
-<p><strong>roshi</strong> — main pipeline (Python 3.12)</p>
-<p class="todo-red">TODO @Margaret: Update this section if we merge EgoAllo into our code.</p><p>Handles IMU data reception, calibration, pose reconstruction, synchronization,
+<h3>Conda Environments<a class="headerlink" href="#conda-environments" title="Link to this heading">#</a></h3>
+<p>RoSHI uses 3 separate conda environments for different pipeline components.</p>
+<p><strong>roshi</strong> — main pipeline + EgoAllo inference (Python 3.12)</p>
+<p>This environment handles IMU data reception, calibration, pose reconstruction, synchronization,
 and <a class="reference external" href="https://github.com/facebookresearch/egoallo">EgoAllo</a>-based
-diffusion pose estimation.</p>
+diffusion pose estimation with our guidance optimizer. EgoAllo is integrated directly into the codebase
+under <code class="docutils literal notranslate"><span class="pre">src/egoallo/</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>roshi<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
 conda<span class="w"> </span>activate<span class="w"> </span>roshi
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_roshi.txt
+
+<span class="c1"># Install the package (includes egoallo and all dependencies)</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># JAX with CUDA support (required for guidance optimization)</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;jax[cuda12]&gt;=0.6&quot;</span>
+pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/brentyi/jaxls.git
 </pre></div>
 </div>
 <p><strong>sam_3d_body</strong> — 3D body estimation from video (Python 3.11)</p>
-<p>Used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/sam-3d-body">sam-3d-body</a>
-module for extracting SMPL-X body parameters from third-person video frames.
+<p>This environment is used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/sam-3d-body">sam-3d-body</a>
+module for extracting SMPL-X body parameters from third-person video frames as part of our calibration pipeline.
 See the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/sam-3d-body/INSTALL.md">installation guide</a>
 for detailed setup instructions and checkpoint downloads.</p>
 <p><strong>mhr</strong> — motion and hand reconstruction (Python 3.12)</p>
-<p>Used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/MHR">MHR</a> module to convert
-MHR format to SMPL. Refer to its
+<p>This environment is used by the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/tree/main/MHR">MHR</a> module to convert
+MHR format to SMPL-X as part of our calibration pipeline. Refer to its
 <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-MoCap/blob/main/MHR/README.md">README</a>
 for detailed installation instructions and checkpoint downloads.</p>
 </section>
 <section id="model-files">
-<h2>Model Files<a class="headerlink" href="#model-files" title="Link to this heading">#</a></h2>
-<p>SMPL body models are licensed separately and must be placed under <code class="docutils literal notranslate"><span class="pre">model/</span></code>:</p>
+<h3>Model Files<a class="headerlink" href="#model-files" title="Link to this heading">#</a></h3>
+<p>All models are placed under <code class="docutils literal notranslate"><span class="pre">model/</span></code>. SMPL body models are licensed separately
+and must be downloaded manually; the EgoAllo checkpoint can be fetched with the
+provided script.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>model/
-├── smplh/
+├── egoallo/                        # EgoAllo diffusion checkpoint
+│   └── checkpoints_3000000/
+│       ├── model.safetensors
+│       └── ...
+├── smplh/                           # SMPL-H body model
 │   └── neutral/model.npz
-└── smplx/
+└── smplx/                           # SMPL-X body model
     └── SMPLX_NEUTRAL.npz
 </pre></div>
 </div>
-<p>See the official <a class="reference external" href="https://mano.is.tue.mpg.de/">SMPL-H</a> and
-<a class="reference external" href="https://smpl-x.is.tue.mpg.de/">SMPL-X</a> distribution sites for the
-required model downloads.</p>
+<ul class="simple">
+<li><p><strong>SMPL-H</strong> (16 shape parameters, “Extended SMPL+H model”): download from the
+<a class="reference external" href="https://mano.is.tue.mpg.de/">MANO project page</a>.
+Used by EgoAllo for diffusion-based pose estimation.</p></li>
+<li><p><strong>SMPL-X</strong>: download from the
+<a class="reference external" href="https://smpl-x.is.tue.mpg.de/">SMPL-X project page</a>.
+Used by the calibration pipeline and IMU pose reconstruction.</p></li>
+<li><p><strong>EgoAllo checkpoint</strong>: run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/download_checkpoint_and_data.sh</span></code>,
+or download manually from
+<a class="reference external" href="https://drive.google.com/file/d/14bDkWixFgo3U6dgyrCRmLoXSsXkrDA2w/view?usp=drive_link">Google Drive</a>.</p></li>
+</ul>
 </section>
+<section id="project-structure">
+<h3>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h3>
+<p>After setup, the repository is organized as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RoSHI-MoCap/
+├── src/
+│   ├── egoallo/          # EgoAllo: diffusion model + IMU guidance optimizer
+│   ├── pipeline/         # End-to-end pipeline scripts
+│   │   ├── 01_receiver.py      # Receive calibration data from iOS app
+│   │   ├── 02_calibrate.py     # Calibrate bone-to-sensor rotation offsets
+│   │   ├── 03_sync.py          # Synchronize RGB + calibrated IMU data
+│   │   ├── 04_inference.py     # Run EgoAllo diffusion-based pose estimation
+│   │   ├── 05_visualize.py     # Multi-method visualization
+│   │   └── 06_evaluate.py      # Evaluate against OptiTrack ground truth
+│   └── utils/             # Shared utilities
+├── hardware/              # IMU hardware driver (ESP32 serial reader)
+├── evaluation/            # Evaluation scripts and ground truth
+├── scripts/               # Download scripts
+├── model/                 # All model files
+├── pyproject.toml         # Package configuration
+└── requirements_roshi.txt # Pip requirements
+</pre></div>
+</div>
+</section>
+</section>
+<section id="calibration-app">
+<h2>2. Calibration App<a class="headerlink" href="#calibration-app" title="Link to this heading">#</a></h2>
+<p>The RoSHI calibration app runs on an iOS device and is used to record a
+short video for sensor-to-bone calibration. See the <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-App">RoSHI-App repository</a> for
+build instructions, and <a class="reference internal" href="../calibration/app_setup.html"><span class="doc">Calibration App Setup</span></a> for detailed setup and
+receiver configuration.</p>
+</section>
+<section id="hardware-imus">
+<h2>3. Hardware – IMUs<a class="headerlink" href="#hardware-imus" title="Link to this heading">#</a></h2>
+<p style="color: red; font-weight: bold;">TODO: Add hardware setup instructions.</p></section>
+<section id="aria-glasses">
+<h2>4. Aria Glasses<a class="headerlink" href="#aria-glasses" title="Link to this heading">#</a></h2>
+<p style="color: red; font-weight: bold;">TODO: Add detailed Aria setup walkthrough and MPS submission instructions.</p></section>
 </section>
 
 
@@ -467,11 +537,11 @@ required model downloads.</p>
       </div>
     </a>
     <a class="right-next"
-       href="data_capture.html"
+       href="recording.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Capture</p>
+        <p class="prev-next-title">How to Record Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -494,9 +564,16 @@ required model downloads.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environments">Conda Environments</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-files">Model Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-codebase">1. Environment &amp; Codebase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environments">Conda Environments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-files">Model Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-app">2. Calibration App</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-imus">3. Hardware – IMUs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aria-glasses">4. Aria Glasses</a></li>
 </ul>
   </nav></div>
 
@@ -534,7 +611,7 @@ required model downloads.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

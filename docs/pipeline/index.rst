@@ -9,6 +9,7 @@ set up and run RoSHI.
 
    overview
    installation
-   data_capture
-   session_layout
-   pose_estimation
+   recording
+   postprocessing
+   math
+   evaluation
