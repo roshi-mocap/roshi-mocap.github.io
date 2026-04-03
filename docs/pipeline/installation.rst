@@ -162,8 +162,8 @@ After setup, the repository is organized as follows:
    │   │   ├── 05_visualize.py     # Multi-method visualization
    │   │   └── 06_evaluate.py      # Evaluate against OptiTrack ground truth
    │   └── utils/             # Shared utilities
-   ├── sam-3d-body/            # SAM 3D Body (submodule)
-   ├── MHR/                   # Momentum Human Rig (submodule)
+   ├── sam-3d-body/            # SAM 3D Body
+   ├── MHR/                   # Momentum Human Rig
    ├── hardware/              # IMU hardware driver (ESP32 serial reader)
    ├── evaluation/            # Evaluation scripts and ground truth
    ├── scripts/               # Download scripts
