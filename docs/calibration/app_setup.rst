@@ -3,7 +3,7 @@ Calibration App Setup
 
 Use this page to build the RoSHI iOS app and connect it to the receiver.
 
-For the recording workflow, see :doc:`procedure`. For UI details, uploaded
+For the recording workflow, see :doc:`/pipeline/recording`. For UI details, uploaded
 files, and troubleshooting, see :doc:`app_reference`. For calibration math and
 frame conventions, see :doc:`math`.
 
