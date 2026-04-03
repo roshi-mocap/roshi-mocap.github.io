@@ -8,9 +8,5 @@ Aria, and a short iPhone calibration step.
    :maxdepth: 2
 
    pipeline/index
-
-.. toctree::
-   :hidden:
-
    hardware/index
    calibration/index
