@@ -425,7 +425,7 @@ using RoSHI:</p>
 <p>RoSHI uses 3 separate conda environments for different pipeline components.</p>
 <p><strong>roshi</strong> — main pipeline + EgoAllo inference (Python 3.12)</p>
 <p>This environment handles IMU data reception, calibration, pose reconstruction, synchronization,
-and <a class="reference external" href="https://github.com/facebookresearch/egoallo">EgoAllo</a>-based
+and <a class="reference external" href="https://github.com/brentyi/egoallo">EgoAllo</a>-based
 diffusion pose estimation with our guidance optimizer. EgoAllo is integrated directly into the codebase
 under <code class="docutils literal notranslate"><span class="pre">src/egoallo/</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>roshi<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
@@ -461,8 +461,12 @@ separately and must be downloaded manually.</p>
 │   └── checkpoints_3000000/
 │       ├── model.safetensors
 │       └── ...
-├── mhr/                               # MHR torchscript model
-│   └── mhr_model.pt
+├── mhr/                               # MHR model assets (full bundle)
+│   ├── mhr_model.pt
+│   ├── lod*.fbx
+│   ├── compact_v6_1.model
+│   ├── corrective_activation.npz
+│   └── corrective_blendshapes_lod*.npz
 ├── sam3d/                             # SAM 3D Body checkpoint
 │   └── sam-3d-body-dinov3/
 │       ├── model.ckpt
@@ -484,10 +488,14 @@ separately and must be downloaded manually.</p>
 </pre></div>
 </div>
 </li>
-<li><p><strong>MHR</strong>: download the torchscript model from the
-<a class="reference external" href="https://github.com/facebookresearch/MHR/releases/tag/v1.0.0">MHR GitHub release</a>:</p>
+<li><p><strong>MHR</strong>: download the full assets bundle from the
+<a class="reference external" href="https://github.com/facebookresearch/MHR/releases/tag/v1.0.0">MHR GitHub release</a>.
+The MHR→SMPL-X conversion requires the complete assets (LOD meshes,
+corrective blendshapes, etc.), not just the torchscript model:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-OL<span class="w"> </span>https://github.com/facebookresearch/MHR/releases/download/v1.0.0/assets.zip
-unzip<span class="w"> </span>-p<span class="w"> </span>assets.zip<span class="w"> </span>assets/mhr_model.pt<span class="w"> </span>&gt;<span class="w"> </span>model/mhr/mhr_model.pt
+unzip<span class="w"> </span>assets.zip<span class="w"> </span>-d<span class="w"> </span>model/mhr/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>assets.zip
+<span class="c1"># Flatten: move files from model/mhr/assets/ up to model/mhr/</span>
+mv<span class="w"> </span>model/mhr/assets/*<span class="w"> </span>model/mhr/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rmdir<span class="w"> </span>model/mhr/assets
 </pre></div>
 </div>
 </li>
@@ -529,6 +537,8 @@ the <a class="reference internal" href="postprocessing.html"><span class="doc">p
 │   │   ├── 05_visualize.py     # Multi-method visualization
 │   │   └── 06_evaluate.py      # Evaluate against OptiTrack ground truth
 │   └── utils/             # Shared utilities
+├── sam-3d-body/            # SAM 3D Body (submodule)
+├── MHR/                   # Momentum Human Rig (submodule)
 ├── hardware/              # IMU hardware driver (ESP32 serial reader)
 ├── evaluation/            # Evaluation scripts and ground truth
 ├── scripts/               # Download scripts

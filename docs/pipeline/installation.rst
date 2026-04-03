@@ -35,7 +35,7 @@ RoSHI uses 3 separate conda environments for different pipeline components.
 **roshi** — main pipeline + EgoAllo inference (Python 3.12)
 
 This environment handles IMU data reception, calibration, pose reconstruction, synchronization,
-and `EgoAllo <https://github.com/facebookresearch/egoallo>`_-based
+and `EgoAllo <https://github.com/brentyi/egoallo>`_-based
 diffusion pose estimation with our guidance optimizer. EgoAllo is integrated directly into the codebase
 under ``src/egoallo/``.
 
@@ -80,8 +80,12 @@ separately and must be downloaded manually.
    │   └── checkpoints_3000000/
    │       ├── model.safetensors
    │       └── ...
-   ├── mhr/                               # MHR torchscript model
-   │   └── mhr_model.pt
+   ├── mhr/                               # MHR model assets (full bundle)
+   │   ├── mhr_model.pt
+   │   ├── lod*.fbx
+   │   ├── compact_v6_1.model
+   │   ├── corrective_activation.npz
+   │   └── corrective_blendshapes_lod*.npz
    ├── sam3d/                             # SAM 3D Body checkpoint
    │   └── sam-3d-body-dinov3/
    │       ├── model.ckpt
@@ -102,13 +106,17 @@ separately and must be downloaded manually.
      huggingface-cli download facebook/sam-3d-body-dinov3 \
          --local-dir model/sam3d/sam-3d-body-dinov3
 
-- **MHR**: download the torchscript model from the
-  `MHR GitHub release <https://github.com/facebookresearch/MHR/releases/tag/v1.0.0>`_:
+- **MHR**: download the full assets bundle from the
+  `MHR GitHub release <https://github.com/facebookresearch/MHR/releases/tag/v1.0.0>`_.
+  The MHR→SMPL-X conversion requires the complete assets (LOD meshes,
+  corrective blendshapes, etc.), not just the torchscript model:
 
   .. code-block:: bash
 
      curl -OL https://github.com/facebookresearch/MHR/releases/download/v1.0.0/assets.zip
-     unzip -p assets.zip assets/mhr_model.pt > model/mhr/mhr_model.pt
+     unzip assets.zip -d model/mhr/ && rm assets.zip
+     # Flatten: move files from model/mhr/assets/ up to model/mhr/
+     mv model/mhr/assets/* model/mhr/ && rmdir model/mhr/assets
 
 - **SMPL-H** (16 shape parameters, "Extended SMPL+H model"): download from the
   `MANO project page <https://mano.is.tue.mpg.de/>`_.
@@ -154,6 +162,8 @@ After setup, the repository is organized as follows:
    │   │   ├── 05_visualize.py     # Multi-method visualization
    │   │   └── 06_evaluate.py      # Evaluate against OptiTrack ground truth
    │   └── utils/             # Shared utilities
+   ├── sam-3d-body/            # SAM 3D Body (submodule)
+   ├── MHR/                   # Momentum Human Rig (submodule)
    ├── hardware/              # IMU hardware driver (ESP32 serial reader)
    ├── evaluation/            # Evaluation scripts and ground truth
    ├── scripts/               # Download scripts
