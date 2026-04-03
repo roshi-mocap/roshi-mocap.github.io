@@ -60,6 +60,12 @@ This runs four sub-steps:
 4. **Calibration solve** — compute bone-to-sensor rotation offsets (``imu_calibration.json``).
    Can also be re-run independently via ``python src/pipeline/02_calibrate.py <session_dir>``.
 
+.. note::
+
+   The calibration pipeline automatically detects which sub-steps have already
+   been completed and skips them. If you need to re-run a specific step (e.g.
+   after updating a model checkpoint), delete its output directory first.
+
 After this step, the session directory contains:
 
 .. code-block:: text

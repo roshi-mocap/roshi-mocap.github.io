@@ -449,6 +449,12 @@ python<span class="w"> </span>src/pipeline/01_receiver.py<span class="w"> </span
 <li><p><strong>Calibration solve</strong> — compute bone-to-sensor rotation offsets (<code class="docutils literal notranslate"><span class="pre">imu_calibration.json</span></code>).
 Can also be re-run independently via <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">src/pipeline/02_calibrate.py</span> <span class="pre">&lt;session_dir&gt;</span></code>.</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The calibration pipeline automatically detects which sub-steps have already
+been completed and skips them. If you need to re-run a specific step (e.g.
+after updating a model checkpoint), delete its output directory first.</p>
+</div>
 <p>After this step, the session directory contains:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>received_recordings/&lt;session_name&gt;/
 ├── ...                              # (existing files)
