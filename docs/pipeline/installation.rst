@@ -159,8 +159,9 @@ After setup, the repository is organized as follows:
    │   │   ├── 02_calibrate.py     # Calibrate bone-to-sensor rotation offsets
    │   │   ├── 03_sync.py          # Synchronize RGB + calibrated IMU data
    │   │   ├── 04_inference.py     # Run EgoAllo diffusion-based pose estimation
-   │   │   ├── 05_visualize.py     # Multi-method visualization
-   │   │   └── 06_evaluate.py      # Evaluate against OptiTrack ground truth
+   │   │   ├── 05_visualize.py          # Visualize IMU FK and SAM results (no localization)
+   │   │   ├── 05_visualize_roshi.py   # Visualize RoSHI pipeline results
+   │   │   └── 06_evaluate.py          # Evaluate against OptiTrack ground truth
    │   └── utils/             # Shared utilities
    ├── sam-3d-body/            # SAM 3D Body
    ├── MHR/                   # Momentum Human Rig

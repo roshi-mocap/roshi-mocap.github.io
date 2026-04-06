@@ -188,16 +188,17 @@ Results are saved to ``<session_dir>/egoallo_outputs/`` as NPZ files containing:
 Step 5: Visualization
 ----------------------
 
-Compare methods side-by-side with third-person RGB:
-
-- **SAM-3D** — third-person video body estimation from the calibration pipeline
-- **IMU FK** — pure forward kinematics from calibrated IMUs, no diffusion model, assume missing joints are at the identity
-- **RoSHI** — diffusion + IMU guidance (from ``04_inference.py``)
-- **EgoAllo** — diffusion baseline outputs (from ``04_inference.py --guidance-mode egoallo``)
+Visualize IMU FK and SAM results (no localization):
 
 .. code-block:: bash
 
    python src/pipeline/05_visualize.py <session_dir>
+
+Visualize RoSHI pipeline results:
+
+.. code-block:: bash
+
+   python src/pipeline/05_visualize_roshi.py <session_dir>
 
 For evaluation against OptiTrack ground truth, see :doc:`evaluation`.
 
