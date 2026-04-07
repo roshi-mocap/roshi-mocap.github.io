@@ -2,5 +2,6 @@
 .idea
 IROS 2026 ROSHI.pdf
 docs/_build/
+docs/.venv/
 roshi-mocap.github.io.code-workspace
 CLAUDE.md
