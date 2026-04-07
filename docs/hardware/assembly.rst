@@ -4,7 +4,26 @@ Assembly
 This page walks through assembling a RoSHI body tracker based on the SlimeVR
 Hyperion PCB, a **BNO085** IMU, and a **custom 3D-printed case** sized for rigid
 AprilTag mounting. For why the tag matters and how we use it in calibration,
-see :doc:`april_tag`.
+see :doc:`april_tag`. **STEP/STL files, firmware, and Python tools** are in the
+`RoSHI-Hardware`_ repo; after mechanical build, flash firmware per :doc:`software`.
+
+.. _RoSHI-Hardware: https://github.com/Jirl-upenn/RoSHI-Hardware
+
+3D printing
+-----------
+
+Printed parts for the tracker case, receiver enclosure, strap hardware, and
+related pieces are published under **`RoSHI-Hardware` → `3D Prints/`** (`see repo`_).
+
+.. _see repo: https://github.com/Jirl-upenn/RoSHI-Hardware/tree/main/3D%20Prints
+
+- **`Design/`** — CAD sources (STEP and design files).
+- **`Print/`** — **STL** files ready for slicing.
+
+We print our parts in **PLA matte**. Other materials (for example **PETG**)
+often need **tolerance adjustments** in the slicer or CAD—the fits are tuned for
+our filament and machine. The internal spacing is intended as a **firm press
+fit** so the **IMU stack does not rattle or vibrate** during motion.
 
 PCB source and ordering
 -----------------------
@@ -18,7 +37,12 @@ Use that repository for **ordering PCBs** (for example Gerbers to JLCPCB),
 recommended board thickness, and reference **Hyperion Lite** case variants where
 helpful.
 
-**IMU choice.** RoSHI is built around the **BNO085** variant of this PCB.
+**IMU choice.** We use the **BNO085** because it includes **on-board sensor
+fusion**, so orientation is ready to use without extra fusion code on the MCU. A
+lower-cost path such as **ICM-45686 + QMC6309** is possible on the same PCB
+family, but you must implement **custom sensor fusion** on the **ESP8266
+WeMos D1 Mini** and flash that before the tracker can transmit usable
+orientation data.
 
 **Case.** We do **not** use the stock Hyperion case as-is: RoSHI needs a **custom
 case** that holds a printed AprilTag in a known pose for tag-based calibration.
@@ -188,9 +212,8 @@ not a USB data test—just power-on confirmation.)
 Enclosure and IMU stack
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-We print the case in **PLA matte**. There is a **small press-fit tolerance**;
-other filaments will change how smooth and reliable the fit feels. We provide
-**STEP** geometry if you need to modify clearances or mounts.
+Follow the **3D printing** notes above for material and press-fit goals. Use the
+**Design/** or **Print/** folders in `RoSHI-Hardware`_ for STEP/STL.
 
 Route **straps** through the provided loops and tighten so the tracker stays put
 without crushing the shell. If you move many units at once, you can use a
@@ -242,9 +265,8 @@ inserts** secure the **top and bottom** halves of the enclosure. The Feather
    :alt: Receiver rear panel connectors
    :width: 85%
 
-Wiring diagram
---------------
+Next step
+---------
 
-.. note::
-   A dedicated wiring diagram will be added here if needed beyond the reference
-   Hyperion schematics.
+When soldering and enclosure work are complete, continue with **firmware
+flashing and host Python setup** in :doc:`software`.

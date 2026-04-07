@@ -160,3 +160,43 @@ helps (passives, connectors). PCB Gerbers follow the SlimeVR Hyperion design—s
 .. _SS12D00G3 40-pack: https://www.amazon.com/dp/B0CFDGZ9R2
 .. _503759 1200mAh battery: https://www.amazon.com/dp/B0CNLNV5ZC
 .. _JST-PH socket kit: https://www.amazon.com/dp/B0BM492MMF
+
+Receiver (host unit) BOM
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+These parts match the **receiver** described in :doc:`assembly` (ESP32-S3 host,
+ESP-NOW on 2.4 GHz, small OLED on I²C, external antenna). Prices are **Adafruit
+U.S. list** (before tax/shipping). The Feather uses a **w.FL / MHF3 / IPEX3**
+port (not u.FL); pair the **RP-SMA dipole antenna** with the **RP-SMA to w.FL
+adapter** cable. Budget separately for **STEMMA QT / Qwiic** cables and any
+I²C multiplexers your receiver PCB uses.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 38 10 14 28
+
+   * - Item
+     - Qty
+     - Price
+     - Source
+   * - Adafruit ESP32-S3 Feather 8 MB Flash, **w.FL antenna** (native USB-C)
+     - 1
+     - **$17.50**
+     - `ESP32-S3 Feather w.FL`_
+   * - 2.4 GHz dipole swivel antenna, **RP-SMA**, 2 dBi
+     - 1
+     - **$7.95**
+     - `2.4 GHz RP-SMA antenna`_
+   * - RP-SMA to **w.FL / MHF3 / IPEX3** adapter cable
+     - 1
+     - **$2.95**
+     - `RP-SMA to w.FL adapter`_
+   * - Monochrome **0.91"** 128×32 **I²C OLED**, STEMMA QT / Qwiic
+     - 1
+     - **$12.50**
+     - `0.91in OLED STEMMA QT`_
+
+.. _ESP32-S3 Feather w.FL: https://www.adafruit.com/product/5885
+.. _2.4 GHz RP-SMA antenna: https://www.adafruit.com/product/944
+.. _RP-SMA to w.FL adapter: https://www.adafruit.com/product/5444
+.. _0.91in OLED STEMMA QT: https://www.adafruit.com/product/4440
