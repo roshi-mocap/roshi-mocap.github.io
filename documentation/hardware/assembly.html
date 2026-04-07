@@ -27,38 +27,43 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=32c850b6" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=7f76b32a3354e82990f2"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2" />
 
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'hardware/assembly';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Calibration" href="../calibration/index.html" />
+    <link rel="next" title="Software (firmware and host tools)" href="software.html" />
     <link rel="prev" title="Components" href="components.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
-
+  <body data-default-mode="dark">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
@@ -90,7 +95,7 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
@@ -324,13 +329,22 @@
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
         <div class="sidebar-primary-item">
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software (firmware and host tools)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="april_tag.html">AprilTag on trackers</a></li>
 </ul>
 </div>
 </nav></div>
@@ -393,34 +407,257 @@
                   
   <section id="assembly">
 <h1>Assembly<a class="headerlink" href="#assembly" title="Link to this heading">#</a></h1>
-<p>This page covers how to assemble the RoSHI wearable suit.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Detailed assembly instructions with photos are coming soon.</p>
-</div>
+<p>This page walks through assembling a RoSHI body tracker based on the SlimeVR
+Hyperion PCB, a <strong>BNO085</strong> IMU, and a <strong>custom 3D-printed case</strong> sized for rigid
+AprilTag mounting. For why the tag matters and how we use it in calibration,
+see <a class="reference internal" href="april_tag.html"><span class="doc">AprilTag on trackers</span></a>. <strong>STEP/STL files, firmware, and Python tools</strong> are in the
+<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware">RoSHI-Hardware</a> repo; after mechanical build, flash firmware per <a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
+<section id="d-printing">
+<h2>3D printing<a class="headerlink" href="#d-printing" title="Link to this heading">#</a></h2>
+<p>Printed parts for the tracker case, receiver enclosure, strap hardware, and
+related pieces are published under <strong>`RoSHI-Hardware` → `3D Prints/`</strong> (<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware/tree/main/3D%20Prints">see repo</a>).</p>
+<ul class="simple">
+<li><p><strong>`Design/`</strong> — CAD sources (STEP and design files).</p></li>
+<li><p><strong>`Print/`</strong> — <strong>STL</strong> files ready for slicing.</p></li>
+</ul>
+<p>We print our parts in <strong>PLA matte</strong>. Other materials (for example <strong>PETG</strong>)
+often need <strong>tolerance adjustments</strong> in the slicer or CAD—the fits are tuned for
+our filament and machine. The internal spacing is intended as a <strong>firm press
+fit</strong> so the <strong>IMU stack does not rattle or vibrate</strong> during motion.</p>
+</section>
+<section id="pcb-source-and-ordering">
+<h2>PCB source and ordering<a class="headerlink" href="#pcb-source-and-ordering" title="Link to this heading">#</a></h2>
+<p>We use the PCB and ordering workflow from the <strong>SlimeVR Hyperion Multi-IMU BMI
+BNO</strong> project (<a class="reference external" href="https://github.com/Shine-Bright-Meow/SlimeVR-Hyperion-BMI-BNO-PCB-Case#case-guide">Case guide on GitHub</a>), including Gerber ordering notes.</p>
+<p>Use that repository for <strong>ordering PCBs</strong> (for example Gerbers to JLCPCB),
+recommended board thickness, and reference <strong>Hyperion Lite</strong> case variants where
+helpful.</p>
+<p><strong>IMU choice.</strong> We use the <strong>BNO085</strong> because it includes <strong>on-board sensor
+fusion</strong>, so orientation is ready to use without extra fusion code on the MCU. A
+lower-cost path such as <strong>ICM-45686 + QMC6309</strong> is possible on the same PCB
+family, but you must implement <strong>custom sensor fusion</strong> on the <strong>ESP8266
+WeMos D1 Mini</strong> and flash that before the tracker can transmit usable
+orientation data.</p>
+<p><strong>Case.</strong> We do <strong>not</strong> use the stock Hyperion case as-is: RoSHI needs a <strong>custom
+case</strong> that holds a printed AprilTag in a known pose for tag-based calibration.
+See <a class="reference internal" href="april_tag.html"><span class="doc">AprilTag on trackers</span></a> for tag size, family, and mounting goals.</p>
+<p><strong>Other SlimeVR-style trackers.</strong> Many DIY SlimeVR-compatible PCBs and IMUs can
+stream orientation over Wi-Fi in a similar way. The practical constraint for
+RoSHI is mechanical: <strong>the enclosure must present a rigid AprilTag on a known
+face</strong>. Any alternative board or IMU module is fine in principle, but you will
+need to <strong>redesign or adapt the case</strong> (strap mounts, clearance, tag plane) for
+your PCB outline and tag size.</p>
+</section>
 <section id="tracker-assembly">
-<h2>Tracker Assembly<a class="headerlink" href="#tracker-assembly" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Solder the BNO085 breakout to the ESP32 via I2C (SDA/SCL)</p></li>
-<li><p>Connect the LiPo battery to the ESP32 power input</p></li>
-<li><p>Mount the assembled electronics in the 3D-printed enclosure</p></li>
-<li><p>Attach the AprilTag (42 mm, Tag36h11) rigidly to the enclosure face</p></li>
-</ol>
+<h2>Tracker assembly<a class="headerlink" href="#tracker-assembly" title="Link to this heading">#</a></h2>
+<p>The photos below follow one build order: charging board first, then passives and
+connectors, then the IMU and MCU, then test and switch, then the enclosure stack.</p>
+<section id="parts-layout">
+<h3>Parts layout<a class="headerlink" href="#parts-layout" title="Link to this heading">#</a></h3>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/1_layout.jpg"><img alt="Components and PCB laid out before soldering" src="../_images/1_layout.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Overview of parts and PCB orientation before assembly.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="suit-integration">
-<h2>Suit Integration<a class="headerlink" href="#suit-integration" title="Link to this heading">#</a></h2>
+<section id="charging-board-tp4056">
+<h3>Charging board (TP4056)<a class="headerlink" href="#charging-board-tp4056" title="Link to this heading">#</a></h3>
+<p>We start with the <strong>charging board</strong> (TP4056 “battery charger” module in the
+Hyperion design—sometimes informally called the BMS section in build guides).</p>
 <ol class="arabic simple">
-<li><p>Attach each tracker to the corresponding body location using Velcro straps</p></li>
-<li><p>Ensure the AprilTag face is visible and not occluded by clothing</p></li>
-<li><p>Wear the Project Aria glasses and pair via the Aria companion app</p></li>
+<li><p>Seat the module so <strong>its holes line up</strong> with the PCB pads and outline.</p></li>
+<li><p><strong>Tack one pin:</strong> apply solder to a single pad and solder one lead first.</p></li>
+<li><p><strong>Align the rest:</strong> reheat that joint and gently nudge the board until all
+pads line up, then solder the remaining pins.</p></li>
+<li><p><strong>Inspect both sides:</strong> joints should be shiny and complete. When you flip
+the board and look from the bottom, <strong>each through-hole should show a filled
+annulus</strong> (solder wicked through the barrel—not a dry hole).</p></li>
 </ol>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/2_bms_place.jpg"><img alt="Charging board placed on the PCB before soldering" src="../_images/2_bms_place.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Align the charging module to the PCB footprint.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/3_bms_solder.jpg"><img alt="Soldering the charging board pins" src="../_images/3_bms_solder.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Tack one pin, align, then finish all joints.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/4_bms_back.jpg"><img alt="View of solder joints from the back of the PCB" src="../_images/4_bms_back.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">From underneath, through-holes should show proper fill.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="wiring-diagram">
-<h2>Wiring Diagram<a class="headerlink" href="#wiring-diagram" title="Link to this heading">#</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Wiring diagram will be added here.</p>
-</div>
+<section id="battery-connector-jst">
+<h3>Battery connector (JST)<a class="headerlink" href="#battery-connector-jst" title="Link to this heading">#</a></h3>
+<p>Insert the <strong>through-hole JST</strong> into the battery power footprint. Adjust it so it
+sits <strong>perpendicular</strong> to the board and <strong>aligned with the board edges</strong>, then
+<strong>solder from the underside</strong> so each joint is solid.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/5_jst.jpg"><img alt="JST battery connector soldered to the PCB" src="../_images/5_jst.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">JST seated square and soldered from below before taller parts go on.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="resistor-and-diode">
+<h3>Resistor and diode<a class="headerlink" href="#resistor-and-diode" title="Link to this heading">#</a></h3>
+<p>Use a <strong>180 kΩ</strong> resistor and the <strong>diode called out in the BOM</strong>. <strong>Diode
+polarity</strong> matches the silkscreen on the board—orient the part to that drawing
+before soldering. Fit passives flush, solder so <strong>solder fully covers each hole</strong>
+on both sides, and trim leads.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/6_resistor_hole.jpg"><img alt="Resistor leads through the PCB" src="../_images/6_resistor_hole.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/7_resistor_soldered.jpg"><img alt="Resistor soldered on the component side" src="../_images/7_resistor_soldered.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/8_resistor_back.jpg"><img alt="Resistor joints viewed from the solder side" src="../_images/8_resistor_back.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+<section id="pin-headers-imu-and-esp32-wemos-d1-mini">
+<h3>Pin headers (IMU and ESP32 Wemos D1 Mini)<a class="headerlink" href="#pin-headers-imu-and-esp32-wemos-d1-mini" title="Link to this heading">#</a></h3>
+<p>For both the <strong>IMU</strong> and <strong>ESP32 Wemos D1 Mini</strong>, having the <strong>long side of the
+pins facing up</strong> makes alignment easier. After soldering, <strong>make sure solder
+fully covers each hole</strong>—no dry or shallow barrels.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/9_header.jpg"><img alt="Pin headers installed on the PCB" src="../_images/9_header.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/10_header_back.jpg"><img alt="Header joints from the bottom of the PCB" src="../_images/10_header_back.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+<section id="bno085-imu">
+<h3>BNO085 IMU<a class="headerlink" href="#bno085-imu" title="Link to this heading">#</a></h3>
+<p>Slide the <strong>BNO085</strong> breakout onto its headers. <strong>Solder one pin first</strong>, then
+check that the module is <strong>almost parallel</strong> to the lower PCB before soldering
+the rest. Finish all pins so the joints are complete.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/11_IMU.jpg"><img alt="BNO085 IMU module mounted on the PCB" src="../_images/11_IMU.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+<section id="esp32-wemos-d1-mini">
+<h3>ESP32 (Wemos D1 Mini)<a class="headerlink" href="#esp32-wemos-d1-mini" title="Link to this heading">#</a></h3>
+<p>Start by <strong>soldering one pin</strong> on the D1 Mini. When that joint is done, <strong>clip
+the long pins on top</strong> as needed, then <strong>re-solder any pin</strong> that did not take
+cleanly. Use the same idea for the <strong>IMU</strong> if the headers are tall after seating.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/12_ESP.jpg"><img alt="ESP32 module seated on headers" src="../_images/12_ESP.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+<section id="connectivity-test">
+<h3>Connectivity test<a class="headerlink" href="#connectivity-test" title="Link to this heading">#</a></h3>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/13_Testing.jpg"><img alt="Multimeter continuity check on the tracker PCB" src="../_images/13_Testing.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Continuity check with a multimeter</strong> (beep mode): verify <strong>VCC</strong>, <strong>GND</strong>,
+and other nets <strong>from the test points</strong> (or designated pads) so power and
+ground wiring matches the design before you apply battery power.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="power-switch">
+<h3>Power switch<a class="headerlink" href="#power-switch" title="Link to this heading">#</a></h3>
+<p>Use the <strong>switch tray</strong> from your <strong>print list</strong> to hold alignment. Press the
+switch down until the pins <strong>seat in the holes</strong>, then solder by <strong>pressing the
+iron into each pin</strong> and <strong>filling the hole with solder</strong> so the joint is solid.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/14_switch.jpg"><img alt="Power switch before final soldering" src="../_images/14_switch.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/15_switch_soldered.jpg"><img alt="Power switch soldered and flush" src="../_images/15_switch_soldered.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+<section id="power-on">
+<h3>Power on<a class="headerlink" href="#power-on" title="Link to this heading">#</a></h3>
+<p>After the <strong>connectivity test</strong> looks good, apply power. If the <strong>blue LED on the
+D1 Mini</strong> comes on, the board is ready for <strong>firmware flashing</strong>. (This step is
+not a USB data test—just power-on confirmation.)</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/16_power_on.jpg"><img alt="Tracker powered on with indicator visible" src="../_images/16_power_on.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+<section id="enclosure-and-imu-stack">
+<h3>Enclosure and IMU stack<a class="headerlink" href="#enclosure-and-imu-stack" title="Link to this heading">#</a></h3>
+<p>Follow the <strong>3D printing</strong> notes above for material and press-fit goals. Use the
+<strong>Design/</strong> or <strong>Print/</strong> folders in <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware">RoSHI-Hardware</a> for STEP/STL.</p>
+<p>Route <strong>straps</strong> through the provided loops and tighten so the tracker stays put
+without crushing the shell. If you move many units at once, you can use a
+<strong>stack tower</strong> (optional print) to keep trackers organized for transport.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/17_IMU_Case.jpg"><img alt="IMU and custom case shell" src="../_images/17_IMU_Case.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/18_IMU_CAP.jpg"><img alt="Case lid or cap fitted over the PCB stack" src="../_images/18_IMU_CAP.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/19_IMU_wrap.jpg"><img alt="Straps or retention around the tracker case" src="../_images/19_IMU_wrap.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/20_IMU_Full.jpg"><img alt="Fully enclosed tracker module" src="../_images/20_IMU_Full.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="../_images/21_IMU_Stack.jpg"><img alt="Exploded or stacked view of case and PCB" src="../_images/21_IMU_Stack.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Rigid case closure and strap routing.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="receiver-unit">
+<h3>Receiver unit<a class="headerlink" href="#receiver-unit" title="Link to this heading">#</a></h3>
+<p>The receiver is the <strong>host</strong>: it <strong>takes in data from the trackers</strong> over
+<strong>ESP-NOW</strong> on a <strong>2.4 GHz</strong> link using an <strong>external antenna</strong> (the <strong>ESP32-S3
+Feather</strong> supports external antenna). <strong>Adafruit I²C bus multiplexers</strong> handle
+<strong>sensor routing</strong> on the I²C bus. The Feather connects to a <strong>small OLED</strong> over
+<strong>I²C</strong>; that display shows <strong>battery</strong> status (and related UI). <strong>M3 threaded
+inserts</strong> secure the <strong>top and bottom</strong> halves of the enclosure. The Feather
+<strong>USB-C</strong> connection goes to a <strong>workstation</strong> for the capture pipeline (see
+<a class="reference internal" href="../pipeline/index.html"><span class="doc">Pipeline</span></a>).</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/22_Receiver_Full.jpg"><img alt="RoSHI receiver unit exterior" src="../_images/22_Receiver_Full.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/23_Receiver_Internal.jpg"><img alt="Receiver internal electronics" src="../_images/23_Receiver_Internal.jpg" style="width: 85%;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/24_Receiver_Back.jpg"><img alt="Receiver rear panel connectors" src="../_images/24_Receiver_Back.jpg" style="width: 85%;" />
+</a>
+</figure>
+</section>
+</section>
+<section id="next-step">
+<h2>Next step<a class="headerlink" href="#next-step" title="Link to this heading">#</a></h2>
+<p>When soldering and enclosure work are complete, continue with <strong>firmware
+flashing and host Python setup</strong> in <a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
 </section>
 </section>
 
@@ -444,11 +681,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="../calibration/index.html"
+       href="software.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calibration</p>
+        <p class="prev-next-title">Software (firmware and host tools)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -469,11 +706,26 @@
     class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracker-assembly">Tracker Assembly</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suit-integration">Suit Integration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wiring-diagram">Wiring Diagram</a></li>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-printing">3D printing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pcb-source-and-ordering">PCB source and ordering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracker-assembly">Tracker assembly</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-layout">Parts layout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charging-board-tp4056">Charging board (TP4056)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#battery-connector-jst">Battery connector (JST)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resistor-and-diode">Resistor and diode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pin-headers-imu-and-esp32-wemos-d1-mini">Pin headers (IMU and ESP32 Wemos D1 Mini)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bno085-imu">BNO085 IMU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esp32-wemos-d1-mini">ESP32 (Wemos D1 Mini)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity-test">Connectivity test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#power-switch">Power switch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#power-on">Power on</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enclosure-and-imu-stack">Enclosure and IMU stack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-unit">Receiver unit</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-step">Next step</a></li>
 </ul>
   </nav></div>
 
@@ -490,8 +742,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -525,7 +777,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.0.
 </p></div>
       
     </div>
