@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Robot policy videos — local layout preview</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 1.5rem;
+        font-family: "Noto Sans", system-ui, sans-serif;
+        background: #fafafa;
+      }
+      .preview-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .preview-note {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-wrap">
+      <p class="preview-note">
+        Open this file in your browser (double-click or <code>file:///…/static/robot-policy-preview.html</code>). It uses the same CSS as the site’s
+        <strong>Real Robot Experiments</strong> block so you can check side-by-side alignment offline.
+      </p>
+      <h2 class="title is-4">Real Robot Experiments (preview)</h2>
+      <div class="columns is-multiline robot-policy-pair">
+        <div class="column is-half has-text-centered">
+          <p class="heading">Tennis</p>
+          <div class="robot-policy-video-frame">
+            <video poster="" controls muted loop playsinline>
+              <source src="./videos/Robot%20Policy/tennis.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="column is-half has-text-centered">
+          <p class="heading">Jump</p>
+          <div class="robot-policy-video-frame">
+            <video poster="" controls muted loop playsinline>
+              <source src="./videos/Robot%20Policy/jump.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -158,19 +158,35 @@ body {
 }
 
 /* Real Robot Experiments: identical frame size side-by-side (mixed aspect ratios). */
+.robot-policy-pair {
+  align-items: stretch;
+}
+
+.robot-policy-pair > .column {
+  display: flex;
+  flex-direction: column;
+}
+
+.robot-policy-pair .heading {
+  flex-shrink: 0;
+}
+
 .robot-policy-video-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #111;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .robot-policy-video-frame video {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  /* Portrait clips sit on the same baseline as landscape; letterbox above if needed. */
+  object-position: bottom center;
 }
