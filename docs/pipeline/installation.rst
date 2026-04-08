@@ -185,9 +185,9 @@ receiver configuration.
 3. Hardware -- IMUs
 -------------------
 
-.. raw:: html
-
-   <p style="color: red; font-weight: bold;">TODO: Add hardware setup instructions.</p>
+We open-source our 9-IMU design. For building the assembled tracker, including
+the 3D-printed IMU case, routers, and more information, please visit the
+`Hardware Documentation <https://roshi-mocap.github.io/documentation/hardware/index.html>`_.
 
 4. Aria Glasses
 ---------------
