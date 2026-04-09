@@ -85,3 +85,8 @@
   color: #e74c3c;
   font-weight: 700;
 }
+
+/* Hide prev/next navigation on index (toctree) pages — injected via raw html in each index.rst */
+.hide-prev-next .prev-next-area {
+  display: none;
+}

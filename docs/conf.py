@@ -19,7 +19,8 @@ html_show_sourcelink = False
 html_favicon = "_static/favicon.png"
 
 html_sidebars = {
-    "**": [],
+    "**": ["sidebar-nav-bs"],
+    "index": [],
 }
 
 html_theme_options = {
@@ -41,7 +42,7 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    "show_prev_next": False,
+    "show_prev_next": True,
     "navigation_with_keys": True,
     "show_nav_level": 2,
     "navigation_depth": 2,
