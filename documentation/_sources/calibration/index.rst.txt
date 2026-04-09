@@ -3,7 +3,7 @@ Calibration
 
 .. raw:: html
 
-   <script>document.querySelector('.bd-article').classList.add('hide-prev-next');</script>
+   <script>document.addEventListener('DOMContentLoaded',function(){var e=document.querySelector('.prev-next-footer');if(e)e.style.display='none';});</script>
 
 This section covers calibration app setup, the app UI,
 and the math used to estimate sensor-to-bone offsets.

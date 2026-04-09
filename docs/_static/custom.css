@@ -87,6 +87,7 @@
 }
 
 /* Hide prev/next navigation on index (toctree) pages — injected via raw html in each index.rst */
+.hide-prev-next ~ footer .prev-next-area,
 .hide-prev-next .prev-next-area {
   display: none;
 }
