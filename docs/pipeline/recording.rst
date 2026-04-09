@@ -11,7 +11,7 @@ Before collecting motion data you need a short calibration video to recover
 **sensor-to-bone offsets** and **per-IMU world alignment**.
 
 1. **Wear the suit** with all 9 IMU trackers attached and powered on.
-2. **Wear the Aria glasses** and start the Aria recording via the companion app.
+2. **Wear the Aria glasses** and start the Aria recording via the companion app or the recording button on the glasses.
 3. **Start the receiver** on the computer and note the IP address and port:
 
    .. code-block:: bash
@@ -44,9 +44,7 @@ Before collecting motion data you need a short calibration video to recover
 
 .. raw:: html
 
-   <p style="color: red; font-weight: bold;">TODO: Add a visual guide for the entire workflow.</p>
-
-For a quick visual walkthrough, see the
+For a quick visual walkthrough for the calibration process, see the
 :ref:`demo video in App Reference <app-reference-video>`.
 
 Session Output

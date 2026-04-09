@@ -41,7 +41,7 @@
   <body>
     <section class="hero">
       <div class="hero-body">
-        <div class="container is-max-desktop">
+        <div class="container is-max-fullhd">
           <div class="columns is-centered">
             <div class="column has-text-centered">
               <h1 class="title is-1 publication-title">
@@ -93,13 +93,14 @@
                 <div class="publication-links">
                   <span class="link-block">
                     <a
-                      href="#"
+                      href="https://arxiv.org/abs/2604.07331"
                       class="external-link button is-normal is-rounded is-dark"
+                      target="_blank"
                     >
                       <span class="icon">
                         <i class="ai ai-arxiv"></i>
                       </span>
-                      <span>arXiv (coming soon)</span>
+                      <span>arXiv</span>
                     </a>
                   </span>
                   <span class="link-block">
@@ -132,8 +133,9 @@
       </div>
     </section>
 
+    <!--
     <section class="section" style="padding-top: 1rem">
-      <div class="container is-max-desktop">
+      <div class="container is-max-fullhd">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
             <div class="publication-video">
@@ -148,6 +150,7 @@
         </div>
       </div>
     </section>
+    -->
 
     <!-- Results carousel. TODO: Add your result videos/images here. -->
     <!--
@@ -172,7 +175,7 @@
 -->
 
     <section class="section" style="padding-top: 1rem;">
-      <div class="container is-max-desktop">
+      <div class="container is-max-fullhd">
         <!-- Abstract. -->
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
@@ -219,7 +222,7 @@
     </section>
 
     <section class="section">
-      <div class="container is-max-desktop">
+      <div class="container is-max-fullhd">
         <!-- Method. -->
         <div class="columns is-centered">
           <div class="column is-full-width">
@@ -271,101 +274,29 @@
 
             <!-- Qualitative -->
             <h3 class="title is-4">Qualitative</h3>
+            <p class="subtitle is-6 has-text-grey">
+              Egocentric RGB + Human Pose + 3D Scene Reconstruction
+            </p>
 
             <div class="content">
               <div class="columns is-multiline">
-                <div class="column is-half">
-                  <div
-                    class="box has-text-centered"
-                    style="
-                      min-height: 200px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      background: #f5f5f5;
-                    "
-                  >
-                    <div>
-                      <p class="heading">Localization</p>
-                      <p class="has-text-grey">Video coming soon</p>
-                    </div>
-                  </div>
+                <div class="column is-half has-text-centered">
+                  <p class="heading">Walk</p>
+                  <video controls autoplay loop muted playsinline style="width: 100%;">
+                    <source src="static/videos/roshiwalk.mp4" type="video/mp4">
+                  </video>
                 </div>
-                <div class="column is-half">
-                  <div
-                    class="box has-text-centered"
-                    style="
-                      min-height: 200px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      background: #f5f5f5;
-                    "
-                  >
-                    <div>
-                      <p class="heading">Jumping Jack</p>
-                      <p class="has-text-grey">Video coming soon</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div
-                    class="box has-text-centered"
-                    style="
-                      min-height: 200px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      background: #f5f5f5;
-                    "
-                  >
-                    <div>
-                      <p class="heading">Agility</p>
-                      <p class="has-text-grey">Video coming soon</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div
-                    class="box has-text-centered"
-                    style="
-                      min-height: 200px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      background: #f5f5f5;
-                    "
-                  >
-                    <div>
-                      <p class="heading">Climbing</p>
-                      <p class="has-text-grey">Video coming soon</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-full">
-                  <div
-                    class="box has-text-centered"
-                    style="
-                      min-height: 200px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      background: #f5f5f5;
-                    "
-                  >
-                    <div>
-                      <p class="heading">Long Horizon &mdash; Coffee Making</p>
-                      <p class="has-text-grey">
-                        Egocentric RGB + Human Pose + 3D Scene Reconstruction
-                      </p>
-                      <p class="has-text-grey">Video coming soon</p>
-                    </div>
-                  </div>
+                <div class="column is-half has-text-centered">
+                  <p class="heading">Tennis</p>
+                  <video controls autoplay loop muted playsinline style="width: 100%;">
+                    <source src="static/videos/roshitennis.mp4" type="video/mp4">
+                  </video>
                 </div>
               </div>
             </div>
 
             <!-- Quantitative -->
+            <hr style="margin: 2.5rem 0; border: none; border-top: 1px solid #dbdbdb;">
             <h3 class="title is-4">Quantitative</h3>
             <div class="content has-text-justified">
               <p>
@@ -472,8 +403,8 @@
             </p>
 
             <!-- Evaluation Videos -->
-            <h4 class="title is-5" style="margin-top: 1.5rem">
-              Dataset 1: In-Place Motions
+            <h4 class="title is-4 has-text-centered" style="margin-top: 2.5rem; color: #e74c3c;">
+              🧍 Dataset 1: In-Place Motions
             </h4>
             <div class="columns is-multiline">
               <div class="column is-half has-text-centered">
@@ -546,8 +477,8 @@
               </div>
             </div>
 
-            <h4 class="title is-5">
-              Dataset 2: Locomotion with Global Translation
+            <h4 class="title is-4 has-text-centered" style="margin-top: 2.5rem; color: #27ae60;">
+              🚶 Dataset 2: Locomotion with Global Translation
             </h4>
             <div class="columns is-multiline">
               <div class="column is-half has-text-centered">
@@ -620,8 +551,8 @@
               </div>
             </div>
 
-            <h4 class="title is-5">Dataset 3: Agile Activities</h4>
-            <div class="columns is-multiline">
+            <h4 class="title is-4 has-text-centered" style="margin-top: 2.5rem; color: #8e44ad;">🏃 Dataset 3: Agile Activities</h4>
+            <div class="columns is-multiline is-centered">
               <div class="column is-half has-text-centered">
                 <p class="heading">Sliding</p>
                 <video poster="" autoplay controls muted loop playsinline width="100%">
@@ -646,8 +577,8 @@
             <p class="has-text-justified" style="margin-bottom: 1rem;">
               Demonstrations using motion data from RoSHI for humanoid policy learning.
             </p>
-            <div class="columns is-multiline robot-policy-pair">
-              <div class="column is-half has-text-centered">
+            <div class="columns is-multiline robot-policy-pair is-centered">
+              <div class="column is-one-third has-text-centered">
                 <p class="heading">Tennis</p>
                 <div class="robot-policy-video-frame">
                   <video poster="" autoplay controls muted loop playsinline>
@@ -655,7 +586,7 @@
                   </video>
                 </div>
               </div>
-              <div class="column is-half has-text-centered">
+              <div class="column is-one-third has-text-centered">
                 <p class="heading">Jump</p>
                 <div class="robot-policy-video-frame">
                   <video poster="" autoplay controls muted loop playsinline>
@@ -674,7 +605,7 @@
     <!-- BibTeX section removed, to be added when citation info is finalized -->
 
     <section class="section" id="code-and-resources">
-      <div class="container is-max-desktop">
+      <div class="container is-max-fullhd">
         <div class="columns is-centered">
           <div class="column is-full-width">
             <h2 class="title is-3">Code &amp; Resources</h2>
@@ -704,8 +635,8 @@
               </div>
 
               <div class="column is-half">
-                <div class="card" style="height: 100%; border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none;">
-                  <div class="card-content">
+                <div class="card" style="height: 100%; border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none; display: flex; flex-direction: column;">
+                  <div class="card-content" style="flex: 1;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                       <p class="title is-5" style="margin-bottom: 0.5rem;">RoSHI-App</p>
                       <span class="tag is-info">Calibration</span>
@@ -724,8 +655,8 @@
               </div>
 
               <div class="column is-half">
-                <div class="card" style="height: 100%; border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none;">
-                  <div class="card-content">
+                <div class="card" style="height: 100%; border: 2px solid #dbdbdb; border-radius: 8px; box-shadow: none; display: flex; flex-direction: column;">
+                  <div class="card-content" style="flex: 1;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                       <p class="title is-5" style="margin-bottom: 0.5rem;">RoSHI-Hardware</p>
                       <span class="tag is-success">Hardware</span>
@@ -755,13 +686,17 @@
     </section>
 
     <section class="section">
-      <div class="container is-max-desktop">
+      <div class="container is-max-fullhd">
         <div class="columns is-centered">
           <div class="column is-full-width">
             <h2 class="title is-3">Acknowledgements</h2>
             <div class="content has-text-justified">
               <p>
-                We thank Nalini Jain for testing the codebase and recording qualitative evaluation videos,
+                This work was supported by DARPA under Agreement No. HR0011-24-9-0430,
+                and the Swiss National Science Foundation under Grant No. 225354.
+                We thank the Meta Aria team for their support and for providing access to the
+                Aria hardware and software infrastructure.
+                We also thank Nalini Jain for testing the codebase and recording qualitative evaluation videos,
                 and Paul (Sanghyub) Lee from Nadia's lab for assisting with the collection of ground-truth
                 human motion data using OptiTrack.
               </p>

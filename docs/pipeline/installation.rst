@@ -192,7 +192,8 @@ the 3D-printed IMU case, routers, and more information, please visit the
 4. Aria Glasses
 ---------------
 
+RoSHI has been tested with both Aria Gen 1 (recording profile 9) and
+Gen 2 (recording profile 8). The current codebase is validated on **Gen 2**.
 
-.. raw:: html
-
-   <p style="color: red; font-weight: bold;">TODO: Add detailed Aria setup walkthrough and MPS submission instructions.</p>
+For device setup, recording profiles, and MPS submission, refer to the
+official `Aria Gen 2 documentation <https://facebookresearch.github.io/projectaria_tools/gen2/>`_.
