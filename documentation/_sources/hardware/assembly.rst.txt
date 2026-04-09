@@ -280,4 +280,8 @@ insert or printed pocket rather than a loose sticker, so it does not flex or pee
 during motion. Use a **matte finish** print to reduce glare from room lights.
 Make sure no clothing or strap covers the tag during capture sessions.
 
+**Orientation:** The tag's **+Y axis must point toward the charging port** of the
+tracker. This orientation is assumed by the calibration pipeline — inconsistent
+tag orientation will produce incorrect sensor-to-bone offsets.
+
 Refer to the tag ID-to-body-part mapping in :doc:`components`.
