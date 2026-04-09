@@ -21,6 +21,9 @@ html_favicon = "_static/favicon.png"
 html_sidebars = {
     "**": ["sidebar-nav-bs"],
     "index": [],
+    "pipeline/index": [],
+    "hardware/index": [],
+    "calibration/index": [],
 }
 
 html_theme_options = {
