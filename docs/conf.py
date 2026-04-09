@@ -19,7 +19,7 @@ html_show_sourcelink = False
 html_favicon = "_static/favicon.png"
 
 html_sidebars = {
-    "index": [],
+    "**": [],
 }
 
 html_theme_options = {
