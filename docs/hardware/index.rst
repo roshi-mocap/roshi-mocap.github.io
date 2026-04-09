@@ -9,4 +9,3 @@ This section covers the wearable hardware, tracker layout, and assembly basics.
    components
    assembly
    software
-   april_tag

@@ -270,3 +270,14 @@ Next step
 
 When soldering and enclosure work are complete, continue with **firmware
 flashing and host Python setup** in :doc:`software`.
+
+Attaching AprilTags
+-------------------
+
+Each tracker needs a printed **Tag36h11** AprilTag (42 mm outer square) attached
+to the flat face of its case. The tag must be **rigidly bonded** — use a flat
+insert or printed pocket rather than a loose sticker, so it does not flex or peel
+during motion. Use a **matte finish** print to reduce glare from room lights.
+Make sure no clothing or strap covers the tag during capture sessions.
+
+Refer to the tag ID-to-body-part mapping in :doc:`components`.
