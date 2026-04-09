@@ -281,7 +281,15 @@ during motion. Use a **matte finish** print to reduce glare from room lights.
 Make sure no clothing or strap covers the tag during capture sessions.
 
 **Orientation:** The tag's **+Y axis must point toward the charging port** of the
-tracker. This orientation is assumed by the calibration pipeline — inconsistent
-tag orientation will produce incorrect sensor-to-bone offsets.
+tracker (green axis in the photo below). This orientation is assumed by the
+calibration pipeline — inconsistent tag orientation will produce incorrect
+sensor-to-bone offsets.
+
+.. figure:: /_static/hardware/assembly/apriltag_orientation.jpg
+   :width: 400px
+   :align: center
+
+   AprilTag mounted on a tracker with axis overlay. The green (+Y) axis points
+   toward the charging port.
 
 Refer to the tag ID-to-body-part mapping in :doc:`components`.
