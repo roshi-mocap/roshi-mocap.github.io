@@ -11,35 +11,7 @@ Each tracker consists of:
 - **3D-printed enclosure** with a rigidly mounted AprilTag
 - **LiPo battery** (e.g. 503759 **1200 mAh**, see BOM)
 
-You need **9 trackers** in total, placed at the following body locations:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 15 30
-
-   * - Tag ID
-     - Body Location
-   * - 0
-     - Pelvis
-   * - 1
-     - Left Shoulder
-   * - 2
-     - Right Shoulder
-   * - 3
-     - Left Elbow
-   * - 4
-     - Right Elbow
-   * - 5
-     - Left Hip
-   * - 6
-     - Right Hip
-   * - 7
-     - Left Knee
-   * - 8
-     - Right Knee
-
-IMU / AprilTag / Joint Mapping
-------------------------------
+You need **9 trackers** in total. The full IMU / AprilTag / SMPL-X mapping is:
 
 .. list-table::
    :header-rows: 1

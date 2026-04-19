@@ -30,8 +30,8 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d1b85585" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=112e3923" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -394,46 +394,44 @@
                   
   <section id="assembly">
 <h1>Assembly<a class="headerlink" href="#assembly" title="Link to this heading">#</a></h1>
-<p>This page walks through assembling a RoSHI body tracker based on the SlimeVR
-Hyperion PCB, a <strong>BNO085</strong> IMU, and a <strong>custom 3D-printed case</strong> sized for rigid
-AprilTag mounting. For why the tag matters and how we use it in calibration,
-see <a class="reference internal" href="april_tag.html"><span class="doc">AprilTag on trackers</span></a>. <strong>STEP/STL files, firmware, and Python tools</strong> are in the
-<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware">RoSHI-Hardware</a> repo; after mechanical build, flash firmware per <a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
+<p>This page walks through assembling a RoSHI body tracker: the SlimeVR Hyperion
+PCB, a <strong>BNO085</strong> IMU, and a <strong>custom 3D-printed case</strong> sized for rigid
+AprilTag mounting. All STEP/STL files, firmware, and Python tools live in the
+<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware">RoSHI-Hardware</a> repo; after the mechanical build, flash firmware per
+<a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Soldering rule used throughout this page:</strong> every through-hole joint
+should be shiny, complete, and <strong>fully fill the barrel</strong>—when you flip the
+board, each pad should show a filled annulus, not a dry hole.</p>
+</div>
 <section id="d-printing">
 <h2>3D printing<a class="headerlink" href="#d-printing" title="Link to this heading">#</a></h2>
-<p>Printed parts for the tracker case, receiver enclosure, strap hardware, and
-related pieces are published under <strong>`RoSHI-Hardware` → `3D Prints/`</strong> (<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware/tree/main/3D%20Prints">see repo</a>).</p>
+<p>Printed parts (tracker case, receiver enclosure, strap hardware) live under
+<code class="docutils literal notranslate"><span class="pre">RoSHI-Hardware</span></code> → <code class="docutils literal notranslate"><span class="pre">3D</span> <span class="pre">Prints/</span></code>
+(<a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware/tree/main/3D%20Prints">see repo</a>):</p>
 <ul class="simple">
-<li><p><strong>`Design/`</strong> — CAD sources (STEP and design files).</p></li>
-<li><p><strong>`Print/`</strong> — <strong>STL</strong> files ready for slicing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Design/</span></code> — CAD sources (STEP and design files).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Print/</span></code> — STL files ready for slicing.</p></li>
 </ul>
-<p>We print our parts in <strong>PLA matte</strong>. Other materials (for example <strong>PETG</strong>)
-often need <strong>tolerance adjustments</strong> in the slicer or CAD—the fits are tuned for
-our filament and machine. The internal spacing is intended as a <strong>firm press
-fit</strong> so the <strong>IMU stack does not rattle or vibrate</strong> during motion.</p>
+<p>We print in <strong>PLA matte</strong>; other materials (e.g. <strong>PETG</strong>) usually need slicer
+or CAD tolerance tweaks. The internal spacing is a <strong>firm press fit</strong> so the
+IMU stack does not rattle during motion.</p>
 </section>
 <section id="pcb-source-and-ordering">
 <h2>PCB source and ordering<a class="headerlink" href="#pcb-source-and-ordering" title="Link to this heading">#</a></h2>
-<p>We use the PCB and ordering workflow from the <strong>SlimeVR Hyperion Multi-IMU BMI
-BNO</strong> project (<a class="reference external" href="https://github.com/Shine-Bright-Meow/SlimeVR-Hyperion-BMI-BNO-PCB-Case#case-guide">Case guide on GitHub</a>), including Gerber ordering notes.</p>
-<p>Use that repository for <strong>ordering PCBs</strong> (for example Gerbers to JLCPCB),
-recommended board thickness, and reference <strong>Hyperion Lite</strong> case variants where
-helpful.</p>
-<p><strong>IMU choice.</strong> We use the <strong>BNO085</strong> because it includes <strong>on-board sensor
-fusion</strong>, so orientation is ready to use without extra fusion code on the MCU. A
-lower-cost path such as <strong>ICM-45686 + QMC6309</strong> is possible on the same PCB
-family, but you must implement <strong>custom sensor fusion</strong> on the <strong>ESP8266
-WeMos D1 Mini</strong> and flash that before the tracker can transmit usable
-orientation data.</p>
-<p><strong>Case.</strong> We do <strong>not</strong> use the stock Hyperion case as-is: RoSHI needs a <strong>custom
-case</strong> that holds a printed AprilTag in a known pose for tag-based calibration.
-See <a class="reference internal" href="april_tag.html"><span class="doc">AprilTag on trackers</span></a> for tag size, family, and mounting goals.</p>
-<p><strong>Other SlimeVR-style trackers.</strong> Many DIY SlimeVR-compatible PCBs and IMUs can
-stream orientation over Wi-Fi in a similar way. The practical constraint for
-RoSHI is mechanical: <strong>the enclosure must present a rigid AprilTag on a known
-face</strong>. Any alternative board or IMU module is fine in principle, but you will
-need to <strong>redesign or adapt the case</strong> (strap mounts, clearance, tag plane) for
-your PCB outline and tag size.</p>
+<p>We use the PCB from the <strong>SlimeVR Hyperion Multi-IMU BMI BNO</strong> project
+(<a class="reference external" href="https://github.com/Shine-Bright-Meow/SlimeVR-Hyperion-BMI-BNO-PCB-Case#case-guide">Case guide on GitHub</a>); follow its Gerber / JLCPCB ordering notes and
+recommended board thickness.</p>
+<p><strong>IMU choice.</strong> We use the <strong>BNO085</strong> for its on-board sensor fusion—orientation
+is ready to use with no extra MCU code. A lower-cost <strong>ICM-45686 + QMC6309</strong>
+build works on the same PCB family but requires custom fusion code on the
+<strong>ESP8266 WeMos D1 Mini</strong>.</p>
+<p><strong>Why a custom case?</strong> RoSHI’s calibration relies on a <strong>rigidly mounted
+AprilTag on a known face</strong> of the enclosure—the stock Hyperion case has no such
+feature. Any SlimeVR-class board / IMU is fine in principle, but you must
+adapt the case (strap mounts, clearance, tag plane) to that PCB outline. See
+<a class="reference internal" href="#id1">Attaching AprilTags</a> below for tag spec and orientation.</p>
 </section>
 <section id="tracker-assembly">
 <h2>Tracker assembly<a class="headerlink" href="#tracker-assembly" title="Link to this heading">#</a></h2>
@@ -441,68 +439,63 @@ your PCB outline and tag size.</p>
 connectors, then the IMU and MCU, then test and switch, then the enclosure stack.</p>
 <section id="parts-layout">
 <h3>Parts layout<a class="headerlink" href="#parts-layout" title="Link to this heading">#</a></h3>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/1_layout.jpg"><img alt="Components and PCB laid out before soldering" src="../_images/1_layout.jpg" style="width: 85%;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Overview of parts and PCB orientation before assembly.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text">Overview of parts and PCB orientation before assembly.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="charging-board-tp4056">
 <h3>Charging board (TP4056)<a class="headerlink" href="#charging-board-tp4056" title="Link to this heading">#</a></h3>
-<p>We start with the <strong>charging board</strong> (TP4056 “battery charger” module in the
-Hyperion design—sometimes informally called the BMS section in build guides).</p>
+<p>We start with the <strong>TP4056 charging board</strong> (sometimes called the BMS section
+in Hyperion build guides).</p>
 <ol class="arabic simple">
-<li><p>Seat the module so <strong>its holes line up</strong> with the PCB pads and outline.</p></li>
-<li><p><strong>Tack one pin:</strong> apply solder to a single pad and solder one lead first.</p></li>
-<li><p><strong>Align the rest:</strong> reheat that joint and gently nudge the board until all
-pads line up, then solder the remaining pins.</p></li>
-<li><p><strong>Inspect both sides:</strong> joints should be shiny and complete. When you flip
-the board and look from the bottom, <strong>each through-hole should show a filled
-annulus</strong> (solder wicked through the barrel—not a dry hole).</p></li>
+<li><p>Seat the module so its holes line up with the PCB pads.</p></li>
+<li><p><strong>Tack one pin</strong> first, then reheat and nudge the board until all pads
+align, and solder the remaining pins.</p></li>
 </ol>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/2_bms_place.jpg"><img alt="Charging board placed on the PCB before soldering" src="../_images/2_bms_place.jpg" style="width: 85%;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Align the charging module to the PCB footprint.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/3_bms_solder.jpg"><img alt="Soldering the charging board pins" src="../_images/3_bms_solder.jpg" style="width: 85%;" />
-</a>
-<figcaption>
-<p><span class="caption-text">Tack one pin, align, then finish all joints.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+<p><span class="caption-text">Align the charging module to the PCB footprint.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/3_bms_solder.jpg"><img alt="Soldering the charging board pins" src="../_images/3_bms_solder.jpg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Tack one pin, align, then finish all joints.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/4_bms_back.jpg"><img alt="View of solder joints from the back of the PCB" src="../_images/4_bms_back.jpg" style="width: 85%;" />
 </a>
 <figcaption>
-<p><span class="caption-text">From underneath, through-holes should show proper fill.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+<p><span class="caption-text">From underneath, through-holes should show proper fill.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="battery-connector-jst">
 <h3>Battery connector (JST)<a class="headerlink" href="#battery-connector-jst" title="Link to this heading">#</a></h3>
-<p>Insert the <strong>through-hole JST</strong> into the battery power footprint. Adjust it so it
-sits <strong>perpendicular</strong> to the board and <strong>aligned with the board edges</strong>, then
-<strong>solder from the underside</strong> so each joint is solid.</p>
-<figure class="align-default" id="id5">
+<p>Insert the <strong>through-hole JST</strong> into the battery power footprint. Keep it
+perpendicular to the board and aligned with the board edges, then solder from
+the underside.</p>
+<figure class="align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/5_jst.jpg"><img alt="JST battery connector soldered to the PCB" src="../_images/5_jst.jpg" style="width: 85%;" />
 </a>
 <figcaption>
-<p><span class="caption-text">JST seated square and soldered from below before taller parts go on.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+<p><span class="caption-text">JST seated square and soldered from below before taller parts go on.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="resistor-and-diode">
 <h3>Resistor and diode<a class="headerlink" href="#resistor-and-diode" title="Link to this heading">#</a></h3>
-<p>Use a <strong>180 kΩ</strong> resistor and the <strong>diode called out in the BOM</strong>. <strong>Diode
-polarity</strong> matches the silkscreen on the board—orient the part to that drawing
-before soldering. Fit passives flush, solder so <strong>solder fully covers each hole</strong>
-on both sides, and trim leads.</p>
+<p>Use a <strong>180 kΩ</strong> resistor and the <strong>diode called out in the BOM</strong>. Match the
+diode polarity to the silkscreen, fit the passives flush, solder, and trim the
+leads.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/6_resistor_hole.jpg"><img alt="Resistor leads through the PCB" src="../_images/6_resistor_hole.jpg" style="width: 85%;" />
 </a>
@@ -518,9 +511,8 @@ on both sides, and trim leads.</p>
 </section>
 <section id="pin-headers-imu-and-esp32-wemos-d1-mini">
 <h3>Pin headers (IMU and ESP32 Wemos D1 Mini)<a class="headerlink" href="#pin-headers-imu-and-esp32-wemos-d1-mini" title="Link to this heading">#</a></h3>
-<p>For both the <strong>IMU</strong> and <strong>ESP32 Wemos D1 Mini</strong>, having the <strong>long side of the
-pins facing up</strong> makes alignment easier. After soldering, <strong>make sure solder
-fully covers each hole</strong>—no dry or shallow barrels.</p>
+<p>For both the <strong>IMU</strong> and the <strong>ESP32 Wemos D1 Mini</strong>, point the <strong>long side of
+the pins up</strong> to make alignment easier.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/9_header.jpg"><img alt="Pin headers installed on the PCB" src="../_images/9_header.jpg" style="width: 85%;" />
 </a>
@@ -532,9 +524,8 @@ fully covers each hole</strong>—no dry or shallow barrels.</p>
 </section>
 <section id="bno085-imu">
 <h3>BNO085 IMU<a class="headerlink" href="#bno085-imu" title="Link to this heading">#</a></h3>
-<p>Slide the <strong>BNO085</strong> breakout onto its headers. <strong>Solder one pin first</strong>, then
-check that the module is <strong>almost parallel</strong> to the lower PCB before soldering
-the rest. Finish all pins so the joints are complete.</p>
+<p>Slide the <strong>BNO085</strong> breakout onto its headers. Solder one pin first, check
+that the module sits almost parallel to the lower PCB, then finish the rest.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/11_IMU.jpg"><img alt="BNO085 IMU module mounted on the PCB" src="../_images/11_IMU.jpg" style="width: 85%;" />
 </a>
@@ -542,9 +533,9 @@ the rest. Finish all pins so the joints are complete.</p>
 </section>
 <section id="esp32-wemos-d1-mini">
 <h3>ESP32 (Wemos D1 Mini)<a class="headerlink" href="#esp32-wemos-d1-mini" title="Link to this heading">#</a></h3>
-<p>Start by <strong>soldering one pin</strong> on the D1 Mini. When that joint is done, <strong>clip
-the long pins on top</strong> as needed, then <strong>re-solder any pin</strong> that did not take
-cleanly. Use the same idea for the <strong>IMU</strong> if the headers are tall after seating.</p>
+<p>Solder one pin on the D1 Mini, clip any over-long pins on top, then finish the
+remaining joints. Apply the same trick to the IMU if its headers stand tall
+after seating.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/12_ESP.jpg"><img alt="ESP32 module seated on headers" src="../_images/12_ESP.jpg" style="width: 85%;" />
 </a>
@@ -552,21 +543,20 @@ cleanly. Use the same idea for the <strong>IMU</strong> if the headers are tall 
 </section>
 <section id="connectivity-test">
 <h3>Connectivity test<a class="headerlink" href="#connectivity-test" title="Link to this heading">#</a></h3>
-<figure class="align-default" id="id6">
+<figure class="align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/13_Testing.jpg"><img alt="Multimeter continuity check on the tracker PCB" src="../_images/13_Testing.jpg" style="width: 85%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Continuity check with a multimeter</strong> (beep mode): verify <strong>VCC</strong>, <strong>GND</strong>,
 and other nets <strong>from the test points</strong> (or designated pads) so power and
-ground wiring matches the design before you apply battery power.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+ground wiring matches the design before you apply battery power.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="power-switch">
 <h3>Power switch<a class="headerlink" href="#power-switch" title="Link to this heading">#</a></h3>
-<p>Use the <strong>switch tray</strong> from your <strong>print list</strong> to hold alignment. Press the
-switch down until the pins <strong>seat in the holes</strong>, then solder by <strong>pressing the
-iron into each pin</strong> and <strong>filling the hole with solder</strong> so the joint is solid.</p>
+<p>Use the printed <strong>switch tray</strong> to hold alignment. Press the switch down so its
+pins seat in the holes, then solder.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/14_switch.jpg"><img alt="Power switch before final soldering" src="../_images/14_switch.jpg" style="width: 85%;" />
 </a>
@@ -578,9 +568,9 @@ iron into each pin</strong> and <strong>filling the hole with solder</strong> so
 </section>
 <section id="power-on">
 <h3>Power on<a class="headerlink" href="#power-on" title="Link to this heading">#</a></h3>
-<p>After the <strong>connectivity test</strong> looks good, apply power. If the <strong>blue LED on the
-D1 Mini</strong> comes on, the board is ready for <strong>firmware flashing</strong>. (This step is
-not a USB data test—just power-on confirmation.)</p>
+<p>Apply power once the continuity check passes. If the <strong>blue LED on the D1 Mini</strong>
+lights up, the board is ready for firmware flashing (this is power-on
+confirmation only, not a USB data test).</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/16_power_on.jpg"><img alt="Tracker powered on with indicator visible" src="../_images/16_power_on.jpg" style="width: 85%;" />
 </a>
@@ -588,11 +578,10 @@ not a USB data test—just power-on confirmation.)</p>
 </section>
 <section id="enclosure-and-imu-stack">
 <h3>Enclosure and IMU stack<a class="headerlink" href="#enclosure-and-imu-stack" title="Link to this heading">#</a></h3>
-<p>Follow the <strong>3D printing</strong> notes above for material and press-fit goals. Use the
-<strong>Design/</strong> or <strong>Print/</strong> folders in <a class="reference external" href="https://github.com/Jirl-upenn/RoSHI-Hardware">RoSHI-Hardware</a> for STEP/STL.</p>
-<p>Route <strong>straps</strong> through the provided loops and tighten so the tracker stays put
-without crushing the shell. If you move many units at once, you can use a
-<strong>stack tower</strong> (optional print) to keep trackers organized for transport.</p>
+<p>Press-fit the PCB stack into the printed shell, then route the straps through
+the provided loops and tighten until the tracker stays put without crushing
+the shell. The optional <strong>stack tower</strong> print helps keep all nine trackers
+organized for transport.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/17_IMU_Case.jpg"><img alt="IMU and custom case shell" src="../_images/17_IMU_Case.jpg" style="width: 85%;" />
 </a>
@@ -609,24 +598,21 @@ without crushing the shell. If you move many units at once, you can use a
 <a class="reference internal image-reference" href="../_images/20_IMU_Full.jpg"><img alt="Fully enclosed tracker module" src="../_images/20_IMU_Full.jpg" style="width: 85%;" />
 </a>
 </figure>
-<figure class="align-default" id="id7">
+<figure class="align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/21_IMU_Stack.jpg"><img alt="Exploded or stacked view of case and PCB" src="../_images/21_IMU_Stack.jpg" style="width: 85%;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Rigid case closure and strap routing.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+<p><span class="caption-text">Rigid case closure and strap routing.</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="receiver-unit">
 <h3>Receiver unit<a class="headerlink" href="#receiver-unit" title="Link to this heading">#</a></h3>
-<p>The receiver is the <strong>host</strong>: it <strong>takes in data from the trackers</strong> over
-<strong>ESP-NOW</strong> on a <strong>2.4 GHz</strong> link using an <strong>external antenna</strong> (the <strong>ESP32-S3
-Feather</strong> supports external antenna). <strong>Adafruit I²C bus multiplexers</strong> handle
-<strong>sensor routing</strong> on the I²C bus. The Feather connects to a <strong>small OLED</strong> over
-<strong>I²C</strong>; that display shows <strong>battery</strong> status (and related UI). <strong>M3 threaded
-inserts</strong> secure the <strong>top and bottom</strong> halves of the enclosure. The Feather
-<strong>USB-C</strong> connection goes to a <strong>workstation</strong> for the capture pipeline (see
-<a class="reference internal" href="../pipeline/index.html"><span class="doc">Pipeline</span></a>).</p>
+<p>The receiver is an <strong>ESP32-S3 Feather</strong> that collects tracker packets over
+<strong>ESP-NOW</strong> (2.4 GHz, external antenna) and shows per-tracker status on an
+<strong>I²C OLED</strong>. M3 threaded inserts hold the printed enclosure halves together,
+and a single <strong>USB-C</strong> cable links the receiver to the capture workstation.
+For the BOM see <a class="reference internal" href="components.html"><span class="doc">Components</span></a>; for firmware flashing see <a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/22_Receiver_Full.jpg"><img alt="RoSHI receiver unit exterior" src="../_images/22_Receiver_Full.jpg" style="width: 85%;" />
 </a>
@@ -641,31 +627,30 @@ inserts</strong> secure the <strong>top and bottom</strong> halves of the enclos
 </figure>
 </section>
 </section>
-<section id="next-step">
-<h2>Next step<a class="headerlink" href="#next-step" title="Link to this heading">#</a></h2>
-<p>When soldering and enclosure work are complete, continue with <strong>firmware
-flashing and host Python setup</strong> in <a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
-</section>
 <section id="attaching-apriltags">
-<h2>Attaching AprilTags<a class="headerlink" href="#attaching-apriltags" title="Link to this heading">#</a></h2>
-<p>Each tracker needs a printed <strong>Tag36h11</strong> AprilTag (42 mm outer square) attached
-to the flat face of its case. The tag must be <strong>rigidly bonded</strong> — use a flat
-insert or printed pocket rather than a loose sticker, so it does not flex or peel
-during motion. Use a <strong>matte finish</strong> print to reduce glare from room lights.
-Make sure no clothing or strap covers the tag during capture sessions.</p>
-<p><strong>Orientation:</strong> The tag’s <strong>+Y axis must point toward the charging port</strong> of the
-tracker (green axis in the photo below). This orientation is assumed by the
-calibration pipeline — inconsistent tag orientation will produce incorrect
-sensor-to-bone offsets.</p>
-<figure class="align-center" id="id8">
+<span id="id1"></span><h2>Attaching AprilTags<a class="headerlink" href="#attaching-apriltags" title="Link to this heading">#</a></h2>
+<p>Each tracker carries a printed <strong>Tag36h11</strong> AprilTag (<strong>42 mm</strong> outer square)
+<strong>rigidly bonded</strong> to the flat face of its case—use a flat insert or printed
+pocket, not a loose sticker, so the tag cannot flex or peel during motion.
+Print <strong>matte</strong> to reduce room-light glare and keep clothing or straps clear of
+the tag during capture.</p>
+<p><strong>Orientation.</strong> The tag’s <strong>+Y axis must point toward the charging port</strong>
+(green axis in the photo below). The calibration pipeline assumes this;
+inconsistent orientation will produce wrong sensor-to-bone offsets. Tag IDs
+follow the mapping in <a class="reference internal" href="components.html"><span class="doc">Components</span></a>.</p>
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="../_images/apriltag_orientation.jpg"><img alt="../_images/apriltag_orientation.jpg" src="../_images/apriltag_orientation.jpg" style="width: 400px;" />
 </a>
 <figcaption>
 <p><span class="caption-text">AprilTag mounted on a tracker with axis overlay. The green (+Y) axis points
-toward the charging port.</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
+toward the charging port.</span><a class="headerlink" href="#id9" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Refer to the tag ID-to-body-part mapping in <a class="reference internal" href="components.html"><span class="doc">Components</span></a>.</p>
+</section>
+<section id="next-step">
+<h2>Next step<a class="headerlink" href="#next-step" title="Link to this heading">#</a></h2>
+<p>With soldering and the enclosure complete, continue with firmware flashing and
+host Python setup in <a class="reference internal" href="software.html"><span class="doc">Software (firmware and host tools)</span></a>.</p>
 </section>
 </section>
 
@@ -733,8 +718,8 @@ toward the charging port.</span><a class="headerlink" href="#id8" title="Link to
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-unit">Receiver unit</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-step">Next step</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attaching-apriltags">Attaching AprilTags</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-step">Next step</a></li>
 </ul>
   </nav></div>
 

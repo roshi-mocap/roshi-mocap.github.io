@@ -89,6 +89,43 @@
                 >
               </div>
 
+              <div
+                class="affiliation-logos"
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 2.5rem;
+                  margin: 1.75rem 0 0.5rem;
+                "
+              >
+                <a
+                  href="https://www.grasp.upenn.edu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Penn GRASP Laboratory"
+                >
+                  <img
+                    src="./static/img/grasp_logo.svg"
+                    alt="Penn GRASP Laboratory"
+                    style="height: 88px; width: auto;"
+                  />
+                </a>
+                <a
+                  href="https://jirl.seas.upenn.edu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Janus Intelligent Robots Lab (JIRL)"
+                >
+                  <img
+                    src="./static/img/jirl_logo.png"
+                    alt="Janus Intelligent Robots Lab (JIRL)"
+                    style="height: 88px; width: auto;"
+                  />
+                </a>
+              </div>
+
               <div class="column has-text-centered">
                 <div class="publication-links">
                   <span class="link-block">
@@ -230,38 +267,70 @@
 
             <div class="content has-text-justified">
               <p>
-                RoSHI combines nine low-cost IMU trackers (~$30 each,
-                BNO085-based, wireless at 100&nbsp;Hz) with Project Aria glasses
-                to capture synchronized 3D body pose, egocentric RGB video, and
-                a globally consistent root trajectory. The two modalities are
-                complementary: IMUs provide robustness to visual occlusion and
-                high-speed motion, while egocentric SLAM anchors long-horizon
-                global localization and stabilizes upper-body pose.
+                RoSHI is a hybrid wearable system that combines nine low-cost
+                IMU trackers
+                with Project Aria glasses to capture synchronized
+                (i)&nbsp;3D body pose,
+                (ii)&nbsp;egocentric RGB video, and
+                (iii)&nbsp;a globally consistent 6-DoF root trajectory.
+                As illustrated in the figure below, the two sensing
+                modalities are complementary: IMUs provide robust local body
+                orientation estimates under occlusion and fast motion, while
+                egocentric SLAM from Aria anchors global motion over long
+                horizons and stabilizes upper-body pose.
               </p>
+
+              <figure class="image" style="margin: 1.5rem 0;">
+                <img
+                  src="./static/img/IROS2026 ROSHI Method.png"
+                  alt="RoSHI method pipeline."
+                  style="width: 100%"
+                />
+                <figcaption
+                  class="has-text-centered has-text-grey is-size-6"
+                  style="margin-top: 0.5rem;"
+                >
+                  RoSHI system overview &mdash; vision-assisted calibration,
+                  IMU-guided EgoAllo diffusion, and SMPL body output.
+                </figcaption>
+              </figure>
+
+              <h3 class="title is-5" style="margin-top: 1.5rem;">
+                Calibration
+              </h3>
               <p>
-                Calibration requires only a short 20&ndash;40&nbsp;second video
-                captured by an iPhone while wearing the suit. Each tracker has a
-                rigidly mounted AprilTag; combined with SAM&nbsp;3D Body
-                estimates from the calibration video, this recovers
-                sensor-to-bone and cross-sensor heading alignments without a box
-                calibration or prescribed poses. It enables quick recalibration
-                at any time without removing the IMUs.
+                We propose a vision-assisted calibration procedure that removes
+                the need for box calibration or predefined poses. Each IMU is
+                rigidly attached to an AprilTag, and a short
+                20&ndash;40&nbsp;second handheld iPhone video is used to
+                jointly estimate (i)&nbsp;sensor-to-bone alignment and
+                (ii)&nbsp;cross-sensor heading consistency. Specifically, we
+                combine AprilTag detections with per-frame body pose estimates
+                from SAM&nbsp;3D Body to recover consistent rotations between
+                the IMU frames and the SMPL skeleton. This enables fast,
+                on-body calibration and supports re-calibration without
+                removing the sensors.
               </p>
+
+              <h3 class="title is-5" style="margin-top: 1.5rem;">
+                Body Pose Generation
+              </h3>
               <p>
-                For body pose generation, we leverage the EgoAllo diffusion
-                model conditioned on the 6-DoF headset trajectory from Aria
-                SLAM. We guide diffusion using bone orientations derived from
-                the IMU trackers and enforce three complementary constraints:
-                (i)&nbsp;direct comparison of observable joint angles (elbow,
-                hip, knee), (ii)&nbsp;relative orientation consistency between
-                the pelvis and shoulders, and (iii)&nbsp;temporal smoothness of
-                pelvis-joint rotations across consecutive frames.
+                We generate full-body pose using the EgoAllo diffusion model
+                conditioned on the 6-DoF headset trajectory from Aria SLAM.
+                Instead of relying on vision-based hand cues, we guide the
+                diffusion process using bone orientations derived from IMU
+                measurements. We enforce three complementary constraints
+                during inference:
+                (i)&nbsp;direct supervision of observable joint angles
+                (e.g., elbows, hips, knees),
+                (ii)&nbsp;consistency of relative orientations between key
+                body segments (e.g., pelvis and shoulders), and
+                (iii)&nbsp;temporal smoothness of pelvis-relative joint
+                rotations across consecutive frames.
+                This combination enables robust pose reconstruction under
+                visual occlusion while preserving globally consistent motion.
               </p>
-              <img
-                src="./static/img/IROS2026 ROSHI Method.png"
-                alt="RoSHI method pipeline."
-                style="width: 100%"
-              />
             </div>
           </div>
         </div>
@@ -274,9 +343,17 @@
 
             <!-- Qualitative -->
             <h3 class="title is-4">Qualitative</h3>
-            <p class="subtitle is-6 has-text-grey">
-              Egocentric RGB + Human Pose + 3D Scene Reconstruction
-            </p>
+
+            <div class="content has-text-justified">
+              <p>
+                We tested RoSHI in unconstrained <em>in-the-wild</em>
+                environments. Below are two sample sequences, each showing the
+                synchronized <strong>egocentric RGB</strong>, recovered
+                <strong>human pose</strong>, and the
+                <strong>3D scene reconstruction</strong> (point cloud) from
+                Aria SLAM.
+              </p>
+            </div>
 
             <div class="content">
               <div class="columns is-multiline">
@@ -574,9 +651,16 @@
             </div>
             <!-- Real Robot Experiments: videos in static/videos/Robot Policy/ (same pattern as RoSHI Evaluation). -->
             <h3 class="title is-4" style="margin-top: 2rem;">Real Robot Experiments</h3>
-            <p class="has-text-justified" style="margin-bottom: 1rem;">
-              Demonstrations using motion data from RoSHI for humanoid policy learning.
-            </p>
+            <div class="content has-text-justified">
+              <p>
+                We retarget RoSHI motion data to a
+                <strong>Unitree G1</strong> humanoid and train motion-mimic
+                tracking policies. The policies transfer to the real robot
+                with stable, dynamically consistent whole-body behaviors,
+                showing that RoSHI data is ready for humanoid policy learning
+                and sim-to-real deployment.
+              </p>
+            </div>
             <div class="columns is-multiline robot-policy-pair is-centered">
               <div class="column is-one-third has-text-centered">
                 <p class="heading">Tennis</p>

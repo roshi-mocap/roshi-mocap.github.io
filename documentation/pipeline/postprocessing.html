@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d1b85585" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=112e3923" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -553,6 +553,16 @@ python<span class="w"> </span>src/pipeline/04_inference.py<span class="w"> </spa
 </div>
 <p>For details on the IMU guidance constraints and optimizer parameters, see
 <a class="reference internal" href="math.html"><span class="doc">Guidance Parameters</span></a>.</p>
+<div class="admonition note" id="joint-limit-clamp">
+<p class="admonition-title">Note</p>
+<p>Before saving, <code class="docutils literal notranslate"><span class="pre">04_inference.py</span></code> applies a <strong>hard clamp</strong> to the
+knee and ankle joints (SMPL-H body indices 3, 4, 6, 7) so the exported
+<code class="docutils literal notranslate"><span class="pre">body_quats</span></code> are guaranteed to stay within biomechanical limits — knees
+cannot hyperextend (Euler X ≥ 0), and the Y/Z Euler angles are clipped to
+the same bounds used by the soft penalty in the optimizer (see
+<a class="reference internal" href="math.html#lower-body-joint-limits"><span class="std std-ref">Lower-Body Joint Angle Limits</span></a>). The console prints how many joint-frames
+were adjusted.</p>
+</div>
 <p>Results are saved to <code class="docutils literal notranslate"><span class="pre">&lt;session_dir&gt;/egoallo_outputs/</span></code> as NPZ files containing:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>

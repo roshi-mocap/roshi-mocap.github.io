@@ -160,6 +160,18 @@ Available guidance modes:
 For details on the IMU guidance constraints and optimizer parameters, see
 :doc:`math`.
 
+.. _joint-limit-clamp:
+
+.. note::
+
+   Before saving, ``04_inference.py`` applies a **hard clamp** to the
+   knee and ankle joints (SMPL-H body indices 3, 4, 6, 7) so the exported
+   ``body_quats`` are guaranteed to stay within biomechanical limits — knees
+   cannot hyperextend (Euler X ≥ 0), and the Y/Z Euler angles are clipped to
+   the same bounds used by the soft penalty in the optimizer (see
+   :ref:`lower-body-joint-limits`). The console prints how many joint-frames
+   were adjusted.
+
 Results are saved to ``<session_dir>/egoallo_outputs/`` as NPZ files containing:
 
 .. list-table::
