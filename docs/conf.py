@@ -54,6 +54,8 @@ html_theme_options = {
         "**": ["page-toc"],
         "index": [],
     },
+    "footer_start": ["copyright"],
+    "footer_end": [],
 }
 
 html_context = {
