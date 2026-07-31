@@ -133,12 +133,13 @@ Running Evaluation
 
 The OptiTrack ground truth and the pre-computed predictions for every method
 (27 MB) are hosted on
-`Google Drive <https://drive.google.com/file/d/1I0FfBCEsV5LmAtGimnHunU5VQih4-LVQ/view?usp=sharing>`_.
+`Box <https://upenn.box.com/v/roshi-processed-data>`_.
 Download and extract them into ``evaluation/data/``:
 
 .. code-block:: bash
 
-   gdown 1I0FfBCEsV5LmAtGimnHunU5VQih4-LVQ
+   curl -L -o evaluation_data.zip \
+     "https://upenn.app.box.com/index.php?rm=box_download_shared_file&shared_name=f7wch1ug7742p0betqehr5ic955cryxt&file_id=f_2380790039349"
    unzip evaluation_data.zip -d evaluation/data/ && rm evaluation_data.zip
 
 Then recompute the metrics:

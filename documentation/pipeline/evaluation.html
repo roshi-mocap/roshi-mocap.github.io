@@ -573,9 +573,10 @@ activities.</p>
 <h2>Running Evaluation<a class="headerlink" href="#running-evaluation" title="Link to this heading">#</a></h2>
 <p>The OptiTrack ground truth and the pre-computed predictions for every method
 (27 MB) are hosted on
-<a class="reference external" href="https://drive.google.com/file/d/1I0FfBCEsV5LmAtGimnHunU5VQih4-LVQ/view?usp=sharing">Google Drive</a>.
+<a class="reference external" href="https://upenn.box.com/v/roshi-processed-data">Box</a>.
 Download and extract them into <code class="docutils literal notranslate"><span class="pre">evaluation/data/</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gdown<span class="w"> </span>1I0FfBCEsV5LmAtGimnHunU5VQih4-LVQ
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>evaluation_data.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;https://upenn.app.box.com/index.php?rm=box_download_shared_file&amp;shared_name=f7wch1ug7742p0betqehr5ic955cryxt&amp;file_id=f_2380790039349&quot;</span>
 unzip<span class="w"> </span>evaluation_data.zip<span class="w"> </span>-d<span class="w"> </span>evaluation/data/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>evaluation_data.zip
 </pre></div>
 </div>
