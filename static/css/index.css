@@ -162,6 +162,13 @@ video {
   border-radius: 5px;
 }
 
+.bibtex-block,
+.bibtex-block code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
 /* Real Robot Experiments: identical frame size side-by-side (mixed aspect ratios). */
 .robot-policy-pair {
   align-items: stretch;
