@@ -144,11 +144,6 @@ and extract into ``received_recordings/``:
 This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
 the :doc:`postprocessing pipeline </pipeline/postprocessing>`.
 
-The unprocessed recordings behind all 11 benchmark activities (24 GB, one ``.tar``
-per sequence) are on `Box <https://upenn.box.com/v/roshi-raw-data>`_. Each archive
-has the same layout as the sample recording, so the pipeline steps below apply
-unchanged.
-
 The OptiTrack ground truth and pre-computed predictions used for the benchmark
 are a separate download -- see :doc:`/pipeline/evaluation`.
 
