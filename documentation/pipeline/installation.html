@@ -515,12 +515,14 @@ or download manually from
 <p>A sample recording is available for testing the full postprocessing pipeline.
 Download from
 <a class="reference external" href="https://upenn.box.com/s/f8a9lpwblaod0x3z1ftmr132gl36jjnp">Box</a>
-and extract into <code class="docutils literal notranslate"><span class="pre">received_recordings/</span></code>:</p>
+and extract at the repository root – the archive already carries the
+<code class="docutils literal notranslate"><span class="pre">received_recordings/</span></code> prefix:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download sample_dataset.zip from the link above, then:</span>
-unzip<span class="w"> </span>sample_dataset.zip<span class="w"> </span>-d<span class="w"> </span>received_recordings/
+unzip<span class="w"> </span>sample_dataset.zip
 </pre></div>
 </div>
-<p>This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
+<p>This gives you <code class="docutils literal notranslate"><span class="pre">received_recordings/dataset9_test/</span></code>, a complete raw session (video, metadata,
+IMU, Aria VRS + MPS outputs) ready for
 the <a class="reference internal" href="postprocessing.html"><span class="doc">postprocessing pipeline</span></a>.</p>
 <p>The OptiTrack ground truth and pre-computed predictions used for the benchmark
 are a separate download – see <a class="reference internal" href="evaluation.html"><span class="doc">Evaluation</span></a>.</p>

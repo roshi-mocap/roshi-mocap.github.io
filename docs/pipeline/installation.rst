@@ -134,14 +134,16 @@ Sample Data
 A sample recording is available for testing the full postprocessing pipeline.
 Download from
 `Box <https://upenn.box.com/s/f8a9lpwblaod0x3z1ftmr132gl36jjnp>`_
-and extract into ``received_recordings/``:
+and extract at the repository root -- the archive already carries the
+``received_recordings/`` prefix:
 
 .. code-block:: bash
 
    # Download sample_dataset.zip from the link above, then:
-   unzip sample_dataset.zip -d received_recordings/
+   unzip sample_dataset.zip
 
-This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
+This gives you ``received_recordings/dataset9_test/``, a complete raw session (video, metadata,
+IMU, Aria VRS + MPS outputs) ready for
 the :doc:`postprocessing pipeline </pipeline/postprocessing>`.
 
 The OptiTrack ground truth and pre-computed predictions used for the benchmark
