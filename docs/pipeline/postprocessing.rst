@@ -7,12 +7,12 @@ into full-body SMPL pose estimates.
 .. tip::
 
    A sample recording is available for testing the full pipeline. Download
-   `sample_data.zip <https://drive.google.com/file/d/1EqL7Hqw1rH9tts2XUvUHhaF11cjMHodj/view?usp=sharing>`_
+   `sample_dataset.zip <https://upenn.box.com/s/f8a9lpwblaod0x3z1ftmr132gl36jjnp>`_
    and extract into ``received_recordings/``:
 
    .. code-block:: bash
 
-      unzip sample_data.zip -d received_recordings/
+      unzip sample_dataset.zip -d received_recordings/
 
    This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS
    outputs) that you can use to follow along with every step below.

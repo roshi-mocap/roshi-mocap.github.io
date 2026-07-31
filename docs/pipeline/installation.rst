@@ -133,13 +133,13 @@ Sample Data
 
 A sample recording is available for testing the full postprocessing pipeline.
 Download from
-`Google Drive <https://drive.google.com/file/d/1EqL7Hqw1rH9tts2XUvUHhaF11cjMHodj/view?usp=sharing>`_
+`Box <https://upenn.box.com/s/f8a9lpwblaod0x3z1ftmr132gl36jjnp>`_
 and extract into ``received_recordings/``:
 
 .. code-block:: bash
 
-   # Download sample_data.zip from the link above, then:
-   unzip sample_data.zip -d received_recordings/
+   # Download sample_dataset.zip from the link above, then:
+   unzip sample_dataset.zip -d received_recordings/
 
 This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
 the :doc:`postprocessing pipeline </pipeline/postprocessing>`.
