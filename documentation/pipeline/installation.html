@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=112e3923" />
   
   <!-- So that users can add custom icons -->
@@ -522,6 +522,8 @@ unzip<span class="w"> </span>sample_data.zip<span class="w"> </span>-d<span clas
 </div>
 <p>This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
 the <a class="reference internal" href="postprocessing.html"><span class="doc">postprocessing pipeline</span></a>.</p>
+<p>The OptiTrack ground truth and pre-computed predictions used for the benchmark
+are a separate download – see <a class="reference internal" href="evaluation.html"><span class="doc">Evaluation</span></a>.</p>
 </section>
 <section id="project-structure">
 <h3>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h3>
@@ -541,7 +543,7 @@ the <a class="reference internal" href="postprocessing.html"><span class="doc">p
 ├── sam-3d-body/            # SAM 3D Body
 ├── MHR/                   # Momentum Human Rig
 ├── hardware/              # IMU hardware driver (ESP32 serial reader)
-├── evaluation/            # Evaluation scripts and ground truth
+├── evaluation/            # Evaluation scripts + downloaded benchmark data
 ├── scripts/               # Download scripts
 ├── model/                 # All model files (checkpoints, SMPL-X, etc.)
 ├── received_recordings/   # Raw + processed session data

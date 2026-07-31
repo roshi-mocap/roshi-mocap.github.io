@@ -131,7 +131,17 @@ Per-Activity Results
 Running Evaluation
 ------------------
 
-Pre-computed results are included in the repository. To recompute:
+The OptiTrack ground truth and the pre-computed predictions for every method
+(27 MB) are hosted on
+`Google Drive <https://drive.google.com/file/d/1I0FfBCEsV5LmAtGimnHunU5VQih4-LVQ/view?usp=sharing>`_.
+Download and extract them into ``evaluation/data/``:
+
+.. code-block:: bash
+
+   gdown 1I0FfBCEsV5LmAtGimnHunU5VQih4-LVQ
+   unzip evaluation_data.zip -d evaluation/data/ && rm evaluation_data.zip
+
+Then recompute the metrics:
 
 .. code-block:: bash
 
@@ -148,12 +158,23 @@ Data is organized by activity under ``evaluation/data/``:
    │   ├── roshi.npz             # RoSHI (Ours)
    │   ├── egoallo.npz           # EgoAllo baseline
    │   ├── imu_only.npz          # IMU FK baseline
+   │   ├── imu_egoallo.npz       # IMU + EgoAllo root baseline
    │   └── sam3d.npz             # SAM-3D baseline
    ├── 02_stretch_boxing_bow_wave/
    ├── ...
    └── 11_ball-throwing-catching/
 
-Each NPZ contains:
+Every NPZ contains:
 
-- ``joints_opti``: joint positions in OptiTrack world frame ``(T, 22, 3)``
+- ``joints_opti``: joint positions in the OptiTrack Z-up world frame ``(T, 22, 3)``
 - ``timestamps_ns``: UTC timestamps in nanoseconds ``(T,)``
+
+``optitrack_gt.npz`` additionally stores ``n_camera_frames``, the number of
+third-person camera frames in the activity, which is the denominator of the
+SAM3D recall.
+
+An activity is one continuous motion, which may span two recordings: each
+session was captured as a sequence of takes and split at the point where the
+subject changed activity, so adjacent takes contributing to the same activity
+are concatenated here. Predictions are scored against the nearest ground-truth
+frame in time.

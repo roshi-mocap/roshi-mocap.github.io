@@ -144,6 +144,9 @@ and extract into ``received_recordings/``:
 This provides a complete raw session (video, metadata, IMU, Aria VRS + MPS outputs) ready for
 the :doc:`postprocessing pipeline </pipeline/postprocessing>`.
 
+The OptiTrack ground truth and pre-computed predictions used for the benchmark
+are a separate download -- see :doc:`/pipeline/evaluation`.
+
 Project Structure
 ^^^^^^^^^^^^^^^^^
 
@@ -166,7 +169,7 @@ After setup, the repository is organized as follows:
    ├── sam-3d-body/            # SAM 3D Body
    ├── MHR/                   # Momentum Human Rig
    ├── hardware/              # IMU hardware driver (ESP32 serial reader)
-   ├── evaluation/            # Evaluation scripts and ground truth
+   ├── evaluation/            # Evaluation scripts + downloaded benchmark data
    ├── scripts/               # Download scripts
    ├── model/                 # All model files (checkpoints, SMPL-X, etc.)
    ├── received_recordings/   # Raw + processed session data
