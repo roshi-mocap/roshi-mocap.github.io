@@ -7,7 +7,7 @@ into full-body SMPL pose estimates.
 .. tip::
 
    A sample recording is available for testing the full pipeline. Download
-   `sample_data.zip <https://drive.google.com/file/d/1FT1rDZvcw7Yv5sHv-mdlsmndZcEfuSWU/view?usp=sharing>`_
+   `sample_data.zip <https://drive.google.com/file/d/1EqL7Hqw1rH9tts2XUvUHhaF11cjMHodj/view?usp=sharing>`_
    and extract into ``received_recordings/``:
 
    .. code-block:: bash
